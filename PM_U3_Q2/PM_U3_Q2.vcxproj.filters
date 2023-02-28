@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <MASM Include="plantilla2.asm" />
+    <MASM Include="P8.asm">
+      <Filter>PROGRAMAS</Filter>
+    </MASM>
+    <MASM Include="P2.asm">
+      <Filter>PROGRAMAS</Filter>
+    </MASM>
+    <MASM Include="P1.asm">
+      <Filter>PROGRAMAS</Filter>
+    </MASM>
+    <MASM Include="P3.asm">
+      <Filter>PROGRAMAS</Filter>
+    </MASM>
+    <MASM Include="P4.asm">
+      <Filter>PROGRAMAS</Filter>
+    </MASM>
+    <MASM Include="P5.asm">
+      <Filter>PROGRAMAS</Filter>
+    </MASM>
+    <MASM Include="P6.asm">
+      <Filter>PROGRAMAS</Filter>
+    </MASM>
+    <MASM Include="P7.asm">
+      <Filter>PROGRAMAS</Filter>
+    </MASM>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="PROGRAMAS">
+      <UniqueIdentifier>{bfe370ed-56ea-4483-a91b-85289852da0d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
