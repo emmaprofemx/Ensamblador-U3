@@ -1,8 +1,8 @@
-# Ensamblador-Unidad 3
+# Ensamblador-Unidad 3 
 
 
 
-Programas
+### PROGRAMAS :rage2:  :computer:
 * [P1 - Imprimir un caracter](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P1.asm)
 * [P2 - Caracter](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P2.asm)
 * [P3 - Generando un numero aleatorio v1(sin cambiar)](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P3.asm)
@@ -11,3 +11,10 @@ Programas
 * [P6 - Generador de numeros aleatorios - randomize](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P6.asm)
 * [P7 - Presiona una tecla para continuar](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P7.asm)
 * [P8 - Muestra un numero tantan veces](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P8.asm)
+
+#### MACROS :finnadie: :books:
+* [Macro usado durante esta unidad](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/macros.inc)
+* [P9 - Introduccion a los macros](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P9_intromacro.asm)
+* [P10 - Suma 2 Numeros usando macros](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P10_Suma2nums.asm)
+* [P11 - Read String](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P11_readstring.asm)
+* [EJERCICIO 12 - Nombres](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P12_nombres.asm)
