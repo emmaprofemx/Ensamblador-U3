@@ -20,6 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <MASM Include="P1.asm" />
+    <MASM Include="P10_Suma2nums.asm" />
+    <MASM Include="P11_readstring.asm" />
+    <MASM Include="P12_nombres.asm" />
     <MASM Include="P2.asm" />
     <MASM Include="P3.asm" />
     <MASM Include="P4.asm" />
@@ -27,10 +30,14 @@
     <MASM Include="P6.asm" />
     <MASM Include="P7.asm" />
     <MASM Include="P8.asm" />
+    <MASM Include="P9_intromacro.asm" />
     <MASM Include="plantilla2.asm" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="macros.inc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -108,7 +115,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>c:/Irvine</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainp8</EntryPointSymbol>
+      <EntryPointSymbol>mainp11</EntryPointSymbol>
     </Link>
     <MASM>
       <IncludePaths>c:/Irvine</IncludePaths>

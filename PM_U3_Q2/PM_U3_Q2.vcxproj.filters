@@ -26,6 +26,10 @@
     <MASM Include="P7.asm">
       <Filter>PROGRAMAS</Filter>
     </MASM>
+    <MASM Include="P9_intromacro.asm" />
+    <MASM Include="P10_Suma2nums.asm" />
+    <MASM Include="P11_readstring.asm" />
+    <MASM Include="P12_nombres.asm" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
@@ -34,5 +38,8 @@
     <Filter Include="PROGRAMAS">
       <UniqueIdentifier>{bfe370ed-56ea-4483-a91b-85289852da0d}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="macros.inc" />
   </ItemGroup>
 </Project>
