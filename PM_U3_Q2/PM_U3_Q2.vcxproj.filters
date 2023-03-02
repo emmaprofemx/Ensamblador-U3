@@ -30,6 +30,10 @@
     <MASM Include="P10_Suma2nums.asm" />
     <MASM Include="P11_readstring.asm" />
     <MASM Include="P12_nombres.asm" />
+    <MASM Include="P13_VENTANAEMERGENTE.asm" />
+    <MASM Include="P14_msbv2.asm" />
+    <MASM Include="P15_msgBoxAsk.asm" />
+    <MASM Include="P16_sumaconProc.asm" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />

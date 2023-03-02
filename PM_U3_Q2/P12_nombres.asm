@@ -15,32 +15,34 @@ INCLUDE macros.inc
 .data
 ; Área de Declaración de Variables
 
-nombre byte 20 dup ('A')
-nombredos byte 20 dup('B')
-
+nombre1_12 byte 50 dup ('G')
+nombre2_12 byte 50 dup ('A')
 .code
 
 
 	mainp12 PROC
 	
 		;Lógica del Programa
+		     
+			 println "Ingresa el primer integrante: "
+			 mov edx, offset nombre1_12 ; LOCALIDAD DE MEMORIA DONDE SE GUARDARA LA CADENA LEIDA
+			 mov ecx, sizeof nombre1_12 ; MAXIMA CANTIDAD DE CARACTERES QUE CONTENDRA LA CADENA
 
+			 call readstring ; el valor se va almacenar en nombre
 
-			println "Ingresa el primer nombre del equipo"
-			mov edx , offset nombre
-			mov ecx , sizeof nombre
-			call readstring 
-			;call writestring
-			
-			println "Ingresa el segundo nombre del equipo"
-			mov edx , offset nombredos
-			mov ecx , sizeof nombredos
-			call readstring 
-			;call writestring
+			 println "Ingresa el segundo integrante: "
 
-			println "EL NOMBRE DE LOS INTEGRANTES ES:"
-			call writedec
+			 mov edx, offset nombre2_12
+			 mov ecx, sizeof nombre2_12
+			 call readstring
 
+			mov edx, offset nombre1_12
+			call writestring
+			call crlf
+
+			mov edx, offset nombre2_12
+			call writestring
+			call crlf
 
 	    
 

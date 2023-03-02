@@ -23,6 +23,10 @@
     <MASM Include="P10_Suma2nums.asm" />
     <MASM Include="P11_readstring.asm" />
     <MASM Include="P12_nombres.asm" />
+    <MASM Include="P13_VENTANAEMERGENTE.asm" />
+    <MASM Include="P14_msbv2.asm" />
+    <MASM Include="P15_msgBoxAsk.asm" />
+    <MASM Include="P16_sumaconProc.asm" />
     <MASM Include="P2.asm" />
     <MASM Include="P3.asm" />
     <MASM Include="P4.asm" />
@@ -115,7 +119,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>c:/Irvine</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainp11</EntryPointSymbol>
+      <EntryPointSymbol>mainp17</EntryPointSymbol>
     </Link>
     <MASM>
       <IncludePaths>c:/Irvine</IncludePaths>
