@@ -36,10 +36,22 @@ INCLUDE macros.inc
 
 		mov edx, offset contenido
         mov ebx, offset titulo
-			
-		add ecx, eax ; ecx
+		
+		
+		add ecx, eax ; ecx , la SUMA DE EAX a + b
 		call msgBoxAsk ; eax
-		; +6 = SI  +7 = NO
+		; +6 = SI  +7 = NO INDEPENDIENTEMENTE DE LA RESPUESTA AMBOS SE GUARDAN EN EAX
+
+		;OBTENER EL RESULTADO SI SE OPRINE EL SI
+		;(respuesta del usuario) , respSi
+		cmp eax , 6
+		jnz salir ;SALTO SI NO ES IGUAL
+		mov eax , ecx
+		call writeDec ; IMPRIME SIN SIGNO
+
+		
+
+		SALIR:
 		exit
 
 	mainp16 ENDP

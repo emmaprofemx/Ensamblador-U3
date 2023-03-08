@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <MASM Include="EJ1U3Hamburguesas.asm" />
+    <MASM Include="EJ2_EDADALUMNOS.asm" />
+    <MASM Include="Hamburgesas.asm" />
     <MASM Include="P1.asm" />
     <MASM Include="P10_Suma2nums.asm" />
     <MASM Include="P11_readstring.asm" />

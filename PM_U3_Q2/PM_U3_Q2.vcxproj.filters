@@ -34,6 +34,9 @@
     <MASM Include="P14_msbv2.asm" />
     <MASM Include="P15_msgBoxAsk.asm" />
     <MASM Include="P16_sumaconProc.asm" />
+    <MASM Include="EJ2_EDADALUMNOS.asm" />
+    <MASM Include="Hamburgesas.asm" />
+    <MASM Include="EJ1U3Hamburguesas.asm" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
