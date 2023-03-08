@@ -24,4 +24,4 @@
 * [P16 - Suma con ventana emergente](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P16_sumaconProc.asm)
 
 ### TAREAS :rage4:
-*[T1 - HAMBURGUESAS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ1U3Hamburguesas.asm)
+* [T1 - HAMBURGUESAS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ1U3Hamburguesas.asm)
