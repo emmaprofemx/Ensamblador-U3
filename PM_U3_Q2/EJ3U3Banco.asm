@@ -20,7 +20,7 @@ INCLUDE Irvine32.inc
 var1 dword 100d
 .code
 
-	mainp23 PROC
+	mainp123 PROC
 	
 		;Lógica del Programa
 	    
@@ -30,6 +30,6 @@ var1 dword 100d
 
 		exit
 		
-	mainp23 ENDP
+	mainp123 ENDP
 	
-	END mainp23
+	END mainp123

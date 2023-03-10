@@ -32,6 +32,7 @@
     <MASM Include="P14_msbv2.asm" />
     <MASM Include="P15_msgBoxAsk.asm" />
     <MASM Include="P16_sumaconProc.asm" />
+    <MASM Include="P17_PromedioM_Salones.asm" />
     <MASM Include="P2.asm" />
     <MASM Include="P3.asm" />
     <MASM Include="P4.asm" />
@@ -41,7 +42,6 @@
     <MASM Include="P8.asm" />
     <MASM Include="P9_intromacro.asm" />
     <MASM Include="plantilla2.asm" />
-    <MASM Include="programa345.asm" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
@@ -125,7 +125,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>c:/Irvine</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainp17</EntryPointSymbol>
+      <EntryPointSymbol>mainp150</EntryPointSymbol>
     </Link>
     <MASM>
       <IncludePaths>c:/Irvine</IncludePaths>

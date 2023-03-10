@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/07/23 21:37:03
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/09/23 20:48:21
 NombreProgram						     Page 1 - 1
 
 
@@ -51,85 +51,151 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/07/23 21:37:03
 			      C 
  00000000			.data
 				; Área de Declaración de Variables
- 00000000 41 64 76 65 72		 titulo db "Advertencia",0
-	   74 65 6E 63 69
-	   61 00
- 0000000C 44 65 73 65 61		 contenido db  "Deseas visulaizar el resultado de la suma", 0
-	   73 20 76 69 73
-	   75 6C 61 69 7A
-	   61 72 20 65 6C
-	   20 72 65 73 75
-	   6C 74 61 64 6F
-	   20 64 65 20 6C
-	   61 20 73 75 6D
-	   61 00
-						
+ 00000000 00000000		sumEdadesSalones_17 dword 0
+ 00000004 00000000		sumTotalAlumnosSalones_17 dword 0
+
+
+				;CONSTANTES
+
+
+ 00000008 00000005		contanteTar dword 5d
+ 0000000C 00000000		totalV dword 0d
  00000000			.code
 
-
- 00000000				mainp16 PROC
+ 00000000				mainp150 PROC
 					
 						;Lógica del Programa
-						  
-						println "Ingresa el valor de A : "
- 00000036		     1	.data
- 00000036 49 6E 67 72 65     1		??0000 db "Ingresa el valor de A : " , 0
-	   73 61 20 65 6C
-	   20 76 61 6C 6F
-	   72 20 64 65 20
-	   41 20 3A 20 00
- 00000000		     1		.code
- 00000000  52		     1			push edx 
- 00000001  BA 00000036 R     1			mov edx , offset ??0000
- 00000006  E8 00000000 E     1			call writestring
- 0000000B  E8 00000000 E     1			call crlf
- 00000010  5A		     1			pop edx
- 00000011  E8 00000000 E			call readint ; lo guarda en Eax
-						println "Ingresa el valor de B :"
- 0000004F		     1	.data
- 0000004F 49 6E 67 72 65     1		??0001 db "Ingresa el valor de B :" , 0
-	   73 61 20 65 6C
-	   20 76 61 6C 6F
-	   72 20 64 65 20
-	   42 20 3A 00
- 00000016		     1		.code
- 00000016  52		     1			push edx 
- 00000017  BA 0000004F R     1			mov edx , offset ??0001
- 0000001C  E8 00000000 E     1			call writestring
- 00000021  E8 00000000 E     1			call crlf
- 00000026  5A		     1			pop edx
-
- 00000027  8B C8				mov ecx, eax
-
- 00000029  E8 00000000 E			call readint ; eax
-
-						; a = ecx  b = eax
-
- 0000002E  BA 0000000C R			mov edx, offset contenido
- 00000033  BB 00000000 R	        mov ebx, offset titulo
+ 00000000  BB 00000000				mov ebx , 0 ; PROMEDIO DEL SALON
+						println "Cuantos salones tiene la escuela:"
+ 00000010		     1	.data
+ 00000010 43 75 61 6E 74     1		??0000 db "Cuantos salones tiene la escuela:" , 0
+	   6F 73 20 73 61
+	   6C 6F 6E 65 73
+	   20 74 69 65 6E
+	   65 20 6C 61 20
+	   65 73 63 75 65
+	   6C 61 3A 00
+ 00000005		     1		.code
+ 00000005  52		     1			push edx 
+ 00000006  BA 00000010 R     1			mov edx , offset ??0000
+ 0000000B  E8 00000000 E     1			call writestring
+ 00000010  E8 00000000 E     1			call crlf
+ 00000015  5A		     1			pop edx
+							
+ 00000016  E8 00000000 E				call readint ; eax ; total de salones de la escuela
+							
+ 0000001B  8B C8					mov ecx , eax
+ 0000001D						ciclo1:
+								
+							println "Cuantos alumnos tiene el salon:"
+ 00000032		     1	.data
+ 00000032 43 75 61 6E 74     1		??0001 db "Cuantos alumnos tiene el salon:" , 0
+	   6F 73 20 61 6C
+	   75 6D 6E 6F 73
+	   20 74 69 65 6E
+	   65 20 65 6C 20
+	   73 61 6C 6F 6E
+	   3A 00
+ 0000001D		     1		.code
+ 0000001D  52		     1			push edx 
+ 0000001E  BA 00000032 R     1			mov edx , offset ??0001
+ 00000023  E8 00000000 E     1			call writestring
+ 00000028  E8 00000000 E     1			call crlf
+ 0000002D  5A		     1			pop edx
+ 0000002E  E8 00000000 E				call readint ; cuantos alumnos tiene el salon
+ 00000033  51						push ecx ; GUARDA EN LA PILA EL VALOR DE LA CANTIDAD DE SALONES
+ 00000034  8B C8					mov ecx , eax ; CUANTOS ALUMNOS TIENE EL SALON....PARA EL CICLO
+ 00000036  8B D1					mov edx , ecx ; cuantos alumnos tiene el salonn
+ 00000038						ciclo2:
 						
+									println "Cual es la edad del alumno:"
+ 00000052		     1	.data
+ 00000052 43 75 61 6C 20     1		??0002 db "Cual es la edad del alumno:" , 0
+	   65 73 20 6C 61
+	   20 65 64 61 64
+	   20 64 65 6C 20
+	   61 6C 75 6D 6E
+	   6F 3A 00
+ 00000038		     1		.code
+ 00000038  52		     1			push edx 
+ 00000039  BA 00000052 R     1			mov edx , offset ??0002
+ 0000003E  E8 00000000 E     1			call writestring
+ 00000043  E8 00000000 E     1			call crlf
+ 00000048  5A		     1			pop edx
+ 00000049  E8 00000000 E						call readint; edad de uno de los alumnos
+ 0000004E  03 D8							add ebx , eax ; acumula la edad con el restro de las edades del salon
+ 00000050  E2 E6					loop ciclo2
+
+								; suma de las edades del salon...
+								; se necesita que eax , tenga a la suma ... ahororita en ebx
+								; se necesita que edx , este en 0
+								; en un registro o variable tener la cantidad en el salon
+
+ 00000052  8B C3						mov eax,ebx ; se coloca en ebx , la suma de las edades acumuladas
+ 00000054  8B DA						mov ebx,edx ; en ebx se coloca el total de alumnos que tiene el salon....
+ 00000056  BA 00000000						mov edx ,0 ; en edx se coloca el cero para poder dividir
+
+								;para el acumulado de los datos de la escuela (todos los salones)
+ 0000005B  01 05 00000000 R					add sumEdadesSalones_17 , eax
+ 00000061  01 1D 00000004 R					add sumTotalAlumnosSalones_17 , ebx
+
+ 00000067  F7 F3						div ebx ; eax / ebx => sumaAcumulada/totalAlumnosSalon
+
+							println "El promedio de edades del salon es:"
+ 0000006E		     1	.data
+ 0000006E 45 6C 20 70 72     1		??0003 db "El promedio de edades del salon es:" , 0
+	   6F 6D 65 64 69
+	   6F 20 64 65 20
+	   65 64 61 64 65
+	   73 20 64 65 6C
+	   20 73 61 6C 6F
+	   6E 20 65 73 3A
+	   00
+ 00000069		     1		.code
+ 00000069  52		     1			push edx 
+ 0000006A  BA 0000006E R     1			mov edx , offset ??0003
+ 0000006F  E8 00000000 E     1			call writestring
+ 00000074  E8 00000000 E     1			call crlf
+ 00000079  5A		     1			pop edx
+
+ 0000007A  E8 00000000 E				call writedec
+ 0000007F  E8 00000000 E				call crlf
+ 00000084  BB 00000000					mov ebx , 0 ; REINICIA EL CONTADOR DE LA SUMA DE LAS EDADES
+
+ 00000089  59						pop ecx
+							
+							
+ 0000008A  E2 91					loop ciclo1
+							
+ 0000008C  BA 00000000					mov edx , 0
+ 00000091  8B 1D 00000004 R				mov ebx , sumTotalAlumnosSalones_17
+ 00000097  A1 00000000 R				mov eax , sumEdadesSalones_17
+
+ 0000009C  F7 F3					div ebx
 						
- 00000038  03 C8				add ecx, eax ; ecx , la SUMA DE EAX a + b
- 0000003A  E8 00000000 E			call msgBoxAsk ; eax
-						; +6 = SI  +7 = NO INDEPENDIENTEMENTE DE LA RESPUESTA AMBOS SE GUARDAN EN EAX
-
-						;OBTENER EL RESULTADO SI SE OPRINE EL SI
-						;(respuesta del usuario) , respSi
- 0000003F  83 F8 06				cmp eax , 6
- 00000042  75 07				jnz salir ;SALTO SI NO ES IGUAL
- 00000044  8B C1				mov eax , ecx
- 00000046  E8 00000000 E			call writeDec ; IMPRIME SIN SIGNO
-
-						
-
- 0000004B					SALIR:
-						exit
-
- 00000052				mainp16 ENDP
+						println "El promedio de edad de la escuela es: "
+ 00000092		     1	.data
+ 00000092 45 6C 20 70 72     1		??0004 db "El promedio de edad de la escuela es: " , 0
+	   6F 6D 65 64 69
+	   6F 20 64 65 20
+	   65 64 61 64 20
+	   64 65 20 6C 61
+	   20 65 73 63 75
+	   65 6C 61 20 65
+	   73 3A 20 00
+ 0000009E		     1		.code
+ 0000009E  52		     1			push edx 
+ 0000009F  BA 00000092 R     1			mov edx , offset ??0004
+ 000000A4  E8 00000000 E     1			call writestring
+ 000000A9  E8 00000000 E     1			call crlf
+ 000000AE  5A		     1			pop edx
+ 000000AF  E8 00000000 E			call writedec
+ 000000B4  E8 00000000 E			call crlf
 					
-					END mainp16
-
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/07/23 21:37:03
+ 000000B9				mainp150 ENDP
+					exit
+					END mainp150
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/09/23 20:48:21
 NombreProgram						     Symbols 2 - 1
 
 
@@ -230,8 +296,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000067 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000052 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 000000B9 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 000000C0 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -338,8 +404,9 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-mainp16  . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000052 Public STDCALL
-  SALIR  . . . . . . . . . . . .	L Near	 0000004B _TEXT	
+mainp150 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 000000B9 Public STDCALL
+  ciclo1 . . . . . . . . . . . .	L Near	 0000001D _TEXT	
+  ciclo2 . . . . . . . . . . . .	L Near	 00000038 _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -349,8 +416,11 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
-??0000 . . . . . . . . . . . . .	Byte	 00000036 _DATA	
-??0001 . . . . . . . . . . . . .	Byte	 0000004F _DATA	
+??0000 . . . . . . . . . . . . .	Byte	 00000010 _DATA	
+??0001 . . . . . . . . . . . . .	Byte	 00000032 _DATA	
+??0002 . . . . . . . . . . . . .	Byte	 00000052 _DATA	
+??0003 . . . . . . . . . . . . .	Byte	 0000006E _DATA	
+??0004 . . . . . . . . . . . . .	Byte	 00000092 _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -563,7 +633,7 @@ WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
-contenido  . . . . . . . . . . .	Byte	 0000000C _DATA	
+contanteTar  . . . . . . . . . .	DWord	 00000008 _DATA	
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   
@@ -576,7 +646,9 @@ lightMagenta . . . . . . . . . .	Number	 0000000Dh
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-titulo . . . . . . . . . . . . .	Byte	 00000000 _DATA	
+sumEdadesSalones_17  . . . . . .	DWord	 00000000 _DATA	
+sumTotalAlumnosSalones_17  . . .	DWord	 00000004 _DATA	
+totalV . . . . . . . . . . . . .	DWord	 0000000C _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   
