@@ -93,7 +93,6 @@ select dword 0d
 		salir:
 		sub ecx , credito
 		mov eax, ecx
-	    
 		call writedec
 		exit
 

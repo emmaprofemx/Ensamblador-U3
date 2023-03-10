@@ -20,7 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <MASM Include="EJ1U3Hamburguesas.asm" />
+    <MASM Include="EJ2U3Citas.asm" />
     <MASM Include="EJ2_EDADALUMNOS.asm" />
+    <MASM Include="EJ3U3Banco.asm" />
     <MASM Include="Hamburgesas.asm" />
     <MASM Include="P1.asm" />
     <MASM Include="P10_Suma2nums.asm" />
@@ -39,6 +41,7 @@
     <MASM Include="P8.asm" />
     <MASM Include="P9_intromacro.asm" />
     <MASM Include="plantilla2.asm" />
+    <MASM Include="programa345.asm" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
