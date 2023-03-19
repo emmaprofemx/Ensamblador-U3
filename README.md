@@ -22,6 +22,7 @@
 * [P14 - Ventana Emergente v2](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P14_msbv2.asm)
 * [P15 - Ventana Botones](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P15_msgBoxAsk.asm)
 * [P16 - Suma con ventana emergente](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P16_sumaconProc.asm)
+* [P17 - Promedio Salones](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P17_PromedioM_Salones.asm)
 
 ### TAREAS :rage4:
 * [T1 - HAMBURGUESAS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ1U3Hamburguesas.asm)
