@@ -1,6 +1,6 @@
 TITLE NombrePrograma
 
-;DESCRPICI”N 
+;DESCRPICI√ìN 
 ;Objetivo: Archivo de Ejemplo
 ;
 ; Autore(s):
@@ -8,12 +8,12 @@ TITLE NombrePrograma
 ;         Ruiz Garcia Emmanuel Alejandro.
 
 ; Semestre: 8vo Semestre ISC 
-;FIN DESCRPICI”N
+;FIN DESCRPICI√ìN
 
 INCLUDE Irvine32.inc  
 
 .data
-; ¡rea de DeclaraciÛn de Variables
+; √Årea de Declaraci√≥n de Variables
 
 
 
@@ -22,14 +22,14 @@ var1 dword 100d
 
 	mainp8 PROC
 	
-		;LÛgica del Programa
+		;L√≥gica del Programa
 	    
 		mov ecx, 10 ; SE VA A REPETIR 10 VECES
 		
 		ciclo:
-		 mov eax, 40 
-		 call writedec
-		 call crlf
+		 mov eax, 40 ; ESTE ES EL VALOR A IMPRIMIR 10 VECES
+		 call writedec ; IMPRIME EL VALOR A PANTALLA
+		 call crlf ; HACE UN SALTO DE LINEA
 		 loop ciclo 
 
 		exit
