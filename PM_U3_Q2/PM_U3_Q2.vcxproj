@@ -42,6 +42,12 @@
     <MASM Include="P8.asm" />
     <MASM Include="P9_intromacro.asm" />
     <MASM Include="plantilla2.asm" />
+    <MASM Include="UNIDAD4_p1_introvectrores.asm" />
+    <MASM Include="UNIDAD4_P2_introvectores2.asm" />
+    <MASM Include="UNIDAD4_P3.asm" />
+    <MASM Include="UNIDAD4_P3_introvectores3.asm" />
+    <MASM Include="UNIDAD4_P4.asm" />
+    <MASM Include="UNIDAD4_P5.asm" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
@@ -125,7 +131,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>c:/Irvine</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainp150</EntryPointSymbol>
+      <EntryPointSymbol>main211</EntryPointSymbol>
     </Link>
     <MASM>
       <IncludePaths>c:/Irvine</IncludePaths>
