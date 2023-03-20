@@ -1,15 +1,15 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:35:23
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:41:28
 NombreProgram						     Page 1 - 1
 
 
 				TITLE NombrePrograma
 
 				;DESCRPICIÓN 
-				;Objetivo: Archivo de Ejemplo
+				;Objetivo: Orchivo de Ejemplo
 				;
-				; Autore(s):
+				; Outore(s):
 				;         Luna Sanchez Juan Pablo.
-				;         Ruiz Garcia Emmanuel Alejandro.
+				;         Ruiz Garcia Emmanuel Olejandro.
 
 				; Semestre: 8vo Semestre ISC 
 				;FIN DESCRPICIÓN
@@ -53,66 +53,48 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:35:23
 				; Área de Declaración de Variables
 					
 
-				;CONSTANTES
+				;CONSTONTES
 
- 00000000 00000000		res dword 0d
- 00000004 0000000A		divisor dword 10d
- 00000008 000005DC		valinicial dword 1500d
+ 00000000 00000006		vueltas dword 6d
+ 00000004 00000000		res dword 0d
+ 00000008 0000000A		divisor dword 10d
+ 0000000C 000005DC		valinicial dword 1500d
  00000000			.code
  00000000				mainej16 PROC
 					
+					
+
 						;Lógica del Programa	
+ 00000000  8B 0D 00000000 R			mov ecx , vueltas ; SE VO O REPETIR 6 VECES LO QUE EQUIVOLE O LOS 6 AÑOS
 						println "Ingresa una cantidad:"
- 0000000C		     1	.data
- 0000000C 49 6E 67 72 65     1		??0000 db "Ingresa una cantidad:" , 0
+ 00000010		     1	.data
+ 00000010 49 6E 67 72 65     1		??0000 db "Ingresa una cantidad:" , 0
 	   73 61 20 75 6E
 	   61 20 63 61 6E
 	   74 69 64 61 64
 	   3A 00
- 00000000		     1		.code
- 00000000  52		     1			push edx 
- 00000001  BA 0000000C R     1			mov edx , offset ??0000
- 00000006  E8 00000000 E     1			call writestring
- 0000000B  E8 00000000 E     1			call crlf
- 00000010  5A		     1			pop edx
- 00000011  E8 00000000 E			call readint ; eax = 1500
- 00000016  A3 00000000 R			mov res , eax ; RESPALDO EL VALOR
- 0000001B  A1 00000000 R			mov eax , res
+ 00000006		     1		.code
+ 00000006  52		     1			push edx 
+ 00000007  BA 00000010 R     1			mov edx , offset ??0000
+ 0000000C  E8 00000000 E     1			call writestring
+ 00000011  E8 00000000 E     1			call crlf
+ 00000016  5A		     1			pop edx
+ 00000017  E8 00000000 E			call readint ; eax = 1500
+ 0000001C					ciclo:
+ 0000001C  A3 00000004 R			mov res , eax ; RESPOLDO EL VOLOR
+ 00000021  A1 00000004 R			mov eax , res
 
- 00000020  BA 00000000				mov edx , 0 ; LIMPIEZA DEL REGISTRO
- 00000025  F7 35 00000004 R			div divisor
-						println "El resultado es: "
- 00000022		     1	.data
- 00000022 45 6C 20 72 65     1		??0001 db "El resultado es: " , 0
-	   73 75 6C 74 61
-	   64 6F 20 65 73
-	   3A 20 00
- 0000002B		     1		.code
- 0000002B  52		     1			push edx 
- 0000002C  BA 00000022 R     1			mov edx , offset ??0001
- 00000031  E8 00000000 E     1			call writestring
- 00000036  E8 00000000 E     1			call crlf
- 0000003B  5A		     1			pop edx
- 0000003C  E8 00000000 E			call writedec ; IMPRIME EL 150
- 00000041  E8 00000000 E			call crlf
+ 00000026  BA 00000000				mov edx , 0 ; LIMPIEZO DEL REGISTRO
+ 0000002B  F7 35 00000008 R			div divisor
+						;println "El resultado es: "
+						;call writedec ; IMPRIME EL 150
+ 00000031  E8 00000000 E			call crlf
 
- 00000046  01 05 00000000 R			add res , eax
-						println "El valor de res es: "
- 00000034		     1	.data
- 00000034 45 6C 20 76 61     1		??0002 db "El valor de res es: " , 0
-	   6C 6F 72 20 64
-	   65 20 72 65 73
-	   20 65 73 3A 20
-	   00
- 0000004C		     1		.code
- 0000004C  52		     1			push edx 
- 0000004D  BA 00000034 R     1			mov edx , offset ??0002
- 00000052  E8 00000000 E     1			call writestring
- 00000057  E8 00000000 E     1			call crlf
- 0000005C  5A		     1			pop edx
- 0000005D  A1 00000000 R			mov eax , res
- 00000062  E8 00000000 E			call writedec
-						
+ 00000036  01 05 00000004 R			add res , eax
+						;println "El valor de res es: "
+ 0000003C  A1 00000004 R			mov eax , res
+ 00000041  E8 00000000 E			call writedec
+ 00000046  E2 D4				loop ciclo
 
 
 
@@ -120,11 +102,11 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:35:23
 
 
 
- 0000006E				mainej16 ENDP
+ 0000004F				mainej16 ENDP
 					
 					END mainej16
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:35:23
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:41:28
 NombreProgram						     Symbols 2 - 1
 
 
@@ -225,8 +207,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000049 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000006E Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000026 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000004F Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -333,7 +315,8 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-mainej16 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000006E Public STDCALL
+mainej16 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000004F Public STDCALL
+  ciclo  . . . . . . . . . . . .	L Near	 0000001C _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -343,9 +326,7 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
-??0000 . . . . . . . . . . . . .	Byte	 0000000C _DATA	
-??0001 . . . . . . . . . . . . .	Byte	 00000022 _DATA	
-??0002 . . . . . . . . . . . . .	Byte	 00000034 _DATA	
+??0000 . . . . . . . . . . . . .	Byte	 00000010 _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -559,7 +540,7 @@ black  . . . . . . . . . . . . .	Number	 00000000h
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
-divisor  . . . . . . . . . . . .	DWord	 00000004 _DATA	
+divisor  . . . . . . . . . . . .	DWord	 00000008 _DATA	
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   
 green  . . . . . . . . . . . . .	Number	 00000002h   
@@ -571,8 +552,9 @@ lightMagenta . . . . . . . . . .	Number	 0000000Dh
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-res  . . . . . . . . . . . . . .	DWord	 00000000 _DATA	
-valinicial . . . . . . . . . . .	DWord	 00000008 _DATA	
+res  . . . . . . . . . . . . . .	DWord	 00000004 _DATA	
+valinicial . . . . . . . . . . .	DWord	 0000000C _DATA	
+vueltas  . . . . . . . . . . . .	DWord	 00000000 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   
