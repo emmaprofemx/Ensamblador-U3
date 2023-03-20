@@ -22,15 +22,18 @@ vueltas dword 6d
 res dword 0d
 divisor dword 10d
 valinicial dword 1500d
+sumatotal dword 0d
 .code
 	mainej16 PROC
 	
+		;Lógica del Programa
 	
-
-		;Lógica del Programa	
-		mov ecx , vueltas ; SE VO O REPETIR 6 VECES LO QUE EQUIVOLE O LOS 6 AÑOS
+		;PARA SACAR EL PORCENTAJE DE ALGO SIN USAR DECIAMAL , HACEMOS LO SIGUIENTE
+		; 1500 / 10 = 150 + EL VALOR INICIAL (1500) = 1600
+		mov ecx , vueltas ; SE VA A REPETIR 6 VECES A LO QUE ES IGUAL A LOS 6 AÑOS
 		println "Ingresa una cantidad:"
 		call readint ; eax = 1500
+
 		ciclo:
 		mov res , eax ; RESPOLDO EL VOLOR
 		mov eax , res
@@ -46,7 +49,7 @@ valinicial dword 1500d
 		mov eax , res
 		call writedec
 		loop ciclo
-
+	
 
 
 		exit

@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:41:28
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:51:11
 NombreProgram						     Page 1 - 1
 
 
@@ -59,27 +59,28 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:41:28
  00000004 00000000		res dword 0d
  00000008 0000000A		divisor dword 10d
  0000000C 000005DC		valinicial dword 1500d
+ 00000010 00000000		sumatotal dword 0d
  00000000			.code
  00000000				mainej16 PROC
 					
+						;Lógica del Programa
 					
-
-						;Lógica del Programa	
  00000000  8B 0D 00000000 R			mov ecx , vueltas ; SE VO O REPETIR 6 VECES LO QUE EQUIVOLE O LOS 6 AÑOS
 						println "Ingresa una cantidad:"
- 00000010		     1	.data
- 00000010 49 6E 67 72 65     1		??0000 db "Ingresa una cantidad:" , 0
+ 00000014		     1	.data
+ 00000014 49 6E 67 72 65     1		??0000 db "Ingresa una cantidad:" , 0
 	   73 61 20 75 6E
 	   61 20 63 61 6E
 	   74 69 64 61 64
 	   3A 00
  00000006		     1		.code
  00000006  52		     1			push edx 
- 00000007  BA 00000010 R     1			mov edx , offset ??0000
+ 00000007  BA 00000014 R     1			mov edx , offset ??0000
  0000000C  E8 00000000 E     1			call writestring
  00000011  E8 00000000 E     1			call crlf
  00000016  5A		     1			pop edx
  00000017  E8 00000000 E			call readint ; eax = 1500
+
  0000001C					ciclo:
  0000001C  A3 00000004 R			mov res , eax ; RESPOLDO EL VOLOR
  00000021  A1 00000004 R			mov eax , res
@@ -95,7 +96,7 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:41:28
  0000003C  A1 00000004 R			mov eax , res
  00000041  E8 00000000 E			call writedec
  00000046  E2 D4				loop ciclo
-
+					
 
 
 						exit
@@ -106,7 +107,7 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:41:28
 					
 					END mainej16
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:41:28
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:51:11
 NombreProgram						     Symbols 2 - 1
 
 
@@ -207,7 +208,7 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000026 Para	  Public  'DATA'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 0000002A Para	  Public  'DATA'	
 _TEXT  . . . . . . . . . . . . .	32 Bit	 0000004F Para	  Public  'CODE'	
 
 
@@ -326,7 +327,7 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
-??0000 . . . . . . . . . . . . .	Byte	 00000010 _DATA	
+??0000 . . . . . . . . . . . . .	Byte	 00000014 _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -553,6 +554,7 @@ lightRed . . . . . . . . . . . .	Number	 0000000Ch
 magenta  . . . . . . . . . . . .	Number	 00000005h   
 red  . . . . . . . . . . . . . .	Number	 00000004h   
 res  . . . . . . . . . . . . . .	DWord	 00000004 _DATA	
+sumatotal  . . . . . . . . . . .	DWord	 00000010 _DATA	
 valinicial . . . . . . . . . . .	DWord	 0000000C _DATA	
 vueltas  . . . . . . . . . . . .	DWord	 00000000 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
