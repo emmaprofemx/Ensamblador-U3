@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:03:57
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:08:07
 NombreProgram						     Page 1 - 1
 
 
@@ -93,8 +93,10 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:03:57
  00000031  E8 00000000 E     1			call writestring
  00000036  E8 00000000 E     1			call crlf
  0000003B  5A		     1			pop edx
- 0000003C  E8 00000000 E			call writedec
+ 0000003C  E8 00000000 E			call writedec ; IMPRIME EL 150
  00000041  E8 00000000 E			call crlf
+
+ 00000046  01 05 00000000 R			add res , eax
 						println "El valor de res es: "
  00000034		     1	.data
  00000034 45 6C 20 76 61     1		??0002 db "El valor de res es: " , 0
@@ -102,14 +104,14 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:03:57
 	   65 20 72 65 73
 	   20 65 73 3A 20
 	   00
- 00000046		     1		.code
- 00000046  52		     1			push edx 
- 00000047  BA 00000034 R     1			mov edx , offset ??0002
- 0000004C  E8 00000000 E     1			call writestring
- 00000051  E8 00000000 E     1			call crlf
- 00000056  5A		     1			pop edx
- 00000057  A1 00000000 R			mov eax , res
- 0000005C  E8 00000000 E			call writeint
+ 0000004C		     1		.code
+ 0000004C  52		     1			push edx 
+ 0000004D  BA 00000034 R     1			mov edx , offset ??0002
+ 00000052  E8 00000000 E     1			call writestring
+ 00000057  E8 00000000 E     1			call crlf
+ 0000005C  5A		     1			pop edx
+ 0000005D  A1 00000000 R			mov eax , res
+ 00000062  E8 00000000 E			call writeint
 						
 
 
@@ -118,11 +120,11 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:03:57
 
 
 
- 00000068				mainej16 ENDP
+ 0000006E				mainej16 ENDP
 					
 					END mainej16
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:03:57
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:08:07
 NombreProgram						     Symbols 2 - 1
 
 
@@ -224,7 +226,7 @@ Segments and Groups:
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
 _DATA  . . . . . . . . . . . . .	32 Bit	 00000049 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000068 Para	  Public  'CODE'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000006E Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -331,7 +333,7 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-mainej16 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000068 Public STDCALL
+mainej16 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000006E Public STDCALL
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C

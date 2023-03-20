@@ -33,9 +33,10 @@ valinicial dword 1500d
 		mov edx , 0 ; LIMPIEZA DEL REGISTRO
 		div divisor
 		println "El resultado es: "
-		call writedec
+		call writedec ; IMPRIME EL 150
 		call crlf
 
+		add res , eax
 		println "El valor de res es: "
 		mov eax , res
 		call writeint
