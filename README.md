@@ -29,4 +29,8 @@ Ejercicios de Tarea del documento proporcionado por el Dr.
 * [T1 - HAMBURGUESAS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ1U3Hamburguesas.asm)
 * [T2 - CITAS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ2U3Citas.asm)
 * [T3 - BANCO](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ3U3Banco.asm)
+* [T11 - PROMEDIO ALUMNOS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ11EdadPromedioAlumnos.asm)
+* [T12 - AHORROS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ12Ahorro.asm)
+* [T13 - MENORES MAYORES- MEDIO TERMINADO](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ13MENORESMAYORES.asm)
+* [T16 - SALARIOS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ16Salario.asm)
 
