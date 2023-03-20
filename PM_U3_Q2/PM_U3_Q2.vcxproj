@@ -19,10 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <MASM Include="EJ09_CostoPasaje_alumno.asm" />
+    <MASM Include="EJ10Paquete_Diciembre.asm" />
     <MASM Include="EJ11EdadPromedioAlumnos.asm" />
     <MASM Include="EJ12Ahorro.asm" />
     <MASM Include="EJ13MENORESMAYORES.asm" />
     <MASM Include="EJ16Salario.asm" />
+    <MASM Include="EJ18Focos_colores.asm" />
     <MASM Include="EJ1U3Hamburguesas.asm" />
     <MASM Include="EJ2U3Citas.asm" />
     <MASM Include="EJ2_EDADALUMNOS.asm" />
@@ -135,7 +138,8 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>c:/Irvine</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainej16</EntryPointSymbol>
+      <EntryPointSymbol>main505</EntryPointSymbol>
+      <ImportLibrary>c:/Irvine</ImportLibrary>
     </Link>
     <MASM>
       <IncludePaths>c:/Irvine</IncludePaths>

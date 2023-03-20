@@ -1,15 +1,15 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:51:11
+Microsoft (R) Macro Assembler Version 14.29.30147.0	    03/20/23 00:25:35
 NombreProgram						     Page 1 - 1
 
 
 				TITLE NombrePrograma
 
 				;DESCRPICIÓN 
-				;Objetivo: Orchivo de Ejemplo
+				;Objetivo: Archivo de Ejemplo
 				;
-				; Outore(s):
+				; Autore(s):
 				;         Luna Sanchez Juan Pablo.
-				;         Ruiz Garcia Emmanuel Olejandro.
+				;         Ruiz Garcia Emmanuel Alejandro.
 
 				; Semestre: 8vo Semestre ISC 
 				;FIN DESCRPICIÓN
@@ -32,92 +32,92 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:51:11
 			      C .NOLIST
 			      C .LIST
 			      C 
-				INCLUDE macros.inc
-			      C println macro cadena
-			      C local cad
-			      C .data
-			      C 	cad db cadena , 0
-			      C 
-			      C 	.code
-			      C 		push edx 
-			      C 		mov edx , offset cad
-			      C 		call writestring
-			      C 		call crlf
-			      C 		pop edx
-			      C 
-			      C 		ENDM
-			      C 
-			      C 
-			      C 
+
  00000000			.data
-				; Área de Declaración de Variables
-					
+ 00000000 49 6E 67 72 65	mensaje db "Ingrese la cantidad de dinero que recibira en diciembre: ", 0
+	   73 65 20 6C 61
+	   20 63 61 6E 74
+	   69 64 61 64 20
+	   64 65 20 64 69
+	   6E 65 72 6F 20
+	   71 75 65 20 72
+	   65 63 69 62 69
+	   72 61 20 65 6E
+	   20 64 69 63 69
+	   65 6D 62 72 65
+	   3A 20 00
+ 0000003A 54 69 65 6E 65	paqueteA db "Tiene que comprar el Paquete A.", 0
+	   20 71 75 65 20
+	   63 6F 6D 70 72
+	   61 72 20 65 6C
+	   20 50 61 71 75
+	   65 74 65 20 41
+	   2E 00
+ 0000005A 54 69 65 6E 65	paqueteB db "Tiene que comprar el Paquete B.", 0
+	   20 71 75 65 20
+	   63 6F 6D 70 72
+	   61 72 20 65 6C
+	   20 50 61 71 75
+	   65 74 65 20 42
+	   2E 00
+ 0000007A 54 69 65 6E 65	paqueteC db "Tiene que comprar el Paquete C.", 0
+	   20 71 75 65 20
+	   63 6F 6D 70 72
+	   61 72 20 65 6C
+	   20 50 61 71 75
+	   65 74 65 20 43
+	   2E 00
+ 0000009A 54 69 65 6E 65	paqueteD db "Tiene que comprar el Paquete D.", 0
+	   20 71 75 65 20
+	   63 6F 6D 70 72
+	   61 72 20 65 6C
+	   20 50 61 71 75
+	   65 74 65 20 44
+	   2E 00
 
-				;CONSTONTES
-
- 00000000 00000006		vueltas dword 6d
- 00000004 00000000		res dword 0d
- 00000008 0000000A		divisor dword 10d
- 0000000C 000005DC		valinicial dword 1500d
- 00000010 00000000		sumatotal dword 0d
  00000000			.code
- 00000000				mainej16 PROC
-					
-						;Lógica del Programa
-					
- 00000000  8B 0D 00000000 R			mov ecx , vueltas ; SE VO O REPETIR 6 VECES LO QUE EQUIVOLE O LOS 6 AÑOS
-						println "Ingresa una cantidad:"
- 00000014		     1	.data
- 00000014 49 6E 67 72 65     1		??0000 db "Ingresa una cantidad:" , 0
-	   73 61 20 75 6E
-	   61 20 63 61 6E
-	   74 69 64 61 64
-	   3A 00
- 00000006		     1		.code
- 00000006  52		     1			push edx 
- 00000007  BA 00000014 R     1			mov edx , offset ??0000
- 0000000C  E8 00000000 E     1			call writestring
- 00000011  E8 00000000 E     1			call crlf
- 00000016  5A		     1			pop edx
- 00000017  E8 00000000 E			call readint ; eax = 1500
+ 00000000			main505 PROC
+ 00000000  BA 00000000 R	    mov edx, OFFSET mensaje ; muestra mensaje
+ 00000005  E8 00000000 E	    call WriteString
+				    
+ 0000000A  E8 00000000 E	    call ReadInt ; lee la cantidad de dinero
+ 0000000F  3D 0000C350		    cmp eax, 50000 ; compara con 50,000
+ 00000014  7D 1A		    jge Pqta ; si es mayor o igual, muestra paquete A
 
- 0000001C					ciclo:
- 0000001C  A3 00000004 R			mov res , eax ; RESPOLDO EL VOLOR
- 00000021  A1 00000004 R			mov eax , res
+ 00000016  3D 00004E20		    cmp eax, 20000 ; compara con 20,000
+ 0000001B  7D 1F		    jge Pqtb ; si es mayor o igual, muestra paquete B
 
- 00000026  BA 00000000				mov edx , 0 ; LIMPIEZO DEL REGISTRO
- 0000002B  F7 35 00000008 R			div divisor
-						;println "El resultado es: "
-						;call writedec ; IMPRIME EL 150
- 00000031  E8 00000000 E			call crlf
-
- 00000036  01 05 00000004 R			add res , eax
-						;println "El valor de res es: "
- 0000003C  A1 00000004 R			mov eax , res
- 00000041  E8 00000000 E			call writedec
- 00000046  E2 D4				loop ciclo
-					
-
-
-						exit
-
-
-
- 0000004F				mainej16 ENDP
-					
-					END mainej16
-
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:51:11
+ 0000001D  3D 00002710		    cmp eax, 10000 ; compara con 10,000
+ 00000022  7D 24		    jge Pqtc ; si es mayor o igual, muestra paquete C
+				    
+				    ; la cantidad de dinero es menor que 10,000
+ 00000024  BA 0000009A R	    mov edx, OFFSET paqueteD
+ 00000029  E8 00000000 E	    call msgBox
+ 0000002E  EB 22		    jmp fin
+				    
+ 00000030			Pqta:
+ 00000030  BA 0000003A R	    mov edx, OFFSET paqueteA
+ 00000035  E8 00000000 E	    call msgbox
+ 0000003A  EB 16		    jmp fin
+				    
+ 0000003C			Pqtb:
+ 0000003C  BA 0000005A R	    mov edx, OFFSET paqueteB
+ 00000041  E8 00000000 E	    call msgbox
+ 00000046  EB 0A		    jmp fin
+				    
+ 00000048			Pqtc:
+ 00000048  BA 0000007A R	    mov edx, OFFSET paqueteC
+ 0000004D  E8 00000000 E	    call msgbox
+				    
+ 00000052			fin:
+ 00000052  E8 00000000 E	    call Crlf ; salto de línea
+				    exit
+ 0000005E			main505 ENDP
+				END main505
+Microsoft (R) Macro Assembler Version 14.29.30147.0	    03/20/23 00:25:35
 NombreProgram						     Symbols 2 - 1
 
 
-
-
-Macros:
-
-                N a m e                 Type
-
-println  . . . . . . . . . . . .	Proc
 
 
 Structures and Unions:
@@ -208,8 +208,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 0000002A Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000004F Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 000000BA Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000005E Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -316,8 +316,11 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-mainej16 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000004F Public STDCALL
-  ciclo  . . . . . . . . . . . .	L Near	 0000001C _TEXT	
+main505  . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000005E Public STDCALL
+  Pqta . . . . . . . . . . . . .	L Near	 00000030 _TEXT	
+  Pqtb . . . . . . . . . . . . .	L Near	 0000003C _TEXT	
+  Pqtc . . . . . . . . . . . . .	L Near	 00000048 _TEXT	
+  fin  . . . . . . . . . . . . .	L Near	 00000052 _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -327,7 +330,6 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
-??0000 . . . . . . . . . . . . .	Byte	 00000014 _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -541,7 +543,6 @@ black  . . . . . . . . . . . . .	Number	 00000000h
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
-divisor  . . . . . . . . . . . .	DWord	 00000008 _DATA	
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   
 green  . . . . . . . . . . . . .	Number	 00000002h   
@@ -552,11 +553,12 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
+mensaje  . . . . . . . . . . . .	Byte	 00000000 _DATA	
+paqueteA . . . . . . . . . . . .	Byte	 0000003A _DATA	
+paqueteB . . . . . . . . . . . .	Byte	 0000005A _DATA	
+paqueteC . . . . . . . . . . . .	Byte	 0000007A _DATA	
+paqueteD . . . . . . . . . . . .	Byte	 0000009A _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-res  . . . . . . . . . . . . . .	DWord	 00000004 _DATA	
-sumatotal  . . . . . . . . . . .	DWord	 00000010 _DATA	
-valinicial . . . . . . . . . . .	DWord	 0000000C _DATA	
-vueltas  . . . . . . . . . . . .	DWord	 00000000 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   

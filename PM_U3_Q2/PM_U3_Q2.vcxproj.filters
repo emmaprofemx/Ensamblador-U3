@@ -50,6 +50,15 @@
     <MASM Include="EJ11EdadPromedioAlumnos.asm" />
     <MASM Include="EJ13MENORESMAYORES.asm" />
     <MASM Include="EJ16Salario.asm" />
+    <MASM Include="EJ10Paquete_Diciembre.asm">
+      <Filter>PROGRAMAS</Filter>
+    </MASM>
+    <MASM Include="EJ18Focos_colores.asm">
+      <Filter>PROGRAMAS</Filter>
+    </MASM>
+    <MASM Include="EJ09_CostoPasaje_alumno.asm">
+      <Filter>PROGRAMAS</Filter>
+    </MASM>
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
