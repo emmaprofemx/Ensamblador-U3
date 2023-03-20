@@ -39,7 +39,7 @@ valinicial dword 1500d
 		add res , eax
 		println "El valor de res es: "
 		mov eax , res
-		call writeint
+		call writedec
 		
 
 

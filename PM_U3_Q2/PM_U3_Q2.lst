@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:08:07
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:35:23
 NombreProgram						     Page 1 - 1
 
 
@@ -111,7 +111,7 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:08:07
  00000057  E8 00000000 E     1			call crlf
  0000005C  5A		     1			pop edx
  0000005D  A1 00000000 R			mov eax , res
- 00000062  E8 00000000 E			call writeint
+ 00000062  E8 00000000 E			call writedec
 						
 
 
@@ -124,7 +124,7 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:08:07
 					
 					END mainej16
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:08:07
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/19/23 22:35:23
 NombreProgram						     Symbols 2 - 1
 
 
