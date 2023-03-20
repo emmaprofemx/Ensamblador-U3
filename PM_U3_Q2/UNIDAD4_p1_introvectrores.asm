@@ -19,7 +19,7 @@ vector dword 10,20,30,40,50
 
 .code
 
-	main200 PROC
+	main2001 PROC
 	
 		;Lógica del Programa
 
@@ -29,6 +29,6 @@ vector dword 10,20,30,40,50
 		
 		exit	
 	
-	main200 ENDP
+	main2001 ENDP
 	
-	END main200
+	END main2001

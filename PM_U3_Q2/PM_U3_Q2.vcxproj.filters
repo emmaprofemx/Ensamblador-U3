@@ -46,6 +46,10 @@
     <MASM Include="UNIDAD4_P3.asm" />
     <MASM Include="UNIDAD4_P4.asm" />
     <MASM Include="UNIDAD4_P5.asm" />
+    <MASM Include="EJ12Ahorro.asm" />
+    <MASM Include="EJ11EdadPromedioAlumnos.asm" />
+    <MASM Include="EJ13MENORESMAYORES.asm" />
+    <MASM Include="EJ16Salario.asm" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
