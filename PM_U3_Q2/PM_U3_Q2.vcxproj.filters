@@ -59,6 +59,7 @@
     <MASM Include="EJ09_CostoPasaje_alumno.asm">
       <Filter>PROGRAMAS</Filter>
     </MASM>
+    <MASM Include="EJ15TikiTaka.asm" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
