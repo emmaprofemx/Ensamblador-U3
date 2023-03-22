@@ -27,7 +27,7 @@ sumatotal dword 0d
 	mainej16 PROC
 	
 		;Lógica del Programa
-	
+		
 		;PARA SACAR EL PORCENTAJE DE ALGO SIN USAR DECIAMAL , HACEMOS LO SIGUIENTE
 		; 1500 / 10 = 150 + EL VALOR INICIAL (1500) = 1600
 		mov ecx , vueltas ; SE VA A REPETIR 6 VECES A LO QUE ES IGUAL A LOS 6 AÑOS
@@ -35,11 +35,11 @@ sumatotal dword 0d
 		call readint ; eax = 1500
 
 		ciclo:
-		mov res , eax ; RESPOLDO EL VOLOR
+		mov res , eax ; RESPALDO EL VOLOR
 		mov eax , res
 
 		mov edx , 0 ; LIMPIEZO DEL REGISTRO
-		div divisor
+		div divisor; eax/divisor
 		;println "El resultado es: "
 		;call writedec ; IMPRIME EL 150
 		call crlf

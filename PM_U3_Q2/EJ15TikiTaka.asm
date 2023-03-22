@@ -17,12 +17,38 @@ INCLUDE macros.inc
 
 ;CONSTANTES
 acumulador dword 0d
-meses dword 12d
+venta dword 0d
+vueltas dword 0d
+catuno dword 0d
 .code
 	mainej15 PROC
 	
 		;Lógica del Programa	  
-		println "Cuanto vas a depositar?"
+		 println "Cantidad de ventas en el dia:"
+		 call readint ; LEEMOS EN EAX
+		 mov vueltas, eax ; MOVEMOS EL VAMOR DE EAX 
+
+		 mov ecx, vueltas ; N CANTIDAD DE VUELTAS
+
+		 ciclo:
+			 println "Ingresa la venta"
+			 call readint ;LEEMOS EAX
+			 mov venta, eax
+			 cmp venta, 1000
+			 mov eax , venta
+			 add catuno,eax
+			 jge ventaMayor1000
+
+		 loop ciclo
+
+		ventaMayor1000:
+        ; Si la venta es mayor a 1000, la sumamos a la variable catuno
+		mov eax , catuno
+		call writedec ; MOSTRANDO EL TOTAL
+        
+
+
+		salir:
 		exit
 
 	mainej15 ENDP

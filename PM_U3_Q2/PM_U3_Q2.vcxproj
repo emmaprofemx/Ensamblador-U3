@@ -139,7 +139,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>c:/Irvine</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainej15</EntryPointSymbol>
+      <EntryPointSymbol>mainej13</EntryPointSymbol>
       <ImportLibrary>c:/Irvine</ImportLibrary>
     </Link>
     <MASM>

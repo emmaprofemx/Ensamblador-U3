@@ -1,6 +1,6 @@
 TITLE NombrePrograma
 
-;DESCRPICIÓN 
+;DESCRIPCIÓN 
 ;Objetivo: Archivo de Ejemplo
 ;
 ; Autore(s):
@@ -8,7 +8,7 @@ TITLE NombrePrograma
 ;         Ruiz Garcia Emmanuel Alejandro.
 
 ; Semestre: 8vo Semestre ISC 
-;FIN DESCRPICIÓN
+;FIN DESCRIPCIÓN
 
 INCLUDE Irvine32.inc  
 INCLUDE macros.inc
@@ -46,18 +46,18 @@ mayores dword 0d
 			
 
 		loop ciclo
-			mov eax , mayores
-			println "Mayores a 0: "
-			call writedec
-			call crlf
-			mov eax , 0
-			mov eax , menores
-			println "Menores a 0:"
-			
-			call writedec
+		;Movemos la cantidad de mayores y lo almacenamos en eax
+		mov eax , mayores
+		println "Mayores:"
+		call writedec
+		call crlf
 
 
-
+		; Resta cantidad - mayores y muestra el resultado en pantalla
+		mov eax, cantidad    ; Movemos el valor de cantidad a eax
+		sub eax, mayores     ; Restamos el valor de mayores a eax
+		println "Menores "
+		call writedec      ; Imprimimos el resultado en pantalla
 
 		exit
 
@@ -66,4 +66,3 @@ mayores dword 0d
 	mainej13 ENDP
 	
 	END mainej13
-
