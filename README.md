@@ -36,4 +36,5 @@ Ejercicios de Tarea del documento proporcionado por el Dr.
 * [T13 - MENORES Y MAYORES](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ13MENORESMAYORES.asm)
 * [T16 - SALARIOS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ16Salario.asm)
 * [T18 - FOCOS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ18Focos_colores.asm)
+* [T20 - PROEMDIO SALON](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P17_PromedioM_Salones.asm)
 
