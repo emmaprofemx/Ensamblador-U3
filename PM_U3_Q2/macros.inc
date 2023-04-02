@@ -7,7 +7,7 @@ local cad
 		push edx 
 		mov edx , offset cad
 		call writestring
-		call crlf
+		;call crlf
 		pop edx
 
 		ENDM

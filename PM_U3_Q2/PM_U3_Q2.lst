@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 22:53:57
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 23:02:43
 NombreProgram						     Page 1 - 1
 
 
@@ -42,7 +42,7 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 22:53:57
 			      C 		push edx 
 			      C 		mov edx , offset cad
 			      C 		call writestring
-			      C 		call crlf
+			      C 		;call crlf
 			      C 		pop edx
 			      C 
 			      C 		ENDM
@@ -73,21 +73,35 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 22:53:57
  00000006  A1 0000000C R				mov eax , vueltas
  0000000B  2B C1					sub eax , ecx 
  0000000D  40						inc eax
-							call writeString "vuelta"
-EJ14HORASTRABAJADAS.asm(39) : error A2206:missing operator in expression
- 0000000E  E8 00000000 E				call writedec
- 00000013  E8 00000000 E				call crlf
+							;call crlf
+							println "Horas trabajadas en el dia"
+ 00000010		     1	.data
+ 00000010 48 6F 72 61 73     1		??0000 db "Horas trabajadas en el dia" , 0
+	   20 74 72 61 62
+	   61 6A 61 64 61
+	   73 20 65 6E 20
+	   65 6C 20 64 69
+	   61 00
+ 0000000E		     1		.code
+ 0000000E  52		     1			push edx 
+ 0000000F  BA 00000010 R     1			mov edx , offset ??0000
+ 00000014  E8 00000000 E     1			call writestring
+ 00000019  5A		     1			pop edx
+ 0000001A  E8 00000000 E				call writedec
+ 0000001F  E8 00000000 E				call crlf
+ 00000024  E8 00000000 E				call readint
+							;call crlf
 
 
- 00000018  E2 EC				loop ciclo
+ 00000029  E2 DB				loop ciclo
 
 						exit
 
- 00000021				mainej14 ENDP
+ 00000032				mainej14 ENDP
 					
 					END mainej14
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 22:53:57
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 23:02:43
 NombreProgram						     Symbols 2 - 1
 
 
@@ -188,8 +202,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000010 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000002C Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 0000002B Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000032 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -296,7 +310,7 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-mainej14 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000002C Public STDCALL
+mainej14 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000032 Public STDCALL
   ciclo  . . . . . . . . . . . .	L Near	 00000006 _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -307,6 +321,7 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
+??0000 . . . . . . . . . . . . .	Byte	 00000010 _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -540,4 +555,4 @@ wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   
 
 	   0 Warnings
-	   1 Errors
+	   0 Errors

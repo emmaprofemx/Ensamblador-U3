@@ -36,9 +36,12 @@ vueltas dword 6d
 			mov eax , vueltas
 			sub eax , ecx 
 			inc eax
-			println "Vuelta"
+			;call crlf
+			println "Horas trabajadas en el dia "
 			call writedec
 			call crlf
+			call readint
+			
 
 
 		loop ciclo

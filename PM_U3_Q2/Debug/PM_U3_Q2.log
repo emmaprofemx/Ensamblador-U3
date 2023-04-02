@@ -1,3 +1,2 @@
 ﻿  Assembling EJ14HORASTRABAJADAS.asm...
-EJ14HORASTRABAJADAS.asm(39): error A2206: missing operator in expression
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\BuildCustomizations\masm.targets(70,5): error MSB3721: El comando "ml.exe /c /nologo /Zi /Fo"Debug\EJ14HORASTRABAJADAS.obj" /Fl"PM_U3_Q2.lst" /I "c:/Irvine" /W3 /errorReport:prompt  /TaEJ14HORASTRABAJADAS.asm" salió con el código 1.
+  PM_U3_Q2.vcxproj -> C:\Users\EMMANUEL\source\repos\PM_U3_Q2\Debug\PM_U3_Q2.exe
