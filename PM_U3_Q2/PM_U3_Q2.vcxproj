@@ -24,6 +24,7 @@
     <MASM Include="EJ11EdadPromedioAlumnos.asm" />
     <MASM Include="EJ12Ahorro.asm" />
     <MASM Include="EJ13MENORESMAYORES.asm" />
+    <MASM Include="EJ14HORASTRABAJADAS.asm" />
     <MASM Include="EJ15TikiTaka.asm" />
     <MASM Include="EJ16Salario.asm" />
     <MASM Include="EJ18Focos_colores.asm" />
@@ -139,7 +140,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>c:/Irvine</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainej13</EntryPointSymbol>
+      <EntryPointSymbol>mainej15</EntryPointSymbol>
       <ImportLibrary>c:/Irvine</ImportLibrary>
     </Link>
     <MASM>
