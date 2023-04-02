@@ -33,7 +33,8 @@ Ejercicios de Tarea del documento proporcionado por el Dr.
 * [T10 - PAQUETE DICIEMBRE](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ10Paquete_Diciembre.asm)
 * [T11 - PROMEDIO ALUMNOS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ11EdadPromedioAlumnos.asm)
 * [T12 - AHORROS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ12Ahorro.asm)
-* [T13 - MENORES MAYORES- MEDIO TERMINADO](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ13MENORESMAYORES.asm)
+* [T13 - MENORES Y MAYORES](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ13MENORESMAYORES.asm)
 * [T16 - SALARIOS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ16Salario.asm)
 * [T18 - FOCOS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ18Focos_colores.asm)
+* [T20 - PROEMDIO SALON](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P17_PromedioM_Salones.asm)
 
