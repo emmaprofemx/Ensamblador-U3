@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 23:13:40
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 23:19:52
 NombreProgram						     Page 1 - 1
 
 
@@ -54,7 +54,7 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 23:13:40
 
 				;CONSTANTES
 
- 00000000 0000000A		tarifa dword 10d
+ 00000000 00000025		tarifa dword 37d
  00000004 00000000		horas_trabajadas dword 0d
  00000008 00000000		sueldo dword 0d
  0000000C 00000006		vueltas dword 6d
@@ -71,9 +71,9 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 23:13:40
  00000000  8B 0D 0000000C R			mov ecx , vueltas ; SE VA A REPETIR 6 VECES (DIAS) 
 						
  00000006					ciclo:
- 00000006  A1 0000000C R				mov eax , vueltas
- 0000000B  2B C1					sub eax , ecx 
- 0000000D  40						inc eax
+ 00000006  A1 0000000C R				mov eax , vueltas ; MOVEMOS EL VALOR DE VUELTAS A EAX
+ 0000000B  2B C1					sub eax , ecx ; VAMOS A IR RESTANDO
+ 0000000D  40						inc eax ; DESPUES INCREMENTAMOS EEL VALOR , ESTO SE HACE PARA NO MOSTRAR EL CASO 0
 							;call crlf
 							println "Horas trabajadas en el dia "
  00000014		     1	.data
@@ -88,14 +88,14 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 23:13:40
  0000000F  BA 00000014 R     1			mov edx , offset ??0000
  00000014  E8 00000000 E     1			call writestring
  00000019  5A		     1			pop edx
- 0000001A  E8 00000000 E				call writedec
- 0000001F  B8 00000000					mov eax , 0 ; RESETEAMOS EAX
- 00000024  E8 00000000 E				call crlf
+ 0000001A  E8 00000000 E				call writedec ; MOSTRAMOS LA POSICION ACTUAL
+ 0000001F  B8 00000000					mov eax , 0 ; RESETEAMOS EAX - PARA LEER LOS DATOS
+ 00000024  E8 00000000 E				call crlf ; SALTO DE LINEA
  00000029  E8 00000000 E				call readint ; leemos eax
- 0000002E  01 05 00000004 R				add horas_trabajadas , eax
+ 0000002E  01 05 00000004 R				add horas_trabajadas , eax ; IREMOS SUMANDO LAS HORAS DE CADA DIA eax(f) = horas_trabajadas + eax
 							
  00000034  E2 D0				loop ciclo
- 00000036  A1 00000004 R			mov eax , horas_trabajadas ; SE GUARDA EL VALOR DE HORAS TRABAJADAS (47)
+ 00000036  A1 00000004 R			mov eax , horas_trabajadas ; PASAMOS EL VALOR ALMACENADO DE HORAS TRABAJADAS A EAX
 						println "Total de horas trabajadas en la semana: "
  00000030		     1	.data
  00000030 54 6F 74 61 6C     1		??0001 db "Total de horas trabajadas en la semana: " , 0
@@ -112,8 +112,8 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 23:13:40
  0000003C  BA 00000030 R     1			mov edx , offset ??0001
  00000041  E8 00000000 E     1			call writestring
  00000046  5A		     1			pop edx
- 00000047  E8 00000000 E			call writedec 
- 0000004C  F7 25 00000000 R			mul tarifa
+ 00000047  E8 00000000 E			call writedec ; IMPRIMIMOS LAS HORAS TRABAJADAS
+ 0000004C  F7 25 00000000 R			mul tarifa ; multiplicamos las horas trabajadas * el valor de la tarifa , que se guardara en eax
  00000052  E8 00000000 E			call crlf
 						println "Sueldo del empleado: "
  00000059		     1	.data
@@ -127,7 +127,7 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 23:13:40
  00000058  BA 00000059 R     1			mov edx , offset ??0002
  0000005D  E8 00000000 E     1			call writestring
  00000062  5A		     1			pop edx
- 00000063  E8 00000000 E			call writedec 
+ 00000063  E8 00000000 E			call writedec ; MOSTRAMOS EL SUELDO DEL EMPLEADO
 
 						exit
 
@@ -135,7 +135,7 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 23:13:40
 					
 					END mainej14
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 23:13:40
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 23:19:52
 NombreProgram						     Symbols 2 - 1
 
 

@@ -17,7 +17,7 @@ INCLUDE macros.inc
 
 ;CONSTANTES
 
-tarifa dword 10d
+tarifa dword 37d
 horas_trabajadas dword 0d
 sueldo dword 0d
 vueltas dword 6d
@@ -34,25 +34,25 @@ total dword 0d
 		mov ecx , vueltas ; SE VA A REPETIR 6 VECES (DIAS) 
 		
 		ciclo:
-			mov eax , vueltas
-			sub eax , ecx 
-			inc eax
+			mov eax , vueltas ; MOVEMOS EL VALOR DE VUELTAS A EAX
+			sub eax , ecx ; VAMOS A IR RESTANDO
+			inc eax ; DESPUES INCREMENTAMOS EEL VALOR , ESTO SE HACE PARA NO MOSTRAR EL CASO 0
 			;call crlf
 			println "Horas trabajadas en el dia "
-			call writedec
-			mov eax , 0 ; RESETEAMOS EAX
-			call crlf
+			call writedec ; MOSTRAMOS LA POSICION ACTUAL
+			mov eax , 0 ; RESETEAMOS EAX - PARA LEER LOS DATOS
+			call crlf ; SALTO DE LINEA
 			call readint ; leemos eax
-			add horas_trabajadas , eax
+			add horas_trabajadas , eax ; IREMOS SUMANDO LAS HORAS DE CADA DIA eax(f) = horas_trabajadas + eax
 			
 		loop ciclo
-		mov eax , horas_trabajadas ; SE GUARDA EL VALOR DE HORAS TRABAJADAS (47)
+		mov eax , horas_trabajadas ; PASAMOS EL VALOR ALMACENADO DE HORAS TRABAJADAS A EAX
 		println "Total de horas trabajadas en la semana: "
-		call writedec 
-		mul tarifa
+		call writedec ; IMPRIMIMOS LAS HORAS TRABAJADAS
+		mul tarifa ; multiplicamos las horas trabajadas * el valor de la tarifa , que se guardara en eax
 		call crlf
 		println "Sueldo del empleado: "
-		call writedec 
+		call writedec ; MOSTRAMOS EL SUELDO DEL EMPLEADO
 
 		exit
 
