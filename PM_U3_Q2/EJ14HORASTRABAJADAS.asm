@@ -16,8 +16,11 @@ INCLUDE macros.inc
 ; Área de Declaración de Variables
 
 ;CONSTANTES
-acumulador dword 0d
-meses dword 12d
+
+tarifa dword 0d
+horas_trabajadas dword 0d
+sueldo dword 0d
+vueltas dword 6d
 .code
 	mainej14 PROC
 	
@@ -27,7 +30,18 @@ meses dword 12d
 		;durante la semana(dias) y requiere determinat el total de estas , asi como el
 		;sueldo que recibira por las horas trabajadas
 
+		mov ecx , vueltas ; SE VA A REPETIR 6 VECES (DIAS) 
+		
+		ciclo:
+			mov eax , vueltas
+			sub eax , ecx 
+			inc eax
+			println "Vuelta"
+			call writedec
+			call crlf
 
+
+		loop ciclo
 
 		exit
 

@@ -1,10 +1,3 @@
-﻿  Assembling EJ15TikiTaka.asm...
-EJ15TikiTaka.asm(54): error A2070: invalid instruction operands
-EJ15TikiTaka.asm(63): error A2070: invalid instruction operands
-EJ15TikiTaka.asm(69): error A2070: invalid instruction operands
-EJ15TikiTaka.asm(75): error A2070: invalid instruction operands
-EJ15TikiTaka.asm(83): error A2070: invalid instruction operands
-EJ15TikiTaka.asm(56): error A2006: undefined symbol : finCiclo
-EJ15TikiTaka.asm(65): error A2006: undefined symbol : finCiclo
-EJ15TikiTaka.asm(71): error A2006: undefined symbol : finCiclo
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\BuildCustomizations\masm.targets(70,5): error MSB3721: El comando "ml.exe /c /nologo /Zi /Fo"Debug\EJ15TikiTaka.obj" /Fl"PM_U3_Q2.lst" /I "c:/Irvine" /W3 /errorReport:prompt  /TaEJ15TikiTaka.asm" salió con el código 1.
+﻿  Assembling EJ14HORASTRABAJADAS.asm...
+EJ14HORASTRABAJADAS.asm(39): error A2206: missing operator in expression
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\BuildCustomizations\masm.targets(70,5): error MSB3721: El comando "ml.exe /c /nologo /Zi /Fo"Debug\EJ14HORASTRABAJADAS.obj" /Fl"PM_U3_Q2.lst" /I "c:/Irvine" /W3 /errorReport:prompt  /TaEJ14HORASTRABAJADAS.asm" salió con el código 1.

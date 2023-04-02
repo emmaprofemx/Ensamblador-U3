@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/21/23 22:50:46
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 22:53:57
 NombreProgram						     Page 1 - 1
 
 
@@ -53,228 +53,41 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/21/23 22:50:46
 				; Área de Declaración de Variables
 
 				;CONSTANTES
- 00000000 00000000		    vueltas DWORD 0d
- 00000004 00000000		    venta DWORD 0d
- 00000008 00000000		    totalGlobal DWORD 0d
- 0000000C 00000000		    sumaCatUno DWORD 0d
- 00000010 00000000		    CatUno DWORD 0d
- 00000014 00000000		    sumaCatDos DWORD 0d
- 00000018 00000000		    CatDos DWORD 0d
- 0000001C 00000000		    sumaCatTres DWORD 0d
- 00000020 00000000		    CatTres DWORD 0d
- 00000024 00000000		    menores500 DWORD 0d
- 00000028 00000000		    ventaActual DWORD 0d
- 0000002C 00000000		    cantVentas DWORD 0d
 
+ 00000000 00000000		tarifa dword 0d
+ 00000004 00000000		horas_trabajadas dword 0d
+ 00000008 00000000		sueldo dword 0d
+ 0000000C 00000006		vueltas dword 6d
  00000000			.code
- 00000000				mainej15 PROC
+ 00000000				mainej14 PROC
 					
-					     ;Lógica del Programa	  
-						 println "Cantidad de ventas en el dia:"
- 00000030		     1	.data
- 00000030 43 61 6E 74 69     1		??0000 db "Cantidad de ventas en el dia:" , 0
-	   64 61 64 20 64
-	   65 20 76 65 6E
-	   74 61 73 20 65
-	   6E 20 65 6C 20
-	   64 69 61 3A 00
- 00000000		     1		.code
- 00000000  52		     1			push edx 
- 00000001  BA 00000030 R     1			mov edx , offset ??0000
- 00000006  E8 00000000 E     1			call writestring
- 0000000B  E8 00000000 E     1			call crlf
- 00000010  5A		     1			pop edx
- 00000011  E8 00000000 E			 call readint ; LEEMOS EN EAX
- 00000016  A3 00000000 R			 mov vueltas, eax ; MOVEMOS EL VALOR DE EAX 
-
- 0000001B  8B 0D 00000000 R			 mov ecx, vueltas ; N CANTIDAD DE VUELTAS
-
- 00000021					 ciclo:
-							 println "Ingresa la venta"
- 0000004E		     1	.data
- 0000004E 49 6E 67 72 65     1		??0001 db "Ingresa la venta" , 0
-	   73 61 20 6C 61
-	   20 76 65 6E 74
-	   61 00
- 00000021		     1		.code
- 00000021  52		     1			push edx 
- 00000022  BA 0000004E R     1			mov edx , offset ??0001
- 00000027  E8 00000000 E     1			call writestring
- 0000002C  E8 00000000 E     1			call crlf
- 00000031  5A		     1			pop edx
- 00000032  E8 00000000 E	             call readint ;LEEMOS EAX
- 00000037  A3 00000028 R	             mov ventaActual, eax
-
- 0000003C  81 3D 00000028 R	             cmp ventaActual, 1000
-	   000003E8
- 00000046  7F 4B		             jg ventaMayor1000
-
- 00000048  81 3D 00000028 R	             cmp ventaActual, 500
-	   000001F4
- 00000052  7F 11		             jg ventaMayor500
-
-				        ; Si la venta es menor o igual a 500, la sumamos a la categoría 1
-				        add sumaCatUno, ventaActual
-EJ15TikiTaka.asm(54) : error A2070:invalid instruction operands
- 00000054  FF 05 00000010 R	        inc CatUno
-				        jmp finCiclo
-EJ15TikiTaka.asm(56) : error A2006:undefined symbol : finCiclo
-
- 00000065			        ventaMayor500:
- 00000065  81 3D 00000028 R	        cmp ventaActual, 1000
-	   000003E8
- 0000006F  7E 11		        jle ventaEntre500y1000
-
-				        ; Si la venta es mayor a 1000, la sumamos a la categoría 3
-				        add sumaCatTres, ventaActual
-EJ15TikiTaka.asm(63) : error A2070:invalid instruction operands
- 00000071  FF 05 00000020 R	        inc CatTres
-				        jmp finCiclo
-EJ15TikiTaka.asm(65) : error A2006:undefined symbol : finCiclo
-
- 00000082			        ventaEntre500y1000:
-				        ; Si la venta está entre 500 y 1000 (inclusive), la sumamos a la categoría 2
-				        add sumaCatDos, ventaActual
-EJ15TikiTaka.asm(69) : error A2070:invalid instruction operands
- 00000082  FF 05 00000018 R	        inc CatDos
-				        jmp finCiclo
-EJ15TikiTaka.asm(71) : error A2006:undefined symbol : finCiclo
-
- 00000093			        ventaMayor1000:
-				        ; Si la venta es mayor a 1000, la sumamos al totalGlobal
-				        add totalGlobal, ventaActual
-EJ15TikiTaka.asm(75) : error A2070:invalid instruction operands
- 00000093  EB 00		        jmp incrementos
-
- 00000095			        incrementos:
-				        ; Incrementamos el contador de ventas
- 00000095  FF 05 0000002C R	        inc cantVentas
-
-				        ; Si ya hemos procesado todas las ventas, salimos del ciclo
-				        cmp cantVentas, vueltas
-EJ15TikiTaka.asm(83) : error A2070:invalid instruction operands
- 0000009B  7C 84		        jl ciclo
-
- 0000009D  E2 82				 loop ciclo
-						 ; Mostramos los resultados
-				        println "Cantidad de ventas en CategoriaUno:"
- 0000005F		     1	.data
- 0000005F 43 61 6E 74 69     1		??0002 db "Cantidad de ventas en CategoriaUno:" , 0
-	   64 61 64 20 64
-	   65 20 76 65 6E
-	   74 61 73 20 65
-	   6E 20 43 61 74
-	   65 67 6F 72 69
-	   61 55 6E 6F 3A
-	   00
- 0000009F		     1		.code
- 0000009F  52		     1			push edx 
- 000000A0  BA 0000005F R     1			mov edx , offset ??0002
- 000000A5  E8 00000000 E     1			call writestring
- 000000AA  E8 00000000 E     1			call crlf
- 000000AF  5A		     1			pop edx
- 000000B0  A1 00000010 R	        mov eax, CatUno
- 000000B5  E8 00000000 E	        call writedec
- 000000BA  E8 00000000 E	        call crlf
-				        println "Total en Categoria Uno:"
- 00000083		     1	.data
- 00000083 54 6F 74 61 6C     1		??0003 db "Total en Categoria Uno:" , 0
-	   20 65 6E 20 43
-	   61 74 65 67 6F
-	   72 69 61 20 55
-	   6E 6F 3A 00
- 000000BF		     1		.code
- 000000BF  52		     1			push edx 
- 000000C0  BA 00000083 R     1			mov edx , offset ??0003
- 000000C5  E8 00000000 E     1			call writestring
- 000000CA  E8 00000000 E     1			call crlf
- 000000CF  5A		     1			pop edx
- 000000D0  A1 0000000C R	        mov eax, sumaCatUno
- 000000D5  E8 00000000 E	        call writedec
- 000000DA  E8 00000000 E	        call crlf
-
-				        println "Cantidad de ventas en CategoriaDos:"
- 0000009B		     1	.data
- 0000009B 43 61 6E 74 69     1		??0004 db "Cantidad de ventas en CategoriaDos:" , 0
-	   64 61 64 20 64
-	   65 20 76 65 6E
-	   74 61 73 20 65
-	   6E 20 43 61 74
-	   65 67 6F 72 69
-	   61 44 6F 73 3A
-	   00
- 000000DF		     1		.code
- 000000DF  52		     1			push edx 
- 000000E0  BA 0000009B R     1			mov edx , offset ??0004
- 000000E5  E8 00000000 E     1			call writestring
- 000000EA  E8 00000000 E     1			call crlf
- 000000EF  5A		     1			pop edx
- 000000F0  A1 00000018 R	        mov eax, CatDos
- 000000F5  E8 00000000 E	        call writedec
- 000000FA  E8 00000000 E	        call crlf
-				        println "Total en Categoria Dos:"
- 000000BF		     1	.data
- 000000BF 54 6F 74 61 6C     1		??0005 db "Total en Categoria Dos:" , 0
-	   20 65 6E 20 43
-	   61 74 65 67 6F
-	   72 69 61 20 44
-	   6F 73 3A 00
- 000000FF		     1		.code
- 000000FF  52		     1			push edx 
- 00000100  BA 000000BF R     1			mov edx , offset ??0005
- 00000105  E8 00000000 E     1			call writestring
- 0000010A  E8 00000000 E     1			call crlf
- 0000010F  5A		     1			pop edx
- 00000110  A1 00000014 R	        mov eax, sumaCatDos
- 00000115  E8 00000000 E	        call writedec
- 0000011A  E8 00000000 E	        call crlf
-
-				        println "Cantidad de ventas en CategoriaTres:"
- 000000D7		     1	.data
- 000000D7 43 61 6E 74 69     1		??0006 db "Cantidad de ventas en CategoriaTres:" , 0
-	   64 61 64 20 64
-	   65 20 76 65 6E
-	   74 61 73 20 65
-	   6E 20 43 61 74
-	   65 67 6F 72 69
-	   61 54 72 65 73
-	   3A 00
- 0000011F		     1		.code
- 0000011F  52		     1			push edx 
- 00000120  BA 000000D7 R     1			mov edx , offset ??0006
- 00000125  E8 00000000 E     1			call writestring
- 0000012A  E8 00000000 E     1			call crlf
- 0000012F  5A		     1			pop edx
- 00000130  A1 00000020 R	        mov eax, CatTres
- 00000135  E8 00000000 E	        call writedec
- 0000013A  E8 00000000 E	        call crlf
-				        println "Total en Categoria Tres:"
- 000000FC		     1	.data
- 000000FC 54 6F 74 61 6C     1		??0007 db "Total en Categoria Tres:" , 0
-	   20 65 6E 20 43
-	   61 74 65 67 6F
-	   72 69 61 20 54
-	   72 65 73 3A 00
- 0000013F		     1		.code
- 0000013F  52		     1			push edx 
- 00000140  BA 000000FC R     1			mov edx , offset ??0007
- 00000145  E8 00000000 E     1			call writestring
- 0000014A  E8 00000000 E     1			call crlf
- 0000014F  5A		     1			pop edx
- 00000150  A1 0000001C R	        mov eax, sumaCatTres
- 00000155  E8 00000000 E	        call writedec
-					
-				        
-
-
+						;Lógica del Programa	  
 						
+						;Una empresa tiene el registro de las horas que trabaja diariamente un empleado
+						;durante la semana(dias) y requiere determinat el total de estas , asi como el
+						;sueldo que recibira por las horas trabajadas
+
+ 00000000  8B 0D 0000000C R			mov ecx , vueltas ; SE VA A REPETIR 6 VECES (DIAS) 
+						
+ 00000006					ciclo:
+ 00000006  A1 0000000C R				mov eax , vueltas
+ 0000000B  2B C1					sub eax , ecx 
+ 0000000D  40						inc eax
+							call writeString "vuelta"
+EJ14HORASTRABAJADAS.asm(39) : error A2206:missing operator in expression
+ 0000000E  E8 00000000 E				call writedec
+ 00000013  E8 00000000 E				call crlf
+
+
+ 00000018  E2 EC				loop ciclo
+
 						exit
 
- 00000161				mainej15 ENDP
+ 00000021				mainej14 ENDP
 					
-					END mainej15
+					END mainej14
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    03/21/23 22:50:46
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 22:53:57
 NombreProgram						     Symbols 2 - 1
 
 
@@ -375,8 +188,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000115 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000161 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000010 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000002C Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -483,12 +296,8 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-mainej15 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000161 Public STDCALL
-  ciclo  . . . . . . . . . . . .	L Near	 00000021 _TEXT	
-  ventaMayor500  . . . . . . . .	L Near	 00000065 _TEXT	
-  ventaEntre500y1000 . . . . . .	L Near	 00000082 _TEXT	
-  ventaMayor1000 . . . . . . . .	L Near	 00000093 _TEXT	
-  incrementos  . . . . . . . . .	L Near	 00000095 _TEXT	
+mainej14 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000002C Public STDCALL
+  ciclo  . . . . . . . . . . . .	L Near	 00000006 _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -498,14 +307,6 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
-??0000 . . . . . . . . . . . . .	Byte	 00000030 _DATA	
-??0001 . . . . . . . . . . . . .	Byte	 0000004E _DATA	
-??0002 . . . . . . . . . . . . .	Byte	 0000005F _DATA	
-??0003 . . . . . . . . . . . . .	Byte	 00000083 _DATA	
-??0004 . . . . . . . . . . . . .	Byte	 0000009B _DATA	
-??0005 . . . . . . . . . . . . .	Byte	 000000BF _DATA	
-??0006 . . . . . . . . . . . . .	Byte	 000000D7 _DATA	
-??0007 . . . . . . . . . . . . .	Byte	 000000FC _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -520,9 +321,6 @@ CAPSLOCK_ON  . . . . . . . . . .	Number	 00000080h
 CREATE_ALWAYS  . . . . . . . . .	Number	 00000002h   
 CREATE_NEW . . . . . . . . . . .	Number	 00000001h   
 CTRL_MASK  . . . . . . . . . . .	Number	 0000000Ch   
-CatDos . . . . . . . . . . . . .	DWord	 00000018 _DATA	
-CatTres  . . . . . . . . . . . .	DWord	 00000020 _DATA	
-CatUno . . . . . . . . . . . . .	DWord	 00000010 _DATA	
 CreateFile . . . . . . . . . . .	Text   	 CreateFileA
 DO_NOT_SHARE . . . . . . . . . .	Number	 00000000h   
 ENABLE_ECHO_INPUT  . . . . . . .	Number	 00000004h   
@@ -721,11 +519,11 @@ WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
-cantVentas . . . . . . . . . . .	DWord	 0000002C _DATA	
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   
 green  . . . . . . . . . . . . .	Number	 00000002h   
+horas_trabajadas . . . . . . . .	DWord	 00000004 _DATA	
 lightBlue  . . . . . . . . . . .	Number	 00000009h   
 lightCyan  . . . . . . . . . . .	Number	 0000000Bh   
 lightGray  . . . . . . . . . . .	Number	 00000007h   
@@ -733,18 +531,13 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
-menores500 . . . . . . . . . . .	DWord	 00000024 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-sumaCatDos . . . . . . . . . . .	DWord	 00000014 _DATA	
-sumaCatTres  . . . . . . . . . .	DWord	 0000001C _DATA	
-sumaCatUno . . . . . . . . . . .	DWord	 0000000C _DATA	
-totalGlobal  . . . . . . . . . .	DWord	 00000008 _DATA	
-ventaActual  . . . . . . . . . .	DWord	 00000028 _DATA	
-venta  . . . . . . . . . . . . .	DWord	 00000004 _DATA	
-vueltas  . . . . . . . . . . . .	DWord	 00000000 _DATA	
+sueldo . . . . . . . . . . . . .	DWord	 00000008 _DATA	
+tarifa . . . . . . . . . . . . .	DWord	 00000000 _DATA	
+vueltas  . . . . . . . . . . . .	DWord	 0000000C _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   
 
 	   0 Warnings
-	   8 Errors
+	   1 Errors
