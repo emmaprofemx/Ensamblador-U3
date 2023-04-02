@@ -17,10 +17,11 @@ INCLUDE macros.inc
 
 ;CONSTANTES
 
-tarifa dword 0d
+tarifa dword 10d
 horas_trabajadas dword 0d
 sueldo dword 0d
 vueltas dword 6d
+total dword 0d
 .code
 	mainej14 PROC
 	
@@ -39,12 +40,19 @@ vueltas dword 6d
 			;call crlf
 			println "Horas trabajadas en el dia "
 			call writedec
+			mov eax , 0 ; RESETEAMOS EAX
 			call crlf
-			call readint
+			call readint ; leemos eax
+			add horas_trabajadas , eax
 			
-
-
 		loop ciclo
+		mov eax , horas_trabajadas ; SE GUARDA EL VALOR DE HORAS TRABAJADAS (47)
+		println "Total de horas trabajadas en la semana: "
+		call writedec 
+		mul tarifa
+		call crlf
+		println "Sueldo del empleado: "
+		call writedec 
 
 		exit
 

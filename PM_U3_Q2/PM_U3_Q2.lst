@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 23:02:43
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 23:13:40
 NombreProgram						     Page 1 - 1
 
 
@@ -54,10 +54,11 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 23:02:43
 
 				;CONSTANTES
 
- 00000000 00000000		tarifa dword 0d
+ 00000000 0000000A		tarifa dword 10d
  00000004 00000000		horas_trabajadas dword 0d
  00000008 00000000		sueldo dword 0d
  0000000C 00000006		vueltas dword 6d
+ 00000010 00000000		total dword 0d
  00000000			.code
  00000000				mainej14 PROC
 					
@@ -74,34 +75,67 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 23:02:43
  0000000B  2B C1					sub eax , ecx 
  0000000D  40						inc eax
 							;call crlf
-							println "Horas trabajadas en el dia"
- 00000010		     1	.data
- 00000010 48 6F 72 61 73     1		??0000 db "Horas trabajadas en el dia" , 0
+							println "Horas trabajadas en el dia "
+ 00000014		     1	.data
+ 00000014 48 6F 72 61 73     1		??0000 db "Horas trabajadas en el dia " , 0
 	   20 74 72 61 62
 	   61 6A 61 64 61
 	   73 20 65 6E 20
 	   65 6C 20 64 69
-	   61 00
+	   61 20 00
  0000000E		     1		.code
  0000000E  52		     1			push edx 
- 0000000F  BA 00000010 R     1			mov edx , offset ??0000
+ 0000000F  BA 00000014 R     1			mov edx , offset ??0000
  00000014  E8 00000000 E     1			call writestring
  00000019  5A		     1			pop edx
  0000001A  E8 00000000 E				call writedec
- 0000001F  E8 00000000 E				call crlf
- 00000024  E8 00000000 E				call readint
-							;call crlf
-
-
- 00000029  E2 DB				loop ciclo
+ 0000001F  B8 00000000					mov eax , 0 ; RESETEAMOS EAX
+ 00000024  E8 00000000 E				call crlf
+ 00000029  E8 00000000 E				call readint ; leemos eax
+ 0000002E  01 05 00000004 R				add horas_trabajadas , eax
+							
+ 00000034  E2 D0				loop ciclo
+ 00000036  A1 00000004 R			mov eax , horas_trabajadas ; SE GUARDA EL VALOR DE HORAS TRABAJADAS (47)
+						println "Total de horas trabajadas en la semana: "
+ 00000030		     1	.data
+ 00000030 54 6F 74 61 6C     1		??0001 db "Total de horas trabajadas en la semana: " , 0
+	   20 64 65 20 68
+	   6F 72 61 73 20
+	   74 72 61 62 61
+	   6A 61 64 61 73
+	   20 65 6E 20 6C
+	   61 20 73 65 6D
+	   61 6E 61 3A 20
+	   00
+ 0000003B		     1		.code
+ 0000003B  52		     1			push edx 
+ 0000003C  BA 00000030 R     1			mov edx , offset ??0001
+ 00000041  E8 00000000 E     1			call writestring
+ 00000046  5A		     1			pop edx
+ 00000047  E8 00000000 E			call writedec 
+ 0000004C  F7 25 00000000 R			mul tarifa
+ 00000052  E8 00000000 E			call crlf
+						println "Sueldo del empleado: "
+ 00000059		     1	.data
+ 00000059 53 75 65 6C 64     1		??0002 db "Sueldo del empleado: " , 0
+	   6F 20 64 65 6C
+	   20 65 6D 70 6C
+	   65 61 64 6F 3A
+	   20 00
+ 00000057		     1		.code
+ 00000057  52		     1			push edx 
+ 00000058  BA 00000059 R     1			mov edx , offset ??0002
+ 0000005D  E8 00000000 E     1			call writestring
+ 00000062  5A		     1			pop edx
+ 00000063  E8 00000000 E			call writedec 
 
 						exit
 
- 00000032				mainej14 ENDP
+ 0000006F				mainej14 ENDP
 					
 					END mainej14
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 23:02:43
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/01/23 23:13:40
 NombreProgram						     Symbols 2 - 1
 
 
@@ -202,8 +236,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 0000002B Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000032 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 0000006F Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000006F Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -310,7 +344,7 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-mainej14 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000032 Public STDCALL
+mainej14 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000006F Public STDCALL
   ciclo  . . . . . . . . . . . .	L Near	 00000006 _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -321,7 +355,9 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
-??0000 . . . . . . . . . . . . .	Byte	 00000010 _DATA	
+??0000 . . . . . . . . . . . . .	Byte	 00000014 _DATA	
+??0001 . . . . . . . . . . . . .	Byte	 00000030 _DATA	
+??0002 . . . . . . . . . . . . .	Byte	 00000059 _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -549,6 +585,7 @@ magenta  . . . . . . . . . . . .	Number	 00000005h
 red  . . . . . . . . . . . . . .	Number	 00000004h   
 sueldo . . . . . . . . . . . . .	DWord	 00000008 _DATA	
 tarifa . . . . . . . . . . . . .	DWord	 00000000 _DATA	
+total  . . . . . . . . . . . . .	DWord	 00000010 _DATA	
 vueltas  . . . . . . . . . . . .	DWord	 0000000C _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
