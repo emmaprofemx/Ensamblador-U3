@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 16:35:46
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 17:29:01
 NombreProgram						     Page 1 - 1
 
 
@@ -57,13 +57,15 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 16:35:46
  00000004 00000000		venta dword 0d
  00000008 00000000		vueltas dword 0d
  0000000C 00000000		catuno dword 0d
+ 00000010 00000000		catdos dword 0d
+ 00000014 00000000		cattres dword 0d
  00000000			.code
  00000000				mainej15 PROC
 					
 						;Lógica del Programa	  
 						 println "Cantidad de ventas en el dia:"
- 00000010		     1	.data
- 00000010 43 61 6E 74 69     1		??0000 db "Cantidad de ventas en el dia:" , 0
+ 00000018		     1	.data
+ 00000018 43 61 6E 74 69     1		??0000 db "Cantidad de ventas en el dia:" , 0
 	   64 61 64 20 64
 	   65 20 76 65 6E
 	   74 61 73 20 65
@@ -71,7 +73,7 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 16:35:46
 	   64 69 61 3A 00
  00000000		     1		.code
  00000000  52		     1			push edx 
- 00000001  BA 00000010 R     1			mov edx , offset ??0000
+ 00000001  BA 00000018 R     1			mov edx , offset ??0000
  00000006  E8 00000000 E     1			call writestring
  0000000B  5A		     1			pop edx
  0000000C  E8 00000000 E			 call readint ; LEEMOS EN EAX
@@ -80,38 +82,96 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 16:35:46
  00000016  8B 0D 00000008 R			 mov ecx, vueltas ; N CANTIDAD DE VUELTAS
 
  0000001C					 ciclo:
-							 println "Ingresa la venta: "
- 0000002E		     1	.data
- 0000002E 49 6E 67 72 65     1		??0001 db "Ingresa la venta: " , 0
+						     println "Ingresa la venta: "
+ 00000036		     1	.data
+ 00000036 49 6E 67 72 65     1		??0001 db "Ingresa la venta: " , 0
 	   73 61 20 6C 61
 	   20 76 65 6E 74
 	   61 3A 20 00
  0000001C		     1		.code
  0000001C  52		     1			push edx 
- 0000001D  BA 0000002E R     1			mov edx , offset ??0001
+ 0000001D  BA 00000036 R     1			mov edx , offset ??0001
  00000022  E8 00000000 E     1			call writestring
  00000027  5A		     1			pop edx
- 00000028  E8 00000000 E				 call readint ;LEEMOS EAX
- 0000002D  3D 000003E8					 cmp eax , 1000
- 00000032  7C 06					 jl noMayor1000
- 00000034  FF 05 0000000C R				 inc catuno
- 0000003A						 noMayor1000:
- 0000003A  E2 E0					 loop ciclo
+ 00000028  E8 00000000 E	             call readint ;LEEMOS EAX
+ 0000002D  3D 000003E8		             cmp eax, 1000 ; COMPARA CON 1000
+ 00000032  7F 0F		             jg ventaMayor1000
+ 00000034  3D 000001F4		             cmp eax, 500 ; COMPARA CON 500
+ 00000039  7F 10		             jg ventaMayor500
+ 0000003B  FF 05 00000014 R	             inc cattres ; INCREMENTA SI ES MENOR O IGUAL A 500
+ 00000041  EB 0E		             jmp finCiclo
 
- 0000003C  A1 0000000C R			 mov eax , catuno
-						
- 00000041  E8 00000000 E			call writedec ; MOSTRANDO EL TOTAL
-				        
+ 00000043			             ventaMayor1000:
+ 00000043  FF 05 0000000C R	             inc catuno ; INCREMENTA SI ES MAYOR A 1000
+ 00000049  EB 06		             jmp finCiclo
+				             
+ 0000004B			             ventaMayor500:
+ 0000004B  FF 05 00000010 R	             inc catdos ; INCREMENTA SI ES MAYOR A 500 Y MENOR O IGUAL A 1000
+
+ 00000051			             finCiclo:
+ 00000051  E2 C9					 loop ciclo
+ 00000053  A1 0000000C R	mov eax, catuno
+				         println "Ventas mayores a 1000: "
+ 00000049		     1	.data
+ 00000049 56 65 6E 74 61     1		??0002 db "Ventas mayores a 1000: " , 0
+	   73 20 6D 61 79
+	   6F 72 65 73 20
+	   61 20 31 30 30
+	   30 3A 20 00
+ 00000058		     1		.code
+ 00000058  52		     1			push edx 
+ 00000059  BA 00000049 R     1			mov edx , offset ??0002
+ 0000005E  E8 00000000 E     1			call writestring
+ 00000063  5A		     1			pop edx
+ 00000064  E8 00000000 E	         call writedec ; MOSTRANDO EL TOTAL DE VENTAS MAYORES A 1000
+ 00000069  E8 00000000 E	         call crlf
+ 0000006E  A1 00000010 R	         mov eax, catdos
+				         println "Ventas mayores a 500 y menores o iguales a 1000: "
+ 00000061		     1	.data
+ 00000061 56 65 6E 74 61     1		??0003 db "Ventas mayores a 500 y menores o iguales a 1000: " , 0
+	   73 20 6D 61 79
+	   6F 72 65 73 20
+	   61 20 35 30 30
+	   20 79 20 6D 65
+	   6E 6F 72 65 73
+	   20 6F 20 69 67
+	   75 61 6C 65 73
+	   20 61 20 31 30
+	   30 30 3A 20 00
+ 00000073		     1		.code
+ 00000073  52		     1			push edx 
+ 00000074  BA 00000061 R     1			mov edx , offset ??0003
+ 00000079  E8 00000000 E     1			call writestring
+ 0000007E  5A		     1			pop edx
+ 0000007F  E8 00000000 E	         call writedec ; MOSTRANDO EL TOTAL DE VENTAS MAYORES A 500 Y MENORES O IGUALES A 1000
+ 00000084  E8 00000000 E	         call crlf
+ 00000089  A1 00000014 R	         mov eax, cattres
+				         println "Ventas menores o iguales a 500: "
+ 00000093		     1	.data
+ 00000093 56 65 6E 74 61     1		??0004 db "Ventas menores o iguales a 500: " , 0
+	   73 20 6D 65 6E
+	   6F 72 65 73 20
+	   6F 20 69 67 75
+	   61 6C 65 73 20
+	   61 20 35 30 30
+	   3A 20 00
+ 0000008E		     1		.code
+ 0000008E  52		     1			push edx 
+ 0000008F  BA 00000093 R     1			mov edx , offset ??0004
+ 00000094  E8 00000000 E     1			call writestring
+ 00000099  5A		     1			pop edx
+ 0000009A  E8 00000000 E	         call writedec ; MOSTRANDO EL TOTAL DE VENTAS MENORES O IGUALES A 500
+ 0000009F  E8 00000000 E	         call crlf
 
 
- 00000046					salir:
+ 000000A4					salir:
 						exit
 
- 0000004D				mainej15 ENDP
+ 000000AB				mainej15 ENDP
 					
 					END mainej15
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 16:35:46
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 17:29:01
 NombreProgram						     Symbols 2 - 1
 
 
@@ -212,8 +272,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000041 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000004D Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 000000B4 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 000000AB Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -320,10 +380,12 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-mainej15 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000004D Public STDCALL
+mainej15 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 000000AB Public STDCALL
   ciclo  . . . . . . . . . . . .	L Near	 0000001C _TEXT	
-  noMayor1000  . . . . . . . . .	L Near	 0000003A _TEXT	
-  salir  . . . . . . . . . . . .	L Near	 00000046 _TEXT	
+  ventaMayor1000 . . . . . . . .	L Near	 00000043 _TEXT	
+  ventaMayor500  . . . . . . . .	L Near	 0000004B _TEXT	
+  finCiclo . . . . . . . . . . .	L Near	 00000051 _TEXT	
+  salir  . . . . . . . . . . . .	L Near	 000000A4 _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -333,8 +395,11 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
-??0000 . . . . . . . . . . . . .	Byte	 00000010 _DATA	
-??0001 . . . . . . . . . . . . .	Byte	 0000002E _DATA	
+??0000 . . . . . . . . . . . . .	Byte	 00000018 _DATA	
+??0001 . . . . . . . . . . . . .	Byte	 00000036 _DATA	
+??0002 . . . . . . . . . . . . .	Byte	 00000049 _DATA	
+??0003 . . . . . . . . . . . . .	Byte	 00000061 _DATA	
+??0004 . . . . . . . . . . . . .	Byte	 00000093 _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -548,6 +613,8 @@ acumulador . . . . . . . . . . .	DWord	 00000000 _DATA
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
+catdos . . . . . . . . . . . . .	DWord	 00000010 _DATA	
+cattres  . . . . . . . . . . . .	DWord	 00000014 _DATA	
 catuno . . . . . . . . . . . . .	DWord	 0000000C _DATA	
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
