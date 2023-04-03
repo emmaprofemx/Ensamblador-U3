@@ -26,24 +26,21 @@ catuno dword 0d
 		;Lógica del Programa	  
 		 println "Cantidad de ventas en el dia:"
 		 call readint ; LEEMOS EN EAX
-		 mov vueltas, eax ; MOVEMOS EL VAMOR DE EAX 
+		 mov vueltas, eax ; MOVEMOS EL VALOR DE EAX 
 
 		 mov ecx, vueltas ; N CANTIDAD DE VUELTAS
 
 		 ciclo:
-			 println "Ingresa la venta"
+			 println "Ingresa la venta: "
 			 call readint ;LEEMOS EAX
-			 mov venta, eax
-			 cmp venta, 1000
-			 mov eax , venta
-			 add catuno,eax
-			 jge ventaMayor1000
+			 cmp eax , 1000
+			 jl noMayor1000
+			 inc catuno
+			 noMayor1000:
+			 loop ciclo
 
-		 loop ciclo
-
-		ventaMayor1000:
-        ; Si la venta es mayor a 1000, la sumamos a la variable catuno
-		mov eax , catuno
+		 mov eax , catuno
+		
 		call writedec ; MOSTRANDO EL TOTAL
         
 
