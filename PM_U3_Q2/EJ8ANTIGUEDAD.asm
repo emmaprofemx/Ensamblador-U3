@@ -18,6 +18,7 @@ INCLUDE macros.inc
 ;CONSTANTES
 
 i dword 0d
+j dword 0d
 anios dword 0d
 n dword 100d
 m dword 1000d
@@ -35,18 +36,28 @@ bono dword 0d
 		println "Ingresa los anios trabajados: "
 		call readint ; LEEMOS EAX
 		mov ecx , eax
+		cmp ecx , 5
+		jle casouno
+		cmp ecx , 6
+		jmp casodos
 
-		ciclo:
+		casouno:
+			ciclo:
 			inc i
 			mov eax , i
 			mul n
-		loop ciclo
+				loop ciclo
+			println "El bono es: "
+				call writedec
+				call crlf
+			jmp salir
 
-		println "El bono es: "
+		casodos:
+		mov eax , m
+		println "Tu bono es: "
 		call writedec
-		call crlf
 
-
+		salir:
 		exit
 
 	mainej8 ENDP

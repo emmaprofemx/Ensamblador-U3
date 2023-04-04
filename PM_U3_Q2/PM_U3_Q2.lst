@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 18:27:23
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 21:27:09
 NombreProgram						     Page 1 - 1
 
 
@@ -55,9 +55,11 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 18:27:23
 				;CONSTANTES
 
  00000000 00000000		i dword 0d
- 00000004 00000000		anios dword 0d
- 00000008 00000064		n dword 100d
- 0000000C 00000000		bono dword 0d
+ 00000004 00000000		j dword 0d
+ 00000008 00000000		anios dword 0d
+ 0000000C 00000064		n dword 100d
+ 00000010 000003E8		m dword 1000d
+ 00000014 00000000		bono dword 0d
  00000000			.code
  00000000				mainej8 PROC
 					
@@ -69,8 +71,8 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 18:27:23
 						;que recibira un trabajador.
 
 						println "Ingresa los anios trabajados: "
- 00000010		     1	.data
- 00000010 49 6E 67 72 65     1		??0000 db "Ingresa los anios trabajados: " , 0
+ 00000018		     1	.data
+ 00000018 49 6E 67 72 65     1		??0000 db "Ingresa los anios trabajados: " , 0
 	   73 61 20 6C 6F
 	   73 20 61 6E 69
 	   6F 73 20 74 72
@@ -79,39 +81,61 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 18:27:23
 	   00
  00000000		     1		.code
  00000000  52		     1			push edx 
- 00000001  BA 00000010 R     1			mov edx , offset ??0000
+ 00000001  BA 00000018 R     1			mov edx , offset ??0000
  00000006  E8 00000000 E     1			call writestring
  0000000B  5A		     1			pop edx
  0000000C  E8 00000000 E			call readint ; LEEMOS EAX
  00000011  8B C8				mov ecx , eax
 
- 00000013					ciclo:
- 00000013  FF 05 00000000 R				inc i
- 00000019  A1 00000000 R				mov eax , i
- 0000001E  F7 25 00000008 R				mul n
- 00000024  E2 ED				loop ciclo
+ 00000013  83 F9 05				cmp ecx , 5
+ 00000016  7E 05				jle casouno
+ 00000018  83 F9 06				cmp ecx , 6
+ 0000001B  EB 2B				jmp casodos
+						;jmp casodos
 
-						println "El bono es: "
- 0000002F		     1	.data
- 0000002F 45 6C 20 62 6F     1		??0001 db "El bono es: " , 0
+ 0000001D					casouno:
+ 0000001D						ciclo:
+ 0000001D  FF 05 00000000 R				inc i
+ 00000023  A1 00000000 R				mov eax , i
+ 00000028  F7 25 0000000C R				mul n
+ 0000002E  E2 ED						loop ciclo
+							println "El bono es: "
+ 00000037		     1	.data
+ 00000037 45 6C 20 62 6F     1		??0001 db "El bono es: " , 0
 	   6E 6F 20 65 73
 	   3A 20 00
- 00000026		     1		.code
- 00000026  52		     1			push edx 
- 00000027  BA 0000002F R     1			mov edx , offset ??0001
- 0000002C  E8 00000000 E     1			call writestring
- 00000031  5A		     1			pop edx
- 00000032  E8 00000000 E			call writedec
- 00000037  E8 00000000 E			call crlf
+ 00000030		     1		.code
+ 00000030  52		     1			push edx 
+ 00000031  BA 00000037 R     1			mov edx , offset ??0001
+ 00000036  E8 00000000 E     1			call writestring
+ 0000003B  5A		     1			pop edx
+ 0000003C  E8 00000000 E					call writedec
+ 00000041  E8 00000000 E					call crlf
+ 00000046  EB 16					jmp salir
+
+ 00000048					casodos:
+ 00000048  A1 00000010 R			mov eax , m
+						println "Tu bono es: "
+ 00000044		     1	.data
+ 00000044 54 75 20 62 6F     1		??0002 db "Tu bono es: " , 0
+	   6E 6F 20 65 73
+	   3A 20 00
+ 0000004D		     1		.code
+ 0000004D  52		     1			push edx 
+ 0000004E  BA 00000044 R     1			mov edx , offset ??0002
+ 00000053  E8 00000000 E     1			call writestring
+ 00000058  5A		     1			pop edx
+ 00000059  E8 00000000 E			call writedec
 
 
+ 0000005E					salir:
 						exit
 
- 00000043				mainej8 ENDP
+ 00000065				mainej8 ENDP
 					
 					END mainej8
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 18:27:23
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 21:27:09
 NombreProgram						     Symbols 2 - 1
 
 
@@ -212,8 +236,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 0000003C Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000043 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000051 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000065 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -320,8 +344,11 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-mainej8  . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000043 Public STDCALL
-  ciclo  . . . . . . . . . . . .	L Near	 00000013 _TEXT	
+mainej8  . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000065 Public STDCALL
+  casouno  . . . . . . . . . . .	L Near	 0000001D _TEXT	
+  ciclo  . . . . . . . . . . . .	L Near	 0000001D _TEXT	
+  casodos  . . . . . . . . . . .	L Near	 00000048 _TEXT	
+  salir  . . . . . . . . . . . .	L Near	 0000005E _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -331,8 +358,9 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
-??0000 . . . . . . . . . . . . .	Byte	 00000010 _DATA	
-??0001 . . . . . . . . . . . . .	Byte	 0000002F _DATA	
+??0000 . . . . . . . . . . . . .	Byte	 00000018 _DATA	
+??0001 . . . . . . . . . . . . .	Byte	 00000037 _DATA	
+??0002 . . . . . . . . . . . . .	Byte	 00000044 _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -542,16 +570,17 @@ VK_UP  . . . . . . . . . . . . .	Number	 00000026h
 WINDOW_BUFFER_SIZE_EVENT . . . .	Number	 00000004h   
 WriteConsoleOutputCharacter  . .	Text   	 WriteConsoleOutputCharacterA
 WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
-anios  . . . . . . . . . . . . .	DWord	 00000004 _DATA	
+anios  . . . . . . . . . . . . .	DWord	 00000008 _DATA	
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
-bono . . . . . . . . . . . . . .	DWord	 0000000C _DATA	
+bono . . . . . . . . . . . . . .	DWord	 00000014 _DATA	
 brown  . . . . . . . . . . . . .	Number	 00000006h   
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   
 green  . . . . . . . . . . . . .	Number	 00000002h   
 i  . . . . . . . . . . . . . . .	DWord	 00000000 _DATA	
+j  . . . . . . . . . . . . . . .	DWord	 00000004 _DATA	
 lightBlue  . . . . . . . . . . .	Number	 00000009h   
 lightCyan  . . . . . . . . . . .	Number	 0000000Bh   
 lightGray  . . . . . . . . . . .	Number	 00000007h   
@@ -559,7 +588,8 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
-n  . . . . . . . . . . . . . . .	DWord	 00000008 _DATA	
+m  . . . . . . . . . . . . . . .	DWord	 00000010 _DATA	
+n  . . . . . . . . . . . . . . .	DWord	 0000000C _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
