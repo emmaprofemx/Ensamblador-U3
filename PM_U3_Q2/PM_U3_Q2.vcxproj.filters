@@ -63,6 +63,7 @@
     <MASM Include="EJ14HORASTRABAJADAS.asm" />
     <MASM Include="EJ8ANTIGUEDAD.asm" />
     <MASM Include="EJ17NaufragioSatisfecho.asm" />
+    <MASM Include="EJ19Narticulos.asm" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />

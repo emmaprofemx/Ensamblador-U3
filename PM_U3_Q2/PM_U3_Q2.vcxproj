@@ -29,6 +29,7 @@
     <MASM Include="EJ16Salario.asm" />
     <MASM Include="EJ17NaufragioSatisfecho.asm" />
     <MASM Include="EJ18Focos_colores.asm" />
+    <MASM Include="EJ19Narticulos.asm" />
     <MASM Include="EJ1U3Hamburguesas.asm" />
     <MASM Include="EJ2U3Citas.asm" />
     <MASM Include="EJ2_EDADALUMNOS.asm" />
