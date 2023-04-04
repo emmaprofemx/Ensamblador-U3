@@ -21,7 +21,8 @@ contadorS dword 0d
 contadorD dword 0d
 precio dword 0d
 total dword 0d
-
+res dword 0d
+divisor dword 10d
 .code
 	mainej17 PROC
 	
@@ -99,13 +100,23 @@ total dword 0d
 		call writedec ;Mostrar el número de veces que se ingresó 'S'
 		call crlf ;Salto de línea
 		
+		;------PROCESO PARA INCREMENTAR EL 10%-------
 		mov eax , total
+		mov res , eax
+		mov eax , res
 
+		mov edx , 0
+		div divisor
+
+		add res , eax
+		mov eax , res
 		println "Valor total: "
 		call writedec 
 		call crlf ;Salto de línea
-		;--------presione una tecla para continuar----------
+		;------PROCESO PARA INCREMENTAR EL 10%-------
 
+
+		;--------presione una tecla para continuar----------
 	  mov eax, 10
 	  push eax
 	  mov eax , 500 ; milisegundos

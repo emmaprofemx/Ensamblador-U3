@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/04/23 11:47:37
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/04/23 12:02:19
 NombreProgram						     Page 1 - 1
 
 
@@ -58,7 +58,8 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/04/23 11:47:37
  00000008 00000000		contadorD dword 0d
  0000000C 00000000		precio dword 0d
  00000010 00000000		total dword 0d
-
+ 00000014 00000000		res dword 0d
+ 00000018 0000000A		divisor dword 10d
  00000000			.code
  00000000				mainej17 PROC
 					
@@ -71,14 +72,14 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/04/23 11:47:37
 						;diferente tipo , ¿Cuánto deben pagar por un pedido?
 					
 						println "Cuantas vueltas?"
- 00000014		     1	.data
- 00000014 43 75 61 6E 74     1		??0000 db "Cuantas vueltas?" , 0
+ 0000001C		     1	.data
+ 0000001C 43 75 61 6E 74     1		??0000 db "Cuantas vueltas?" , 0
 	   61 73 20 76 75
 	   65 6C 74 61 73
 	   3F 00
  00000000		     1		.code
  00000000  52		     1			push edx 
- 00000001  BA 00000014 R     1			mov edx , offset ??0000
+ 00000001  BA 0000001C R     1			mov edx , offset ??0000
  00000006  E8 00000000 E     1			call writestring
  0000000B  5A		     1			pop edx
  0000000C  E8 00000000 E			call readint ; LEEMOS EN EAX
@@ -133,15 +134,15 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/04/23 11:47:37
 
  00000075  A1 00000000 R				mov eax , contadorT
 						println "Veces que se ingreso T: "
- 00000025		     1	.data
- 00000025 56 65 63 65 73     1		??0001 db "Veces que se ingreso T: " , 0
+ 0000002D		     1	.data
+ 0000002D 56 65 63 65 73     1		??0001 db "Veces que se ingreso T: " , 0
 	   20 71 75 65 20
 	   73 65 20 69 6E
 	   67 72 65 73 6F
 	   20 54 3A 20 00
  0000007A		     1		.code
  0000007A  52		     1			push edx 
- 0000007B  BA 00000025 R     1			mov edx , offset ??0001
+ 0000007B  BA 0000002D R     1			mov edx , offset ??0001
  00000080  E8 00000000 E     1			call writestring
  00000085  5A		     1			pop edx
  00000086  E8 00000000 E			call writedec ;Mostrar el número de veces que se ingresó 'T'
@@ -149,15 +150,15 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/04/23 11:47:37
 
  00000090  A1 00000004 R			mov eax , contadorS 
 						println "Veces que se ingreso S: "
- 0000003E		     1	.data
- 0000003E 56 65 63 65 73     1		??0002 db "Veces que se ingreso S: " , 0
+ 00000046		     1	.data
+ 00000046 56 65 63 65 73     1		??0002 db "Veces que se ingreso S: " , 0
 	   20 71 75 65 20
 	   73 65 20 69 6E
 	   67 72 65 73 6F
 	   20 53 3A 20 00
  00000095		     1		.code
  00000095  52		     1			push edx 
- 00000096  BA 0000003E R     1			mov edx , offset ??0002
+ 00000096  BA 00000046 R     1			mov edx , offset ??0002
  0000009B  E8 00000000 E     1			call writestring
  000000A0  5A		     1			pop edx
  000000A1  E8 00000000 E			call writedec ;Mostrar el número de veces que se ingresó 'S'
@@ -165,51 +166,60 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/04/23 11:47:37
 
  000000AB  A1 00000008 R			mov eax , contadorD
 						println "Veces que se ingreso D: "
- 00000057		     1	.data
- 00000057 56 65 63 65 73     1		??0003 db "Veces que se ingreso D: " , 0
+ 0000005F		     1	.data
+ 0000005F 56 65 63 65 73     1		??0003 db "Veces que se ingreso D: " , 0
 	   20 71 75 65 20
 	   73 65 20 69 6E
 	   67 72 65 73 6F
 	   20 44 3A 20 00
  000000B0		     1		.code
  000000B0  52		     1			push edx 
- 000000B1  BA 00000057 R     1			mov edx , offset ??0003
+ 000000B1  BA 0000005F R     1			mov edx , offset ??0003
  000000B6  E8 00000000 E     1			call writestring
  000000BB  5A		     1			pop edx
  000000BC  E8 00000000 E			call writedec ;Mostrar el número de veces que se ingresó 'S'
  000000C1  E8 00000000 E			call crlf ;Salto de línea
 						
  000000C6  A1 00000010 R			mov eax , total
+ 000000CB  A3 00000014 R			mov res , eax
+ 000000D0  A1 00000014 R			mov eax , res
 
+ 000000D5  BA 00000000				mov edx , 0
+ 000000DA  F7 35 00000018 R			div divisor
+
+ 000000E0  01 05 00000014 R			add res , eax
+ 000000E6  A1 00000014 R			mov eax , res
 						println "Valor total: "
- 00000070		     1	.data
- 00000070 56 61 6C 6F 72     1		??0004 db "Valor total: " , 0
+ 00000078		     1	.data
+ 00000078 56 61 6C 6F 72     1		??0004 db "Valor total: " , 0
 	   20 74 6F 74 61
 	   6C 3A 20 00
- 000000CB		     1		.code
- 000000CB  52		     1			push edx 
- 000000CC  BA 00000070 R     1			mov edx , offset ??0004
- 000000D1  E8 00000000 E     1			call writestring
- 000000D6  5A		     1			pop edx
- 000000D7  E8 00000000 E			call writedec 
- 000000DC  E8 00000000 E			call crlf ;Salto de línea
-						;--------presione una tecla para continuar----------
+ 000000EB		     1		.code
+ 000000EB  52		     1			push edx 
+ 000000EC  BA 00000078 R     1			mov edx , offset ??0004
+ 000000F1  E8 00000000 E     1			call writestring
+ 000000F6  5A		     1			pop edx
+ 000000F7  E8 00000000 E			call writedec 
+ 000000FC  E8 00000000 E			call crlf ;Salto de línea
 
- 000000E1  B8 0000000A			  mov eax, 10
- 000000E6  50				  push eax
- 000000E7  B8 000001F4			  mov eax , 500 ; milisegundos
- 000000EC  E8 00000000 E		  call delay ; DELAY SIEMPRE DEPENDE DE EAX (siempre se maneja en mls)
- 000000F1  58				  pop eax 
+
+
+						;--------presione una tecla para continuar----------
+ 00000101  B8 0000000A			  mov eax, 10
+ 00000106  50				  push eax
+ 00000107  B8 000001F4			  mov eax , 500 ; milisegundos
+ 0000010C  E8 00000000 E		  call delay ; DELAY SIEMPRE DEPENDE DE EAX (siempre se maneja en mls)
+ 00000111  58				  pop eax 
 					  ;call writeDec
 					  ;-----------------------------------------------------
- 000000F2					salir:
+ 00000112					salir:
 						exit
 
- 000000F9				mainej17 ENDP
+ 00000119				mainej17 ENDP
 					
 					END mainej17
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/04/23 11:47:37
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/04/23 12:02:19
 NombreProgram						     Symbols 2 - 1
 
 
@@ -310,8 +320,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 0000007E Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 000000F9 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000086 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000119 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -418,14 +428,14 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-mainej17 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 000000F9 Public STDCALL
+mainej17 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000119 Public STDCALL
   ciclo  . . . . . . . . . . . .	L Near	 00000013 _TEXT	
   contarS  . . . . . . . . . . .	L Near	 00000026 _TEXT	
   contarD  . . . . . . . . . . .	L Near	 0000003D _TEXT	
   contarT  . . . . . . . . . . .	L Near	 00000054 _TEXT	
   noSumar  . . . . . . . . . . .	L Near	 0000006B _TEXT	
   finConteo  . . . . . . . . . .	L Near	 0000006D _TEXT	
-  salir  . . . . . . . . . . . .	L Near	 000000F2 _TEXT	
+  salir  . . . . . . . . . . . .	L Near	 00000112 _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -435,11 +445,11 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
-??0000 . . . . . . . . . . . . .	Byte	 00000014 _DATA	
-??0001 . . . . . . . . . . . . .	Byte	 00000025 _DATA	
-??0002 . . . . . . . . . . . . .	Byte	 0000003E _DATA	
-??0003 . . . . . . . . . . . . .	Byte	 00000057 _DATA	
-??0004 . . . . . . . . . . . . .	Byte	 00000070 _DATA	
+??0000 . . . . . . . . . . . . .	Byte	 0000001C _DATA	
+??0001 . . . . . . . . . . . . .	Byte	 0000002D _DATA	
+??0002 . . . . . . . . . . . . .	Byte	 00000046 _DATA	
+??0003 . . . . . . . . . . . . .	Byte	 0000005F _DATA	
+??0004 . . . . . . . . . . . . .	Byte	 00000078 _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -656,6 +666,7 @@ contadorD  . . . . . . . . . . .	DWord	 00000008 _DATA
 contadorS  . . . . . . . . . . .	DWord	 00000004 _DATA	
 contadorT  . . . . . . . . . . .	DWord	 00000000 _DATA	
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
+divisor  . . . . . . . . . . . .	DWord	 00000018 _DATA	
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   
 green  . . . . . . . . . . . . .	Number	 00000002h   
@@ -668,6 +679,7 @@ lightRed . . . . . . . . . . . .	Number	 0000000Ch
 magenta  . . . . . . . . . . . .	Number	 00000005h   
 precio . . . . . . . . . . . . .	DWord	 0000000C _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
+res  . . . . . . . . . . . . . .	DWord	 00000014 _DATA	
 total  . . . . . . . . . . . . .	DWord	 00000010 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
