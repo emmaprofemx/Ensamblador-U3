@@ -18,6 +18,7 @@ INCLUDE macros.inc
 ;CONSTANTES
 contadorT dword 0d
 contadorS dword 0d
+contadorD dword 0d
 .code
 	mainej17 PROC
 	
@@ -29,13 +30,13 @@ contadorS dword 0d
 		;Suponiendo que los clientes adquieren N hamburguesas , las cuales pueden ser de 
 		;diferente tipo , ¿Cuánto deben pagar por un pedido?
 	
-		;println "Cuantas vueltas?"
-		;call readint ; LEEMOS EN EAX
-		;mov ecx , eax
+		println "Cuantas vueltas?"
+		call readint ; LEEMOS EN EAX
+		mov ecx , eax
 		;mov ebx , 0
 
-		mov ecx , 5 ;Cambiar por el número de entradas a leer
-		mov ebx , 0
+		;mov ecx , 5 ;Cambiar por el número de entradas a leer
+		;mov ebx , 0
 
 		ciclo:
 			;Leer un caracter
@@ -74,6 +75,14 @@ contadorS dword 0d
 		call writedec ;Mostrar el número de veces que se ingresó 'S'
 		call crlf ;Salto de línea
 		
+		;--------presione una tecla para continuar----------
+
+	  mov eax, 10
+	  push eax
+	  mov eax , 500 ; milisegundos
+	  call delay ; DELAY SIEMPRE DEPENDE DE EAX (siempre se maneja en mls)
+	  pop eax 
+	  ;call writeDec
 
 		salir:
 		exit
