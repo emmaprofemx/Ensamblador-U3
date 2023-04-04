@@ -40,5 +40,6 @@ Ejercicios de Tarea del documento proporcionado por el Dr Alejandro.
 * [T16 - SALARIOS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ16Salario.asm)
 * [T17 - NAUFRAGIO SATISFECHO](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ17NaufragioSatisfecho.asm)
 * [T18 - FOCOS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ18Focos_colores.asm)
+* [T19 - N ARTICULOS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ19Narticulos.asm)
 * [T20 - PROEMDIO SALON](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P17_PromedioM_Salones.asm)
 
