@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 23:18:16
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/04/23 11:03:45
 NombreProgram						     Page 1 - 1
 
 
@@ -53,8 +53,8 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 23:18:16
 				; Área de Declaración de Variables
 
 				;CONSTANTES
- 00000000 00000000		contador dword 0d
-
+ 00000000 00000000		contadorT dword 0d
+ 00000004 00000000		contadorS dword 0d
  00000000			.code
  00000000				mainej17 PROC
 					
@@ -71,38 +71,77 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 23:18:16
 						;mov ecx , eax
 						;mov ebx , 0
 
- 00000000  B9 00000005				mov ecx , 5
+ 00000000  B9 00000005				mov ecx , 5 ;Cambiar por el número de entradas a leer
  00000005  BB 00000000				mov ebx , 0
 
-
  0000000A					ciclo:
-							;println "Ingresa una letra"
- 0000000A  E8 00000000 E				call readchar ; eax
- 0000000F  3C 74					cmp al , 't'
- 00000011  75 0B					jne noSumar
+							;Leer un caracter
+ 0000000A  E8 00000000 E				call readchar
+ 0000000F  3C 53					cmp al , 'S'
+ 00000011  74 06					je contarS
+ 00000013  3C 54					cmp al , 'T'
+ 00000015  74 14					je contarT
+ 00000017  EB 24					jmp noSumar
 
- 00000013  43						inc ebx
- 00000014  E8 00000000 E				call writechar
- 00000019  E8 00000000 E				call crlf
- 0000001E						noSumar:
- 0000001E  E2 EA					loop ciclo
+ 00000019						contarS:
+ 00000019  FF 05 00000004 R					inc contadorS 
+ 0000001F  E8 00000000 E					call writechar
+ 00000024  E8 00000000 E					call crlf
+ 00000029  EB 14						jmp finConteo
 
- 00000020  8B C3					mov eax, ebx ;Mover el valor del contador a EAX
- 00000022  E8 00000000 E				call writedec ;Mostrar el número de veces que se ingresó 't'
- 00000027  E8 00000000 E				call crlf ;Salto de línea
+ 0000002B						contarT:
+ 0000002B  FF 05 00000000 R					inc contadorT 
+ 00000031  E8 00000000 E					call writechar
+ 00000036  E8 00000000 E					call crlf
+ 0000003B  EB 02						jmp finConteo
+
+ 0000003D						noSumar:
+ 0000003D  EB 00						jmp finConteo
+
+ 0000003F						finConteo:
+ 0000003F  E2 C9						loop ciclo
+
+ 00000041  A1 00000000 R				mov eax , contadorT
+						println "Veces que se ingreso T: "
+ 00000008		     1	.data
+ 00000008 56 65 63 65 73     1		??0000 db "Veces que se ingreso T: " , 0
+	   20 71 75 65 20
+	   73 65 20 69 6E
+	   67 72 65 73 6F
+	   20 54 3A 20 00
+ 00000046		     1		.code
+ 00000046  52		     1			push edx 
+ 00000047  BA 00000008 R     1			mov edx , offset ??0000
+ 0000004C  E8 00000000 E     1			call writestring
+ 00000051  5A		     1			pop edx
+ 00000052  E8 00000000 E			call writedec ;Mostrar el número de veces que se ingresó 'T'
+ 00000057  E8 00000000 E			call crlf ;Salto de línea
+
+ 0000005C  A1 00000004 R			mov eax , contadorS 
+						println "Veces que se ingreso S: "
+ 00000021		     1	.data
+ 00000021 56 65 63 65 73     1		??0001 db "Veces que se ingreso S: " , 0
+	   20 71 75 65 20
+	   73 65 20 69 6E
+	   67 72 65 73 6F
+	   20 53 3A 20 00
+ 00000061		     1		.code
+ 00000061  52		     1			push edx 
+ 00000062  BA 00000021 R     1			mov edx , offset ??0001
+ 00000067  E8 00000000 E     1			call writestring
+ 0000006C  5A		     1			pop edx
+ 0000006D  E8 00000000 E			call writedec ;Mostrar el número de veces que se ingresó 'S'
+ 00000072  E8 00000000 E			call crlf ;Salto de línea
 						
 
-						;call writechar ; echo
-
-
-					
+ 00000077					salir:
 						exit
 
- 00000033				mainej17 ENDP
+ 0000007E				mainej17 ENDP
 					
 					END mainej17
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 23:18:16
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/04/23 11:03:45
 NombreProgram						     Symbols 2 - 1
 
 
@@ -203,8 +242,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000004 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000033 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 0000003A Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000007E Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -311,9 +350,13 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-mainej17 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000033 Public STDCALL
+mainej17 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000007E Public STDCALL
   ciclo  . . . . . . . . . . . .	L Near	 0000000A _TEXT	
-  noSumar  . . . . . . . . . . .	L Near	 0000001E _TEXT	
+  contarS  . . . . . . . . . . .	L Near	 00000019 _TEXT	
+  contarT  . . . . . . . . . . .	L Near	 0000002B _TEXT	
+  noSumar  . . . . . . . . . . .	L Near	 0000003D _TEXT	
+  finConteo  . . . . . . . . . .	L Near	 0000003F _TEXT	
+  salir  . . . . . . . . . . . .	L Near	 00000077 _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -323,6 +366,8 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
+??0000 . . . . . . . . . . . . .	Byte	 00000008 _DATA	
+??0001 . . . . . . . . . . . . .	Byte	 00000021 _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -535,7 +580,8 @@ WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
-contador . . . . . . . . . . . .	DWord	 00000000 _DATA	
+contadorS  . . . . . . . . . . .	DWord	 00000004 _DATA	
+contadorT  . . . . . . . . . . .	DWord	 00000000 _DATA	
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   

@@ -16,8 +16,8 @@ INCLUDE macros.inc
 ; Área de Declaración de Variables
 
 ;CONSTANTES
-contador dword 0d
-
+contadorT dword 0d
+contadorS dword 0d
 .code
 	mainej17 PROC
 	
@@ -34,28 +34,48 @@ contador dword 0d
 		;mov ecx , eax
 		;mov ebx , 0
 
-		mov ecx , 5
+		mov ecx , 5 ;Cambiar por el número de entradas a leer
 		mov ebx , 0
 
-
 		ciclo:
-			;println "Ingresa una letra"
-			call readchar ; eax
-			cmp al , 't'
-			jne noSumar
+			;Leer un caracter
+			call readchar
+			cmp al , 'S'
+			je contarS
+			cmp al , 'T'
+			je contarT
+			jmp noSumar
 
-			inc ebx
-			call writechar
-			call crlf
+			contarS:
+				inc contadorS 
+				call writechar
+				call crlf
+				jmp finConteo
+
+			contarT:
+				inc contadorT 
+				call writechar
+				call crlf
+				jmp finConteo
+
 			noSumar:
-			loop ciclo
+				jmp finConteo
 
-			mov eax, ebx ;Mover el valor del contador a EAX
-			call writedec ;Mostrar el número de veces que se ingresó 't'
-			call crlf ;Salto de línea
+			finConteo:
+				loop ciclo
+
+			mov eax , contadorT
+		println "Veces que se ingreso T: "
+		call writedec ;Mostrar el número de veces que se ingresó 'T'
+		call crlf ;Salto de línea
+
+		mov eax , contadorS 
+		println "Veces que se ingreso S: "
+		call writedec ;Mostrar el número de veces que se ingresó 'S'
+		call crlf ;Salto de línea
 		
 
-	
+		salir:
 		exit
 
 	mainej17 ENDP
