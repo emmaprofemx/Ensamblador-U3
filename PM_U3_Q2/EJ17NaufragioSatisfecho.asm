@@ -45,6 +45,8 @@ contadorD dword 0d
 			je contarS
 			cmp al , 'T'
 			je contarT
+			cmp al , 'D'
+			je contarD
 			jmp noSumar
 
 			contarS:
@@ -55,6 +57,12 @@ contadorD dword 0d
 
 			contarT:
 				inc contadorT 
+				call writechar
+				call crlf
+				jmp finConteo
+			
+			contarD:
+				inc contadorD 
 				call writechar
 				call crlf
 				jmp finConteo
@@ -74,6 +82,11 @@ contadorD dword 0d
 		println "Veces que se ingreso S: "
 		call writedec ;Mostrar el número de veces que se ingresó 'S'
 		call crlf ;Salto de línea
+
+		mov eax , contadorD
+		println "Veces que se ingreso D: "
+		call writedec ;Mostrar el número de veces que se ingresó 'S'
+		call crlf ;Salto de línea
 		
 		;--------presione una tecla para continuar----------
 
@@ -83,7 +96,7 @@ contadorD dword 0d
 	  call delay ; DELAY SIEMPRE DEPENDE DE EAX (siempre se maneja en mls)
 	  pop eax 
 	  ;call writeDec
-
+	  ;-----------------------------------------------------
 		salir:
 		exit
 
