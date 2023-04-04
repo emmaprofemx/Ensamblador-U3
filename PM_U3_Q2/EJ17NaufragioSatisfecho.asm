@@ -19,6 +19,9 @@ INCLUDE macros.inc
 contadorT dword 0d
 contadorS dword 0d
 contadorD dword 0d
+precio dword 0d
+total dword 0d
+
 .code
 	mainej17 PROC
 	
@@ -43,34 +46,42 @@ contadorD dword 0d
 			call readchar
 			cmp al , 'S'
 			je contarS
-			cmp al , 'T'
-			je contarT
 			cmp al , 'D'
 			je contarD
+			cmp al , 'T'
+			je contarT
 			jmp noSumar
 
 			contarS:
+				;------------SENCILLAS(20)-------------
 				inc contadorS 
 				call writechar
 				call crlf
+				mov eax , 20
 				jmp finConteo
 
-			contarT:
-				inc contadorT 
-				call writechar
-				call crlf
-				jmp finConteo
-			
 			contarD:
+			    ;------------DOBLES(25)----------------
 				inc contadorD 
 				call writechar
 				call crlf
+				mov eax , 25
 				jmp finConteo
 
+			contarT:
+			    ;------------TRIPLES(30)-------------
+				inc contadorT 
+				call writechar
+				call crlf
+				mov eax , 30
+				jmp finConteo
+			
 			noSumar:
 				jmp finConteo
 
+
 			finConteo:
+			add total , eax
 				loop ciclo
 
 			mov eax , contadorT
@@ -88,6 +99,11 @@ contadorD dword 0d
 		call writedec ;Mostrar el número de veces que se ingresó 'S'
 		call crlf ;Salto de línea
 		
+		mov eax , total
+
+		println "Valor total: "
+		call writedec 
+		call crlf ;Salto de línea
 		;--------presione una tecla para continuar----------
 
 	  mov eax, 10
