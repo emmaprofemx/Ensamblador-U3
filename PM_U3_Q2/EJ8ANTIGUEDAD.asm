@@ -19,10 +19,8 @@ INCLUDE macros.inc
 
 i dword 0d
 j dword 0d
-anios dword 0d
-n dword 100d
-m dword 1000d
-bono dword 0d
+n dword 100d ; VALOR QUE SE VA A MULTIPLICAR MIENTRAS anios sean menores a 5
+m dword 1000d ; VALOR QUE SE MOSTRARA COMO EL BONO SI ES MAYOR A 6
 .code
 	mainej8 PROC
 	
@@ -35,29 +33,30 @@ bono dword 0d
 
 		println "Ingresa los anios trabajados: "
 		call readint ; LEEMOS EAX
-		mov ecx , eax
-		cmp ecx , 5
-		jle casouno
-		cmp ecx , 6
-		jmp casodos
+		mov ecx , eax ; DEFINIMOS LA CANTIDAD DE VUELTAS A NUESTRO CICLO
+		cmp ecx , 5 ; EVALUAMOS SI ECX ES IGUAL A 5
+		jle casouno ; SI ES MENOR O IGUAL , IRA AL CASOUNO
+		cmp ecx , 6 ; EVALUAMOS SI ECX ES IGUAL A 6
+		jmp casodos ; SI ES ASI , SALTAMOS AL CASODOS
 
-		casouno:
+		casouno: ; DENTRO DEL CASOUNO establecemos lo siguiente
 			ciclo:
-			inc i
-			mov eax , i
-			mul n
+			inc i ; incrementamos el valor de 0 a 1
+			mov eax , i ; movemos el valor al registro eax para multiplicarlo
+			mul n ; obtendremos el bono mientras sea menor o igual a 5
 				loop ciclo
 			println "El bono es: "
-				call writedec
+				call writedec ; AL FINAL MOSTRAMOS EL BONO CORRESPONDIENTE ENTRE 1-5
 				call crlf
-			jmp salir
+			jmp salir ; SALTAMOS A LA ETIQUETA SALIR , PARA FINALIZAR EL PROGRAMA
 
-		casodos:
-		mov eax , m
+		casodos: ;DENTRO DEL CASODOS ESTABLECEMOS LO SIGUIENTE
+		mov eax , m ; MOVEMOS EL VALOR DE 1000 AL REGISTRO EAX
+		;REALIZAMOS ESTO YA QUE MIENTRAS SEA MAYOR A 6 , EL BONO SERA DE 1000
 		println "Tu bono es: "
-		call writedec
+		call writedec ; MOSTRAMOS EL BONO
 
-		salir:
+		salir: ;ETIQUETA PARA FINALIZAR EL PROGRAMA
 		exit
 
 	mainej8 ENDP

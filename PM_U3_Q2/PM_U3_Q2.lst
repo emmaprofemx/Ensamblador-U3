@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 21:27:09
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 22:33:52
 NombreProgram						     Page 1 - 1
 
 
@@ -86,12 +86,10 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 21:27:09
  0000000B  5A		     1			pop edx
  0000000C  E8 00000000 E			call readint ; LEEMOS EAX
  00000011  8B C8				mov ecx , eax
-
  00000013  83 F9 05				cmp ecx , 5
  00000016  7E 05				jle casouno
  00000018  83 F9 06				cmp ecx , 6
  0000001B  EB 2B				jmp casodos
-						;jmp casodos
 
  0000001D					casouno:
  0000001D						ciclo:
@@ -127,7 +125,6 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 21:27:09
  00000058  5A		     1			pop edx
  00000059  E8 00000000 E			call writedec
 
-
  0000005E					salir:
 						exit
 
@@ -135,7 +132,7 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 21:27:09
 					
 					END mainej8
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 21:27:09
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 22:33:52
 NombreProgram						     Symbols 2 - 1
 
 
