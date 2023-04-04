@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 17:29:01
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 18:27:23
 NombreProgram						     Page 1 - 1
 
 
@@ -53,125 +53,65 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 17:29:01
 				; Área de Declaración de Variables
 
 				;CONSTANTES
- 00000000 00000000		acumulador dword 0d
- 00000004 00000000		venta dword 0d
- 00000008 00000000		vueltas dword 0d
- 0000000C 00000000		catuno dword 0d
- 00000010 00000000		catdos dword 0d
- 00000014 00000000		cattres dword 0d
+
+ 00000000 00000000		i dword 0d
+ 00000004 00000000		anios dword 0d
+ 00000008 00000064		n dword 100d
+ 0000000C 00000000		bono dword 0d
  00000000			.code
- 00000000				mainej15 PROC
+ 00000000				mainej8 PROC
 					
 						;Lógica del Programa	  
-						 println "Cantidad de ventas en el dia:"
- 00000018		     1	.data
- 00000018 43 61 6E 74 69     1		??0000 db "Cantidad de ventas en el dia:" , 0
-	   64 61 64 20 64
-	   65 20 76 65 6E
-	   74 61 73 20 65
-	   6E 20 65 6C 20
-	   64 69 61 3A 00
+						
+						;Se les dara un bono por antiguedad a los empleados de una tienda.
+						;Si tienen una anio , se les dara $100 ; si tienen 2 anios , $200  , y asi sucesivamente
+						;hasta los 5 anios. Para los que tengas mas de 5 , el bono sera de $1000. Determinar el bono
+						;que recibira un trabajador.
+
+						println "Ingresa los anios trabajados: "
+ 00000010		     1	.data
+ 00000010 49 6E 67 72 65     1		??0000 db "Ingresa los anios trabajados: " , 0
+	   73 61 20 6C 6F
+	   73 20 61 6E 69
+	   6F 73 20 74 72
+	   61 62 61 6A 61
+	   64 6F 73 3A 20
+	   00
  00000000		     1		.code
  00000000  52		     1			push edx 
- 00000001  BA 00000018 R     1			mov edx , offset ??0000
+ 00000001  BA 00000010 R     1			mov edx , offset ??0000
  00000006  E8 00000000 E     1			call writestring
  0000000B  5A		     1			pop edx
- 0000000C  E8 00000000 E			 call readint ; LEEMOS EN EAX
- 00000011  A3 00000008 R			 mov vueltas, eax ; MOVEMOS EL VALOR DE EAX 
+ 0000000C  E8 00000000 E			call readint ; LEEMOS EAX
+ 00000011  8B C8				mov ecx , eax
 
- 00000016  8B 0D 00000008 R			 mov ecx, vueltas ; N CANTIDAD DE VUELTAS
+ 00000013					ciclo:
+ 00000013  FF 05 00000000 R				inc i
+ 00000019  A1 00000000 R				mov eax , i
+ 0000001E  F7 25 00000008 R				mul n
+ 00000024  E2 ED				loop ciclo
 
- 0000001C					 ciclo:
-						     println "Ingresa la venta: "
- 00000036		     1	.data
- 00000036 49 6E 67 72 65     1		??0001 db "Ingresa la venta: " , 0
-	   73 61 20 6C 61
-	   20 76 65 6E 74
-	   61 3A 20 00
- 0000001C		     1		.code
- 0000001C  52		     1			push edx 
- 0000001D  BA 00000036 R     1			mov edx , offset ??0001
- 00000022  E8 00000000 E     1			call writestring
- 00000027  5A		     1			pop edx
- 00000028  E8 00000000 E	             call readint ;LEEMOS EAX
- 0000002D  3D 000003E8		             cmp eax, 1000 ; COMPARA CON 1000
- 00000032  7F 0F		             jg ventaMayor1000
- 00000034  3D 000001F4		             cmp eax, 500 ; COMPARA CON 500
- 00000039  7F 10		             jg ventaMayor500
- 0000003B  FF 05 00000014 R	             inc cattres ; INCREMENTA SI ES MENOR O IGUAL A 500
- 00000041  EB 0E		             jmp finCiclo
-
- 00000043			             ventaMayor1000:
- 00000043  FF 05 0000000C R	             inc catuno ; INCREMENTA SI ES MAYOR A 1000
- 00000049  EB 06		             jmp finCiclo
-				             
- 0000004B			             ventaMayor500:
- 0000004B  FF 05 00000010 R	             inc catdos ; INCREMENTA SI ES MAYOR A 500 Y MENOR O IGUAL A 1000
-
- 00000051			             finCiclo:
- 00000051  E2 C9					 loop ciclo
- 00000053  A1 0000000C R	mov eax, catuno
-				         println "Ventas mayores a 1000: "
- 00000049		     1	.data
- 00000049 56 65 6E 74 61     1		??0002 db "Ventas mayores a 1000: " , 0
-	   73 20 6D 61 79
-	   6F 72 65 73 20
-	   61 20 31 30 30
-	   30 3A 20 00
- 00000058		     1		.code
- 00000058  52		     1			push edx 
- 00000059  BA 00000049 R     1			mov edx , offset ??0002
- 0000005E  E8 00000000 E     1			call writestring
- 00000063  5A		     1			pop edx
- 00000064  E8 00000000 E	         call writedec ; MOSTRANDO EL TOTAL DE VENTAS MAYORES A 1000
- 00000069  E8 00000000 E	         call crlf
- 0000006E  A1 00000010 R	         mov eax, catdos
-				         println "Ventas mayores a 500 y menores o iguales a 1000: "
- 00000061		     1	.data
- 00000061 56 65 6E 74 61     1		??0003 db "Ventas mayores a 500 y menores o iguales a 1000: " , 0
-	   73 20 6D 61 79
-	   6F 72 65 73 20
-	   61 20 35 30 30
-	   20 79 20 6D 65
-	   6E 6F 72 65 73
-	   20 6F 20 69 67
-	   75 61 6C 65 73
-	   20 61 20 31 30
-	   30 30 3A 20 00
- 00000073		     1		.code
- 00000073  52		     1			push edx 
- 00000074  BA 00000061 R     1			mov edx , offset ??0003
- 00000079  E8 00000000 E     1			call writestring
- 0000007E  5A		     1			pop edx
- 0000007F  E8 00000000 E	         call writedec ; MOSTRANDO EL TOTAL DE VENTAS MAYORES A 500 Y MENORES O IGUALES A 1000
- 00000084  E8 00000000 E	         call crlf
- 00000089  A1 00000014 R	         mov eax, cattres
-				         println "Ventas menores o iguales a 500: "
- 00000093		     1	.data
- 00000093 56 65 6E 74 61     1		??0004 db "Ventas menores o iguales a 500: " , 0
-	   73 20 6D 65 6E
-	   6F 72 65 73 20
-	   6F 20 69 67 75
-	   61 6C 65 73 20
-	   61 20 35 30 30
+						println "El bono es: "
+ 0000002F		     1	.data
+ 0000002F 45 6C 20 62 6F     1		??0001 db "El bono es: " , 0
+	   6E 6F 20 65 73
 	   3A 20 00
- 0000008E		     1		.code
- 0000008E  52		     1			push edx 
- 0000008F  BA 00000093 R     1			mov edx , offset ??0004
- 00000094  E8 00000000 E     1			call writestring
- 00000099  5A		     1			pop edx
- 0000009A  E8 00000000 E	         call writedec ; MOSTRANDO EL TOTAL DE VENTAS MENORES O IGUALES A 500
- 0000009F  E8 00000000 E	         call crlf
+ 00000026		     1		.code
+ 00000026  52		     1			push edx 
+ 00000027  BA 0000002F R     1			mov edx , offset ??0001
+ 0000002C  E8 00000000 E     1			call writestring
+ 00000031  5A		     1			pop edx
+ 00000032  E8 00000000 E			call writedec
+ 00000037  E8 00000000 E			call crlf
 
 
- 000000A4					salir:
 						exit
 
- 000000AB				mainej15 ENDP
+ 00000043				mainej8 ENDP
 					
-					END mainej15
+					END mainej8
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 17:29:01
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/03/23 18:27:23
 NombreProgram						     Symbols 2 - 1
 
 
@@ -272,8 +212,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 000000B4 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 000000AB Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 0000003C Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000043 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -380,12 +320,8 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-mainej15 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 000000AB Public STDCALL
-  ciclo  . . . . . . . . . . . .	L Near	 0000001C _TEXT	
-  ventaMayor1000 . . . . . . . .	L Near	 00000043 _TEXT	
-  ventaMayor500  . . . . . . . .	L Near	 0000004B _TEXT	
-  finCiclo . . . . . . . . . . .	L Near	 00000051 _TEXT	
-  salir  . . . . . . . . . . . .	L Near	 000000A4 _TEXT	
+mainej8  . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000043 Public STDCALL
+  ciclo  . . . . . . . . . . . .	L Near	 00000013 _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -395,11 +331,8 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
-??0000 . . . . . . . . . . . . .	Byte	 00000018 _DATA	
-??0001 . . . . . . . . . . . . .	Byte	 00000036 _DATA	
-??0002 . . . . . . . . . . . . .	Byte	 00000049 _DATA	
-??0003 . . . . . . . . . . . . .	Byte	 00000061 _DATA	
-??0004 . . . . . . . . . . . . .	Byte	 00000093 _DATA	
+??0000 . . . . . . . . . . . . .	Byte	 00000010 _DATA	
+??0001 . . . . . . . . . . . . .	Byte	 0000002F _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -609,17 +542,16 @@ VK_UP  . . . . . . . . . . . . .	Number	 00000026h
 WINDOW_BUFFER_SIZE_EVENT . . . .	Number	 00000004h   
 WriteConsoleOutputCharacter  . .	Text   	 WriteConsoleOutputCharacterA
 WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
-acumulador . . . . . . . . . . .	DWord	 00000000 _DATA	
+anios  . . . . . . . . . . . . .	DWord	 00000004 _DATA	
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
+bono . . . . . . . . . . . . . .	DWord	 0000000C _DATA	
 brown  . . . . . . . . . . . . .	Number	 00000006h   
-catdos . . . . . . . . . . . . .	DWord	 00000010 _DATA	
-cattres  . . . . . . . . . . . .	DWord	 00000014 _DATA	
-catuno . . . . . . . . . . . . .	DWord	 0000000C _DATA	
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   
 green  . . . . . . . . . . . . .	Number	 00000002h   
+i  . . . . . . . . . . . . . . .	DWord	 00000000 _DATA	
 lightBlue  . . . . . . . . . . .	Number	 00000009h   
 lightCyan  . . . . . . . . . . .	Number	 0000000Bh   
 lightGray  . . . . . . . . . . .	Number	 00000007h   
@@ -627,9 +559,8 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
+n  . . . . . . . . . . . . . . .	DWord	 00000008 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-venta  . . . . . . . . . . . . .	DWord	 00000004 _DATA	
-vueltas  . . . . . . . . . . . .	DWord	 00000008 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   

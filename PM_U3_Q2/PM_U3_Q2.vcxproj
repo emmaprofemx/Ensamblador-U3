@@ -32,6 +32,7 @@
     <MASM Include="EJ2U3Citas.asm" />
     <MASM Include="EJ2_EDADALUMNOS.asm" />
     <MASM Include="EJ3U3Banco.asm" />
+    <MASM Include="EJ8ANTIGUEDAD.asm" />
     <MASM Include="Hamburgesas.asm" />
     <MASM Include="P1.asm" />
     <MASM Include="P10_Suma2nums.asm" />
@@ -140,7 +141,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>c:/Irvine</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainej15</EntryPointSymbol>
+      <EntryPointSymbol>mainej8</EntryPointSymbol>
       <ImportLibrary>c:/Irvine</ImportLibrary>
     </Link>
     <MASM>
