@@ -34,7 +34,7 @@ divisor dword 10d
 		;Suponiendo que los clientes adquieren N hamburguesas , las cuales pueden ser de 
 		;diferente tipo , ¿Cuánto deben pagar por un pedido?
 	
-		println "Cuantas vueltas?"
+		println "Cuantas hamburguesas desea?"
 		call readint ; LEEMOS EN EAX
 		mov ecx , eax
 		;mov ebx , 0
