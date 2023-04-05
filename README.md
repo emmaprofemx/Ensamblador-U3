@@ -29,6 +29,8 @@ Ejercicios de Tarea del documento proporcionado por el Dr Alejandro.
 * [T1 - HAMBURGUESAS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ1U3Hamburguesas.asm)
 * [T2 - CITAS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ2U3Citas.asm)
 * [T3 - BANCO](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ3U3Banco.asm)
+* [T4 - TIPO DE TARJETA](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ04_Tarjetasdecredito.asm)
+* [T5 - BECAS MENSUALES](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ_05_Becas_mensuales.asm)
 * [T8 - ANTIGUEDAD](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ8ANTIGUEDAD.asm)
 * [T9 - COSTO DE PASAJES](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ09_CostoPasaje_alumno.asm)
 * [T10 - PAQUETE DICIEMBRE](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ10Paquete_Diciembre.asm)
