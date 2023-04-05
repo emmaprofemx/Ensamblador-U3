@@ -1,6 +1,6 @@
 TITLE NombrePrograma
 
-;DESCRPICI”N 
+;DESCRPICI√ìN 
 ;Objetivo: Archivo de Ejemplo
 ;
 ; Autore(s):
@@ -8,22 +8,22 @@ TITLE NombrePrograma
 ;         Ruiz Garcia Emmanuel Alejandro.
 
 ; Semestre: 8vo Semestre ISC 
-;FIN DESCRPICI”N
+;FIN DESCRPICI√ìN
 
 INCLUDE Irvine32.inc  
 INCLUDE macros.inc
 .data
-; ¡rea de DeclaraciÛn de Variables
+; √Årea de Declaraci√≥n de Variables
  mensajeEdad BYTE "Ingrese su edad: ",0
     mensajePromedio BYTE "Ingrese su promedio: ",0
-    mensajeBeca BYTE "Usted recibir· una beca de $",0
-    mensajeInvitacion BYTE "Lo invitamos a estudiar m·s en el prÛximo ciclo escolar",0
-    beca DWORD 0d
-    edad DWORD 0d
-    promedio DWORD 0d
+    mensajeBeca BYTE "Usted recibir√° una beca de $",0
+    mensajeInvitacion BYTE "Lo invitamos a estudiar m√°s en el pr√≥ximo ciclo escolar",0
+    beca dword 0d
+    edad dword 0d
+    promedio dword 0d
 .code
 	mainej5 PROC
-		;LÛgica del Programa	 
+		;L√≥gica del Programa	 
 		 ; Pedir la edad del estudiante
         mov edx, OFFSET mensajeEdad
         call WriteString
@@ -47,7 +47,7 @@ INCLUDE macros.inc
         jge beca1000
         cmp promedio, 6
         jge beca500
-        ; Si el promedio es menor a 6, enviar una invitaciÛn
+        ; Si el promedio es menor a 6, enviar una invitaci√≥n
         mov edx, OFFSET mensajeInvitacion
         call WriteString
         jmp fin
@@ -75,7 +75,7 @@ INCLUDE macros.inc
         jge beca2000m
         cmp promedio, 6
         jge beca100m
-        ; Si el promedio es menor a 6, enviar una invitaciÛn
+        ; Si el promedio es menor a 6, enviar una invitaci√≥n
         mov edx, OFFSET mensajeInvitacion
         call WriteString
         jmp fin
