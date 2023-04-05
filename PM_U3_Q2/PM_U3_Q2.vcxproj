@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <MASM Include="EJ04_Tarjetasdecredito.asm" />
     <MASM Include="EJ09_CostoPasaje_alumno.asm" />
     <MASM Include="EJ10Paquete_Diciembre.asm" />
     <MASM Include="EJ11EdadPromedioAlumnos.asm" />
@@ -35,6 +36,7 @@
     <MASM Include="EJ2_EDADALUMNOS.asm" />
     <MASM Include="EJ3U3Banco.asm" />
     <MASM Include="EJ8ANTIGUEDAD.asm" />
+    <MASM Include="EJ_05_Becas_mensuales.asm" />
     <MASM Include="Hamburgesas.asm" />
     <MASM Include="P1.asm" />
     <MASM Include="P10_Suma2nums.asm" />
@@ -66,6 +68,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="macros.inc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32.lib" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -143,7 +148,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>c:/Irvine</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainej17</EntryPointSymbol>
+      <EntryPointSymbol>mainej5</EntryPointSymbol>
       <ImportLibrary>c:/Irvine</ImportLibrary>
     </Link>
     <MASM>

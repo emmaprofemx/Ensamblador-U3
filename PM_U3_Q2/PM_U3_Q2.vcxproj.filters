@@ -64,6 +64,8 @@
     <MASM Include="EJ8ANTIGUEDAD.asm" />
     <MASM Include="EJ17NaufragioSatisfecho.asm" />
     <MASM Include="EJ19Narticulos.asm" />
+    <MASM Include="EJ04_Tarjetasdecredito.asm" />
+    <MASM Include="EJ_05_Becas_mensuales.asm" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
@@ -75,5 +77,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="macros.inc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32.lib" />
   </ItemGroup>
 </Project>
