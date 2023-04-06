@@ -31,7 +31,13 @@ INCLUDE macros.inc
 		;de los articulos y finalmente cuanto se pagara por todos los articulos
 		;obtenidos.
 
+		println "Cantidad de articulos: "
+		call readint ; LEYENDO CANTIDAD EN EAX
+		mov ecx , eax
 
+		ciclo:
+			println"Hola xd"
+		loop ciclo
 
 		;--------presione una tecla para continuar----------
 	  mov eax, 10
