@@ -16,6 +16,11 @@ INCLUDE macros.inc
 ; Área de Declaración de Variables
 
 ;CONSTANTES
+precioarticulo dword 0d
+descuento dword 0
+
+
+
 
 .code
 	mainej19 PROC
@@ -36,8 +41,39 @@ INCLUDE macros.inc
 		mov ecx , eax
 
 		ciclo:
-			println"Hola xd"
+			println "Ingrese el articulo"
+			call readint; LEYENDO ARTICULO EN EAX
+
+			cmp eax , 200
+			jge MayorOiguala200
+			cmp eax, 100
+			jl Menora100
+			jmp Entre100y200
+		
+			MayorOiguala200:
+			println "Descuento del 20% aplicado"
+			jmp finCiclo
+
+			Entre100y200:
+			println "Descuento del 30% aplicado"
+			jmp finCiclo
+
+			 MenorA100:
+			 println "Descuento del 10% aplicado"
+			 jmp finCiclo
+
+		finCiclo:
 		loop ciclo
+
+
+
+
+
+
+
+
+
+
 
 		;--------presione una tecla para continuar----------
 	  mov eax, 10
