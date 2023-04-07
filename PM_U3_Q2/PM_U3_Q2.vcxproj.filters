@@ -38,7 +38,7 @@
     <MASM Include="Hamburgesas.asm" />
     <MASM Include="EJ1U3Hamburguesas.asm" />
     <MASM Include="EJ2U3Citas.asm" />
-    <MASM Include="EJ3U3Banco.asm" />
+    <MASM Include="EJ3U3Fabricas.asm" />
     <MASM Include="P17_PromedioM_Salones.asm" />
     <MASM Include="UNIDAD4_p1_introvectrores.asm" />
     <MASM Include="UNIDAD4_P2_introvectores2.asm" />
@@ -66,6 +66,7 @@
     <MASM Include="EJ19Narticulos.asm" />
     <MASM Include="EJ04_Tarjetasdecredito.asm" />
     <MASM Include="EJ_05_Becas_mensuales.asm" />
+    <MASM Include="EJ06U3_Bono_mensual.asm" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
