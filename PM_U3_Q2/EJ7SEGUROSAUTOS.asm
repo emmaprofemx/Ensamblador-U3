@@ -16,28 +16,32 @@ INCLUDE macros.inc
 ; Área de Declaración de Variables
 
 ;CONSTANTES
-precioarticulo dword 0d
-;divisor1 dword 10d
-;divisor2 dword 20d
-;divisor3 dword 30d
-resultadodescuento dword 0d
-costo_descuento dword 0d
-preciocondescuento dword 0d
-total_compra dword 0d
-
-des1 dword 10d 
-des2 dword 20d  
-des3 dword 30d 
-var2 dword 300d ; valor del producto
-var1_8 dword 100d
-
+cuotaBase dword 0d
+edad dword 0d
 
 .code
 	mainej7 PROC
 	
 		;Lógica del Programa	 
-		println "Ejercicio 7"
 
+		println "Ingresa la edad del conductor: "
+		call readint 
+		xchg edad , eax
+		println "Ingresa el tipo de Poliza (A o B): "
+		call crlf	
+		call readchar
+		cmp al , 'A'
+		je tipoA
+		cmp al , 'B'
+		je tipoB
+
+		tipoA:
+			println "ERES TIPO A"
+			jmp salir
+
+        tipoB:
+		println "ERES TIPO B"
+		jmp salir
 		;--------presione una tecla para continuar----------
 	  mov eax, 10
 	  push eax
