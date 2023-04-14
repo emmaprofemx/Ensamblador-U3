@@ -26,6 +26,7 @@ preciocondescuento dword 0d
 total_compra dword 0d
 
 
+
 .code
 	mainej19 PROC
 	
@@ -55,31 +56,38 @@ total_compra dword 0d
 			jmp Entre100y200
 		
 			MenorA100:
-    println "Descuento del 10% aplicado"
-    mov precioarticulo , eax
-    mov edx, 0
-    div divisor1
-   ;sub eax , precioarticulo
-   sub precioarticulo, eax
-
-    println "El total de este articulo es: "
-    mov eax, precioarticulo
-    call writedec
-    jmp finciclo
-
+			 println "Descuento del 10% aplicado"
+			 mov precioarticulo , eax
+			 mov edx, 0
+		     div divisor1
+			 sub precioarticulo, eax
+		    println "El total de este articulo es: "
+            mov eax, precioarticulo
+            call writedec
+			dec ecx
+            jnz finciclo
 
 			Entre100y200:
 			println "Descuento del 30% aplicado"
-			jmp finciclo
+			 mov precioarticulo , eax
+			 mov edx, 0 ; LIMPIEZZ
+		     div divisor3
+			 sub precioarticulo, eax
+		    println "El total de este articulo es: "
+            mov eax, precioarticulo
+            call writedec
+			dec ecx
+			jnz finciclo
 
 			MayorOiguala200:
 			println "Descuento del 20% aplicado"
-			jmp finciclo
+			dec ecx
+			jnz finciclo
 
 			
 
 		finCiclo:
-		loop ciclo
+		jnz ciclo
 
 
 

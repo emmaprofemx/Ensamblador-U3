@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/13/23 19:46:55
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/13/23 22:48:28
 NombreProgram						     Page 1 - 1
 
 
@@ -63,6 +63,7 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/13/23 19:46:55
  0000001C 00000000		total_compra dword 0d
 
 
+
  00000000			.code
  00000000				mainej19 PROC
 					
@@ -107,13 +108,13 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/13/23 19:46:55
  0000001F  E8 00000000 E				call readint; LEYENDO ARTICULO EN EAX
 							;mov precioarticulo , eax
  00000024  3D 000000C8					cmp eax , 200
- 00000029  7D 4F					jge MayorOiguala200
+ 00000029  7D 7D					jge MayorOiguala200
  0000002B  83 F8 64					cmp eax, 100
  0000002E  7C 02					jl Menora100
- 00000030  EB 3A					jmp Entre100y200
+ 00000030  EB 3B					jmp Entre100y200
 						
  00000032						MenorA100:
-				    println "Descuento del 10% aplicado"
+							 println "Descuento del 10% aplicado"
  0000004C		     1	.data
  0000004C 44 65 73 63 75     1		??0002 db "Descuento del 10% aplicado" , 0
 	   65 6E 74 6F 20
@@ -126,13 +127,11 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/13/23 19:46:55
  00000033  BA 0000004C R     1			mov edx , offset ??0002
  00000038  E8 00000000 E     1			call writestring
  0000003D  5A		     1			pop edx
- 0000003E  A3 00000000 R	    mov precioarticulo , eax
- 00000043  BA 00000000		    mov edx, 0
- 00000048  F7 35 00000004 R	    div divisor1
-				   ;sub eax , precioarticulo
- 0000004E  29 05 00000000 R	   sub precioarticulo, eax
-
-				    println "El total de este articulo es: "
+ 0000003E  A3 00000000 R				 mov precioarticulo , eax
+ 00000043  BA 00000000					 mov edx, 0
+ 00000048  F7 35 00000004 R			     div divisor1
+ 0000004E  29 05 00000000 R				 sub precioarticulo, eax
+						    println "El total de este articulo es: "
  00000067		     1	.data
  00000067 45 6C 20 74 6F     1		??0003 db "El total de este articulo es: " , 0
 	   74 61 6C 20 64
@@ -146,12 +145,12 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/13/23 19:46:55
  00000055  BA 00000067 R     1			mov edx , offset ??0003
  0000005A  E8 00000000 E     1			call writestring
  0000005F  5A		     1			pop edx
- 00000060  A1 00000000 R	    mov eax, precioarticulo
- 00000065  E8 00000000 E	    call writedec
- 0000006A  EB 1C		    jmp finciclo
+ 00000060  A1 00000000 R	            mov eax, precioarticulo
+ 00000065  E8 00000000 E	            call writedec
+ 0000006A  49						dec ecx
+ 0000006B  75 4A		            jnz finciclo
 
-
- 0000006C						Entre100y200:
+ 0000006D						Entre100y200:
 							println "Descuento del 30% aplicado"
  00000086		     1	.data
  00000086 44 65 73 63 75     1		??0004 db "Descuento del 30% aplicado" , 0
@@ -160,33 +159,55 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/13/23 19:46:55
 	   30 25 20 61 70
 	   6C 69 63 61 64
 	   6F 00
- 0000006C		     1		.code
- 0000006C  52		     1			push edx 
- 0000006D  BA 00000086 R     1			mov edx , offset ??0004
- 00000072  E8 00000000 E     1			call writestring
- 00000077  5A		     1			pop edx
- 00000078  EB 0E					jmp finciclo
-
- 0000007A						MayorOiguala200:
-							println "Descuento del 20% aplicado"
+ 0000006D		     1		.code
+ 0000006D  52		     1			push edx 
+ 0000006E  BA 00000086 R     1			mov edx , offset ??0004
+ 00000073  E8 00000000 E     1			call writestring
+ 00000078  5A		     1			pop edx
+ 00000079  A3 00000000 R				 mov precioarticulo , eax
+ 0000007E  BA 00000000					 mov edx, 0 ; LIMPIEZZ
+ 00000083  F7 35 0000000C R			     div divisor3
+ 00000089  29 05 00000000 R				 sub precioarticulo, eax
+						    println "El total de este articulo es: "
  000000A1		     1	.data
- 000000A1 44 65 73 63 75     1		??0005 db "Descuento del 20% aplicado" , 0
+ 000000A1 45 6C 20 74 6F     1		??0005 db "El total de este articulo es: " , 0
+	   74 61 6C 20 64
+	   65 20 65 73 74
+	   65 20 61 72 74
+	   69 63 75 6C 6F
+	   20 65 73 3A 20
+	   00
+ 0000008F		     1		.code
+ 0000008F  52		     1			push edx 
+ 00000090  BA 000000A1 R     1			mov edx , offset ??0005
+ 00000095  E8 00000000 E     1			call writestring
+ 0000009A  5A		     1			pop edx
+ 0000009B  A1 00000000 R	            mov eax, precioarticulo
+ 000000A0  E8 00000000 E	            call writedec
+ 000000A5  49						dec ecx
+ 000000A6  75 0F					jnz finciclo
+
+ 000000A8						MayorOiguala200:
+							println "Descuento del 20% aplicado"
+ 000000C0		     1	.data
+ 000000C0 44 65 73 63 75     1		??0006 db "Descuento del 20% aplicado" , 0
 	   65 6E 74 6F 20
 	   64 65 6C 20 32
 	   30 25 20 61 70
 	   6C 69 63 61 64
 	   6F 00
- 0000007A		     1		.code
- 0000007A  52		     1			push edx 
- 0000007B  BA 000000A1 R     1			mov edx , offset ??0005
- 00000080  E8 00000000 E     1			call writestring
- 00000085  5A		     1			pop edx
- 00000086  EB 00					jmp finciclo
+ 000000A8		     1		.code
+ 000000A8  52		     1			push edx 
+ 000000A9  BA 000000C0 R     1			mov edx , offset ??0006
+ 000000AE  E8 00000000 E     1			call writestring
+ 000000B3  5A		     1			pop edx
+ 000000B4  49						dec ecx
+ 000000B5  75 00					jnz finciclo
 
 							
 
- 00000088					finCiclo:
- 00000088  E2 89				loop ciclo
+ 000000B7					finCiclo:
+ 000000B7  0F 85 FFFFFF56			jnz ciclo
 
 
 
@@ -199,21 +220,21 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/13/23 19:46:55
 
 
 						;--------presione una tecla para continuar----------
- 0000008A  B8 0000000A			  mov eax, 10
- 0000008F  50				  push eax
- 00000090  B8 000001F4			  mov eax , 500 ; milisegundos
- 00000095  E8 00000000 E		  call delay ; DELAY SIEMPRE DEPENDE DE EAX (siempre se maneja en mls)
- 0000009A  58				  pop eax 
+ 000000BD  B8 0000000A			  mov eax, 10
+ 000000C2  50				  push eax
+ 000000C3  B8 000001F4			  mov eax , 500 ; milisegundos
+ 000000C8  E8 00000000 E		  call delay ; DELAY SIEMPRE DEPENDE DE EAX (siempre se maneja en mls)
+ 000000CD  58				  pop eax 
 					  ;call writeDec
 					  ;-----------------------------------------------------
- 0000009B					salir:
+ 000000CE					salir:
 						exit
 
- 000000A2				mainej19 ENDP
+ 000000D5				mainej19 ENDP
 					
 					END mainej19
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/13/23 19:46:55
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/13/23 22:48:28
 NombreProgram						     Symbols 2 - 1
 
 
@@ -314,8 +335,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 000000BC Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 000000A2 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 000000DB Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 000000D5 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -422,13 +443,13 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-mainej19 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 000000A2 Public STDCALL
+mainej19 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 000000D5 Public STDCALL
   ciclo  . . . . . . . . . . . .	L Near	 00000013 _TEXT	
   MenorA100  . . . . . . . . . .	L Near	 00000032 _TEXT	
-  Entre100y200 . . . . . . . . .	L Near	 0000006C _TEXT	
-  MayorOiguala200  . . . . . . .	L Near	 0000007A _TEXT	
-  finCiclo . . . . . . . . . . .	L Near	 00000088 _TEXT	
-  salir  . . . . . . . . . . . .	L Near	 0000009B _TEXT	
+  Entre100y200 . . . . . . . . .	L Near	 0000006D _TEXT	
+  MayorOiguala200  . . . . . . .	L Near	 000000A8 _TEXT	
+  finCiclo . . . . . . . . . . .	L Near	 000000B7 _TEXT	
+  salir  . . . . . . . . . . . .	L Near	 000000CE _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -444,6 +465,7 @@ Symbols:
 ??0003 . . . . . . . . . . . . .	Byte	 00000067 _DATA	
 ??0004 . . . . . . . . . . . . .	Byte	 00000086 _DATA	
 ??0005 . . . . . . . . . . . . .	Byte	 000000A1 _DATA	
+??0006 . . . . . . . . . . . . .	Byte	 000000C0 _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
