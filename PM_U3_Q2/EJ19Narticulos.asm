@@ -51,7 +51,7 @@ var1_8 dword 100d
 		mov ecx , eax ; CANTIDAD DE VUELTAS PARA EL CICLO
 
 		ciclo:
-			println "Ingrese el articulo"
+			println "Ingrese el articulo:"
 			call readint; LEYENDO ARTICULO EN EAX
 			mov precioarticulo , eax
 			cmp precioarticulo , 200
@@ -66,11 +66,12 @@ var1_8 dword 100d
 			  mul precioarticulo
 			  mov edx , 0
 			  div var1_8
-			  call writedec
+			 ; call writedec
 			  sub precioarticulo , eax
 			  call crlf
 			  mov eax , precioarticulo
-			  call writedec
+			  add total_compra , eax
+			 ; call writedec
 			dec ecx
             jnz finciclo ; FUNCIONAAAA
 
@@ -80,13 +81,12 @@ var1_8 dword 100d
 			  mul precioarticulo
 			  mov edx , 0
 			  div var1_8
-			  call writedec
+			  ;call writedec
 			  sub precioarticulo , eax
 			  call crlf
 			  mov eax , precioarticulo
-			  call writedec ; FUNCIONAA LA PARTE DEL 30%
-
-
+			  add total_compra , eax
+			 ; call writedec ; FUNCIONAA LA PARTE DEL 30%
 
 			dec ecx
 			jnz finciclo
@@ -97,11 +97,13 @@ var1_8 dword 100d
 			  mul precioarticulo
 			  mov edx , 0
 			  div var1_8
-			  call writedec
+			 ; call writedec
 			  sub precioarticulo , eax
-			  call crlf
+			  ;call crlf
 			  mov eax , precioarticulo
-			  call writedec
+			  add total_compra , eax
+			  ;call writedec
+			  call crlf
 			dec ecx
 			jnz finciclo
 
@@ -110,16 +112,9 @@ var1_8 dword 100d
 		finCiclo:
 		jnz ciclo
 
-
-
-
-
-
-
-
-
-
-
+		mov eax , total_compra
+		println "El total es: "
+		call writedec
 		;--------presione una tecla para continuar----------
 	  mov eax, 10
 	  push eax
