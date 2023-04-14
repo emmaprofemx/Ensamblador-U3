@@ -62,7 +62,7 @@ var1_8 dword 100d
 		
 			MenorA100:
 			 println "Descuento del 10% aplicado"
-			  mov eax , des1
+			  mov eax , des1 ; PASANDO EL VALOR DE 10
 			  mul precioarticulo
 			  mov edx , 0
 			  div var1_8
@@ -72,17 +72,22 @@ var1_8 dword 100d
 			  mov eax , precioarticulo
 			  call writedec
 			dec ecx
-            jnz finciclo ; FUNCIONAA
+            jnz finciclo ; FUNCIONAAAA
 
 			Entre100y200:
 			println "Descuento del 30% aplicado"
-			 mov precioarticulo , eax
-			 mov edx, 0 ; LIMPIEZZ
-		     ;div divisor3
-			 sub precioarticulo, eax
-		    println "El total de este articulo es: "
-            mov eax, precioarticulo
-            call writedec
+			  mov eax , des3 ; PASANDO EL VALOR DE 30
+			  mul precioarticulo
+			  mov edx , 0
+			  div var1_8
+			  call writedec
+			  sub precioarticulo , eax
+			  call crlf
+			  mov eax , precioarticulo
+			  call writedec
+
+
+
 			dec ecx
 			jnz finciclo
 
