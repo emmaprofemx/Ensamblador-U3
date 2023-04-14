@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 00:17:07
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 00:19:35
 NombreProgram						     Page 1 - 1
 
 
@@ -144,7 +144,7 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 00:17:07
  00000076  A1 00000000 R				  mov eax , precioarticulo
  0000007B  E8 00000000 E				  call writedec
  00000080  49						dec ecx
- 00000081  75 4E		            jnz finciclo ; FUNCIONAAAA
+ 00000081  75 7E		            jnz finciclo ; FUNCIONAAAA
 
  00000083						Entre100y200:
 							println "Descuento del 30% aplicado"
@@ -168,12 +168,12 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 00:17:07
  000000AA  29 05 00000000 R				  sub precioarticulo , eax
  000000B0  E8 00000000 E				  call crlf
  000000B5  A1 00000000 R				  mov eax , precioarticulo
- 000000BA  E8 00000000 E				  call writedec
+ 000000BA  E8 00000000 E				  call writedec ; FUNCIONAA LA PARTE DEL 30%
 
 
 
  000000BF  49						dec ecx
- 000000C0  75 0F					jnz finciclo
+ 000000C0  75 3F					jnz finciclo
 
  000000C2						MayorOiguala200:
 							println "Descuento del 20% aplicado"
@@ -189,13 +189,22 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 00:17:07
  000000C3  BA 0000008A R     1			mov edx , offset ??0004
  000000C8  E8 00000000 E     1			call writestring
  000000CD  5A		     1			pop edx
- 000000CE  49						dec ecx
- 000000CF  75 00					jnz finciclo
+ 000000CE  A1 00000018 R				  mov eax , des2 ; PASANDO EL VALOR DE 20
+ 000000D3  F7 25 00000000 R				  mul precioarticulo
+ 000000D9  BA 00000000					  mov edx , 0
+ 000000DE  F7 35 00000024 R				  div var1_8
+ 000000E4  E8 00000000 E				  call writedec
+ 000000E9  29 05 00000000 R				  sub precioarticulo , eax
+ 000000EF  E8 00000000 E				  call crlf
+ 000000F4  A1 00000000 R				  mov eax , precioarticulo
+ 000000F9  E8 00000000 E				  call writedec
+ 000000FE  49						dec ecx
+ 000000FF  75 00					jnz finciclo
 
 							
 
- 000000D1					finCiclo:
- 000000D1  0F 85 FFFFFF3C			jnz ciclo
+ 00000101					finCiclo:
+ 00000101  0F 85 FFFFFF0C			jnz ciclo
 
 
 
@@ -208,21 +217,21 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 00:17:07
 
 
 						;--------presione una tecla para continuar----------
- 000000D7  B8 0000000A			  mov eax, 10
- 000000DC  50				  push eax
- 000000DD  B8 000001F4			  mov eax , 500 ; milisegundos
- 000000E2  E8 00000000 E		  call delay ; DELAY SIEMPRE DEPENDE DE EAX (siempre se maneja en mls)
- 000000E7  58				  pop eax 
+ 00000107  B8 0000000A			  mov eax, 10
+ 0000010C  50				  push eax
+ 0000010D  B8 000001F4			  mov eax , 500 ; milisegundos
+ 00000112  E8 00000000 E		  call delay ; DELAY SIEMPRE DEPENDE DE EAX (siempre se maneja en mls)
+ 00000117  58				  pop eax 
 					  ;call writeDec
 					  ;-----------------------------------------------------
- 000000E8					salir:
+ 00000118					salir:
 						exit
 
- 000000EF				mainej19 ENDP
+ 0000011F				mainej19 ENDP
 					
 					END mainej19
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 00:17:07
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 00:19:35
 NombreProgram						     Symbols 2 - 1
 
 
@@ -324,7 +333,7 @@ Segments and Groups:
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
 _DATA  . . . . . . . . . . . . .	32 Bit	 000000A5 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 000000EF Para	  Public  'CODE'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000011F Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -431,13 +440,13 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-mainej19 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 000000EF Public STDCALL
+mainej19 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000011F Public STDCALL
   ciclo  . . . . . . . . . . . .	L Near	 00000013 _TEXT	
   MenorA100  . . . . . . . . . .	L Near	 00000044 _TEXT	
   Entre100y200 . . . . . . . . .	L Near	 00000083 _TEXT	
   MayorOiguala200  . . . . . . .	L Near	 000000C2 _TEXT	
-  finCiclo . . . . . . . . . . .	L Near	 000000D1 _TEXT	
-  salir  . . . . . . . . . . . .	L Near	 000000E8 _TEXT	
+  finCiclo . . . . . . . . . . .	L Near	 00000101 _TEXT	
+  salir  . . . . . . . . . . . .	L Near	 00000118 _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C

@@ -84,7 +84,7 @@ var1_8 dword 100d
 			  sub precioarticulo , eax
 			  call crlf
 			  mov eax , precioarticulo
-			  call writedec
+			  call writedec ; FUNCIONAA LA PARTE DEL 30%
 
 
 
@@ -93,6 +93,15 @@ var1_8 dword 100d
 
 			MayorOiguala200:
 			println "Descuento del 20% aplicado"
+			  mov eax , des2 ; PASANDO EL VALOR DE 20
+			  mul precioarticulo
+			  mov edx , 0
+			  div var1_8
+			  call writedec
+			  sub precioarticulo , eax
+			  call crlf
+			  mov eax , precioarticulo
+			  call writedec
 			dec ecx
 			jnz finciclo
 
