@@ -57,6 +57,7 @@
     <MASM Include="P8.asm" />
     <MASM Include="P9_intromacro.asm" />
     <MASM Include="plantilla2.asm" />
+    <MASM Include="pruebarelgade3.asm" />
     <MASM Include="UNIDAD4_p1_introvectrores.asm" />
     <MASM Include="UNIDAD4_P2_introvectores2.asm" />
     <MASM Include="UNIDAD4_P3.asm" />
@@ -149,7 +150,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>c:/Irvine</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainej19</EntryPointSymbol>
+      <EntryPointSymbol>mainp701</EntryPointSymbol>
       <ImportLibrary>c:/Irvine</ImportLibrary>
     </Link>
     <MASM>

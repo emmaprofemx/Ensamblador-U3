@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/13/23 22:48:28
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/13/23 23:58:02
 NombreProgram						     Page 1 - 1
 
 
@@ -10,7 +10,6 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/13/23 22:48:28
 				; Autore(s):
 				;         Luna Sanchez Juan Pablo.
 				;         Ruiz Garcia Emmanuel Alejandro.
-
 				; Semestre: 8vo Semestre ISC 
 				;FIN DESCRPICIÓN
 
@@ -32,219 +31,38 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/13/23 22:48:28
 			      C .NOLIST
 			      C .LIST
 			      C 
-				INCLUDE macros.inc
-			      C println macro cadena
-			      C local cad
-			      C .data
-			      C 	cad db cadena , 0
-			      C 
-			      C 	.code
-			      C 		push edx 
-			      C 		mov edx , offset cad
-			      C 		call writestring
-			      C 		;call crlf
-			      C 		pop edx
-			      C 
-			      C 		ENDM
-			      C 
-			      C 
-			      C 
+
  00000000			.data
 				; Área de Declaración de Variables
-
-				;CONSTANTES
- 00000000 00000000		precioarticulo dword 0d
- 00000004 0000000A		divisor1 dword 10d
- 00000008 00000014		divisor2 dword 20d
- 0000000C 0000001E		divisor3 dword 30d
- 00000010 00000000		resultadodescuento dword 0d
- 00000014 00000000		costo_descuento dword 0d
- 00000018 00000000		preciocondescuento dword 0d
- 0000001C 00000000		total_compra dword 0d
-
-
-
+ 00000000 00000014		var1 dword 20d ; valor del porcentaje
+ 00000004 0000012C		var2 dword 300d ; valor del producto
+ 00000008 00000064		var1_8 dword 100d
  00000000			.code
- 00000000				mainej19 PROC
-					
-						;Lógica del Programa	 
+
+ 00000000				mainp701 PROC
+
+						;Lógica del Programa
 						
-						;Realice el algortimo para determinarr cuanto pagara una
-						;persona que adquiere N articulos , los cuales estan de promocion.
-						;Considere que si su precio es mayor o igual a 200 se le aplica un
-						;descuento de 20%, y si su precio es mayor a 100 pero menor a 200
-						;el descuento es de 30%; de lo contrario , solo se le aplica 10%.
-						;Se debe saber cual es el costo y el desceunto que tendra cada uno
-						;de los articulos y finalmente cuanto se pagara por todos los articulos
-						;obtenidos.
-
-						println "Cantidad de articulos: "
- 00000020		     1	.data
- 00000020 43 61 6E 74 69     1		??0000 db "Cantidad de articulos: " , 0
-	   64 61 64 20 64
-	   65 20 61 72 74
-	   69 63 75 6C 6F
-	   73 3A 20 00
- 00000000		     1		.code
- 00000000  52		     1			push edx 
- 00000001  BA 00000020 R     1			mov edx , offset ??0000
- 00000006  E8 00000000 E     1			call writestring
- 0000000B  5A		     1			pop edx
- 0000000C  E8 00000000 E			call readint ; LEYENDO CANTIDAD EN EAX
- 00000011  8B C8				mov ecx , eax ; CANTIDAD DE VUELTAS PARA EL CICLO
-
- 00000013					ciclo:
-							println "Ingrese el articulo"
- 00000038		     1	.data
- 00000038 49 6E 67 72 65     1		??0001 db "Ingrese el articulo" , 0
-	   73 65 20 65 6C
-	   20 61 72 74 69
-	   63 75 6C 6F 00
- 00000013		     1		.code
- 00000013  52		     1			push edx 
- 00000014  BA 00000038 R     1			mov edx , offset ??0001
- 00000019  E8 00000000 E     1			call writestring
- 0000001E  5A		     1			pop edx
- 0000001F  E8 00000000 E				call readint; LEYENDO ARTICULO EN EAX
-							;mov precioarticulo , eax
- 00000024  3D 000000C8					cmp eax , 200
- 00000029  7D 7D					jge MayorOiguala200
- 0000002B  83 F8 64					cmp eax, 100
- 0000002E  7C 02					jl Menora100
- 00000030  EB 3B					jmp Entre100y200
+ 00000000  A1 00000000 R			mov eax , var1 ; VALOR DEL PORCENTAJE
+ 00000005  F7 25 00000004 R			mul var2 ; MULTIPLICAMOS (PORCENTAJE * PRECIO DEL PRODUCTO)
+ 0000000B  BA 00000000				mov edx , 0 ; LIMPIAMOS REGISTRO
+ 00000010  F7 35 00000008 R			div var1_8 ; REALIZAMOS LA DIVISION ENTRE 100
+ 00000016  E8 00000000 E			call writedec ; 45 OBTENEMOS EL VALOR DEL DESCUENTO
 						
- 00000032						MenorA100:
-							 println "Descuento del 10% aplicado"
- 0000004C		     1	.data
- 0000004C 44 65 73 63 75     1		??0002 db "Descuento del 10% aplicado" , 0
-	   65 6E 74 6F 20
-	   64 65 6C 20 31
-	   30 25 20 61 70
-	   6C 69 63 61 64
-	   6F 00
- 00000032		     1		.code
- 00000032  52		     1			push edx 
- 00000033  BA 0000004C R     1			mov edx , offset ??0002
- 00000038  E8 00000000 E     1			call writestring
- 0000003D  5A		     1			pop edx
- 0000003E  A3 00000000 R				 mov precioarticulo , eax
- 00000043  BA 00000000					 mov edx, 0
- 00000048  F7 35 00000004 R			     div divisor1
- 0000004E  29 05 00000000 R				 sub precioarticulo, eax
-						    println "El total de este articulo es: "
- 00000067		     1	.data
- 00000067 45 6C 20 74 6F     1		??0003 db "El total de este articulo es: " , 0
-	   74 61 6C 20 64
-	   65 20 65 73 74
-	   65 20 61 72 74
-	   69 63 75 6C 6F
-	   20 65 73 3A 20
-	   00
- 00000054		     1		.code
- 00000054  52		     1			push edx 
- 00000055  BA 00000067 R     1			mov edx , offset ??0003
- 0000005A  E8 00000000 E     1			call writestring
- 0000005F  5A		     1			pop edx
- 00000060  A1 00000000 R	            mov eax, precioarticulo
- 00000065  E8 00000000 E	            call writedec
- 0000006A  49						dec ecx
- 0000006B  75 4A		            jnz finciclo
+ 0000001B  29 05 00000004 R			sub var2 , eax ; HACEMOS LA RESTA CORRESPONDIENTE
+ 00000021  E8 00000000 E			call crlf
+ 00000026  A1 00000004 R			mov eax , var2 ; LO MOVEMOS A EAX
+ 0000002B  E8 00000000 E			call writedec ; LO MOSTRAMOS A PANTALLA
 
- 0000006D						Entre100y200:
-							println "Descuento del 30% aplicado"
- 00000086		     1	.data
- 00000086 44 65 73 63 75     1		??0004 db "Descuento del 30% aplicado" , 0
-	   65 6E 74 6F 20
-	   64 65 6C 20 33
-	   30 25 20 61 70
-	   6C 69 63 61 64
-	   6F 00
- 0000006D		     1		.code
- 0000006D  52		     1			push edx 
- 0000006E  BA 00000086 R     1			mov edx , offset ??0004
- 00000073  E8 00000000 E     1			call writestring
- 00000078  5A		     1			pop edx
- 00000079  A3 00000000 R				 mov precioarticulo , eax
- 0000007E  BA 00000000					 mov edx, 0 ; LIMPIEZZ
- 00000083  F7 35 0000000C R			     div divisor3
- 00000089  29 05 00000000 R				 sub precioarticulo, eax
-						    println "El total de este articulo es: "
- 000000A1		     1	.data
- 000000A1 45 6C 20 74 6F     1		??0005 db "El total de este articulo es: " , 0
-	   74 61 6C 20 64
-	   65 20 65 73 74
-	   65 20 61 72 74
-	   69 63 75 6C 6F
-	   20 65 73 3A 20
-	   00
- 0000008F		     1		.code
- 0000008F  52		     1			push edx 
- 00000090  BA 000000A1 R     1			mov edx , offset ??0005
- 00000095  E8 00000000 E     1			call writestring
- 0000009A  5A		     1			pop edx
- 0000009B  A1 00000000 R	            mov eax, precioarticulo
- 000000A0  E8 00000000 E	            call writedec
- 000000A5  49						dec ecx
- 000000A6  75 0F					jnz finciclo
-
- 000000A8						MayorOiguala200:
-							println "Descuento del 20% aplicado"
- 000000C0		     1	.data
- 000000C0 44 65 73 63 75     1		??0006 db "Descuento del 20% aplicado" , 0
-	   65 6E 74 6F 20
-	   64 65 6C 20 32
-	   30 25 20 61 70
-	   6C 69 63 61 64
-	   6F 00
- 000000A8		     1		.code
- 000000A8  52		     1			push edx 
- 000000A9  BA 000000C0 R     1			mov edx , offset ??0006
- 000000AE  E8 00000000 E     1			call writestring
- 000000B3  5A		     1			pop edx
- 000000B4  49						dec ecx
- 000000B5  75 00					jnz finciclo
-
-							
-
- 000000B7					finCiclo:
- 000000B7  0F 85 FFFFFF56			jnz ciclo
-
-
-
-
-
-
-
-
-
-
-
-						;--------presione una tecla para continuar----------
- 000000BD  B8 0000000A			  mov eax, 10
- 000000C2  50				  push eax
- 000000C3  B8 000001F4			  mov eax , 500 ; milisegundos
- 000000C8  E8 00000000 E		  call delay ; DELAY SIEMPRE DEPENDE DE EAX (siempre se maneja en mls)
- 000000CD  58				  pop eax 
-					  ;call writeDec
-					  ;-----------------------------------------------------
- 000000CE					salir:
-						exit
-
- 000000D5				mainej19 ENDP
+						exit	
 					
-					END mainej19
-
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/13/23 22:48:28
+ 00000037				mainp701 ENDP
+					
+					END mainp701
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/13/23 23:58:02
 NombreProgram						     Symbols 2 - 1
 
 
-
-
-Macros:
-
-                N a m e                 Type
-
-println  . . . . . . . . . . . .	Proc
 
 
 Structures and Unions:
@@ -335,8 +153,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 000000DB Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 000000D5 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 0000000C Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000037 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -443,13 +261,7 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-mainej19 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 000000D5 Public STDCALL
-  ciclo  . . . . . . . . . . . .	L Near	 00000013 _TEXT	
-  MenorA100  . . . . . . . . . .	L Near	 00000032 _TEXT	
-  Entre100y200 . . . . . . . . .	L Near	 0000006D _TEXT	
-  MayorOiguala200  . . . . . . .	L Near	 000000A8 _TEXT	
-  finCiclo . . . . . . . . . . .	L Near	 000000B7 _TEXT	
-  salir  . . . . . . . . . . . .	L Near	 000000CE _TEXT	
+mainp701 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000037 Public STDCALL
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -459,13 +271,6 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
-??0000 . . . . . . . . . . . . .	Byte	 00000020 _DATA	
-??0001 . . . . . . . . . . . . .	Byte	 00000038 _DATA	
-??0002 . . . . . . . . . . . . .	Byte	 0000004C _DATA	
-??0003 . . . . . . . . . . . . .	Byte	 00000067 _DATA	
-??0004 . . . . . . . . . . . . .	Byte	 00000086 _DATA	
-??0005 . . . . . . . . . . . . .	Byte	 000000A1 _DATA	
-??0006 . . . . . . . . . . . . .	Byte	 000000C0 _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -678,11 +483,7 @@ WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
-costo_descuento  . . . . . . . .	DWord	 00000014 _DATA	
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
-divisor1 . . . . . . . . . . . .	DWord	 00000004 _DATA	
-divisor2 . . . . . . . . . . . .	DWord	 00000008 _DATA	
-divisor3 . . . . . . . . . . . .	DWord	 0000000C _DATA	
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   
 green  . . . . . . . . . . . . .	Number	 00000002h   
@@ -693,11 +494,10 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
-precioarticulo . . . . . . . . .	DWord	 00000000 _DATA	
-preciocondescuento . . . . . . .	DWord	 00000018 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-resultadodescuento . . . . . . .	DWord	 00000010 _DATA	
-total_compra . . . . . . . . . .	DWord	 0000001C _DATA	
+var1_8 . . . . . . . . . . . . .	DWord	 00000008 _DATA	
+var1 . . . . . . . . . . . . . .	DWord	 00000000 _DATA	
+var2 . . . . . . . . . . . . . .	DWord	 00000004 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   
