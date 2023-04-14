@@ -71,7 +71,7 @@ var1_8 dword 100d
 			  call crlf
 			  mov eax , precioarticulo
 			  add total_compra , eax
-			 ; call writedec
+			 call writedec
 			dec ecx
             jnz finciclo ; FUNCIONAAAA
 
@@ -86,8 +86,7 @@ var1_8 dword 100d
 			  call crlf
 			  mov eax , precioarticulo
 			  add total_compra , eax
-			 ; call writedec ; FUNCIONAA LA PARTE DEL 30%
-
+			 call writedec ; FUNCIONAA LA PARTE DEL 30%
 			dec ecx
 			jnz finciclo
 
@@ -102,7 +101,7 @@ var1_8 dword 100d
 			  ;call crlf
 			  mov eax , precioarticulo
 			  add total_compra , eax
-			  ;call writedec
+			  call writedec
 			  call crlf
 			dec ecx
 			jnz finciclo
