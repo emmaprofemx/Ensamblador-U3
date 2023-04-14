@@ -17,9 +17,13 @@ INCLUDE macros.inc
 
 ;CONSTANTES
 precioarticulo dword 0d
-descuento dword 0
-
-
+divisor1 dword 10d
+divisor2 dword 20d
+divisor3 dword 30d
+resultadodescuento dword 0d
+costo_descuento dword 0d
+preciocondescuento dword 0d
+total_compra dword 0d
 
 
 .code
@@ -38,29 +42,41 @@ descuento dword 0
 
 		println "Cantidad de articulos: "
 		call readint ; LEYENDO CANTIDAD EN EAX
-		mov ecx , eax
+		mov ecx , eax ; CANTIDAD DE VUELTAS PARA EL CICLO
 
 		ciclo:
 			println "Ingrese el articulo"
 			call readint; LEYENDO ARTICULO EN EAX
-
+			;mov precioarticulo , eax
 			cmp eax , 200
 			jge MayorOiguala200
 			cmp eax, 100
 			jl Menora100
 			jmp Entre100y200
 		
-			MayorOiguala200:
-			println "Descuento del 20% aplicado"
-			jmp finCiclo
+			MenorA100:
+    println "Descuento del 10% aplicado"
+    mov precioarticulo , eax
+    mov edx, 0
+    div divisor1
+   ;sub eax , precioarticulo
+   sub precioarticulo, eax
+
+    println "El total de este articulo es: "
+    mov eax, precioarticulo
+    call writedec
+    jmp finciclo
+
 
 			Entre100y200:
 			println "Descuento del 30% aplicado"
-			jmp finCiclo
+			jmp finciclo
 
-			 MenorA100:
-			 println "Descuento del 10% aplicado"
-			 jmp finCiclo
+			MayorOiguala200:
+			println "Descuento del 20% aplicado"
+			jmp finciclo
+
+			
 
 		finCiclo:
 		loop ciclo
