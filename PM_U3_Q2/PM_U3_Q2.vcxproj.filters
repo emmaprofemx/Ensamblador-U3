@@ -68,6 +68,7 @@
     <MASM Include="EJ_05_Becas_mensuales.asm" />
     <MASM Include="EJ06U3_Bono_mensual.asm" />
     <MASM Include="pruebarelgade3.asm" />
+    <MASM Include="EJ7SEGUROSAUTOS.asm" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
