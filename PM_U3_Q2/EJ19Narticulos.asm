@@ -17,14 +17,19 @@ INCLUDE macros.inc
 
 ;CONSTANTES
 precioarticulo dword 0d
-divisor1 dword 10d
-divisor2 dword 20d
-divisor3 dword 30d
+;divisor1 dword 10d
+;divisor2 dword 20d
+;divisor3 dword 30d
 resultadodescuento dword 0d
 costo_descuento dword 0d
 preciocondescuento dword 0d
 total_compra dword 0d
 
+des1 dword 10d 
+des2 dword 20d  
+des3 dword 30d 
+var2 dword 300d ; valor del producto
+var1_8 dword 100d
 
 
 .code
@@ -48,30 +53,32 @@ total_compra dword 0d
 		ciclo:
 			println "Ingrese el articulo"
 			call readint; LEYENDO ARTICULO EN EAX
-			;mov precioarticulo , eax
-			cmp eax , 200
+			mov precioarticulo , eax
+			cmp precioarticulo , 200
 			jge MayorOiguala200
-			cmp eax, 100
+			cmp precioarticulo, 100
 			jl Menora100
 			jmp Entre100y200
 		
 			MenorA100:
 			 println "Descuento del 10% aplicado"
-			 mov precioarticulo , eax
-			 mov edx, 0
-		     div divisor1
-			 sub precioarticulo, eax
-		    println "El total de este articulo es: "
-            mov eax, precioarticulo
-            call writedec
+			  mov eax , des1
+			  mul precioarticulo
+			  mov edx , 0
+			  div var1_8
+			  call writedec
+			  sub precioarticulo , eax
+			  call crlf
+			  mov eax , precioarticulo
+			  call writedec
 			dec ecx
-            jnz finciclo
+            jnz finciclo ; FUNCIONAA
 
 			Entre100y200:
 			println "Descuento del 30% aplicado"
 			 mov precioarticulo , eax
 			 mov edx, 0 ; LIMPIEZZ
-		     div divisor3
+		     ;div divisor3
 			 sub precioarticulo, eax
 		    println "El total de este articulo es: "
             mov eax, precioarticulo

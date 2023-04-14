@@ -150,7 +150,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>c:/Irvine</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainp701</EntryPointSymbol>
+      <EntryPointSymbol>mainej19</EntryPointSymbol>
       <ImportLibrary>c:/Irvine</ImportLibrary>
     </Link>
     <MASM>
