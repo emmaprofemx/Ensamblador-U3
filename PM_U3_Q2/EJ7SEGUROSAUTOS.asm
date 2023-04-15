@@ -20,6 +20,7 @@ cuotaBase dword 0d
 edad dword 0d
 cuotaEdad dword 0d
 cuotaAlcohol dword 10d ; Para cambiarlo mas adelante 
+cuotaLentes dword 0d
 
 .code
 	mainej7 PROC
@@ -71,32 +72,49 @@ cuotaAlcohol dword 10d ; Para cambiarlo mas adelante
 		
 		;Si llegamos aqui , significa que cobertura no es igual a S
 		mov cuotaAlcohol , 0
-		jmp salir 
+		jmp etqLentes 
 
 		tiposI:
-			alcoholSI:
 			println "SI INGIERE ALCOHOL"
 			mov cuotaAlcohol , 20
+			jmp etqLentes
+
+		;***********EVALUANDO SI USA LENTES***************
+
+		etqLentes:
+		call crlf
+		println "Usas lentes?(S o N)"
+		call readchar
+		cmp al , 'S'
+		je tipolenSi
+
+		;Si llegamos aqui , significa que cobertura no es igual a S
+		mov cuotaLentes , 0
+		jmp salir 
+
+		tipolenSi:
+			println "SI USA LENTES"
+			mov cuotaLentes , 10
 			jmp salir
+			
 
-
-
-
-		
-
-
-
+		;***********S A L I D A***************
 		salir:
 		call crlf
 		xchg eax , cuotaBase
 		println "El valor de costo Base es: "
 		call writedec
-		call crlf
 		xchg eax , cuotaEdad
+		call crlf
 		println "La valor de la cuota Edad es: "
 		call writedec
 		xchg eax , cuotaAlcohol
-		println "VALOR DE ALCOHOL"
+		call crlf
+		println "VALOR DE ALCOHOL: "
+		call writedec
+		xchg eax , cuotaLentes
+		call crlf
+		println "VALOR AL USAR LENTES:"
 		call writedec
 
 

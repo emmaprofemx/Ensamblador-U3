@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:08:35
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:20:07
 NombreProgram						     Page 1 - 1
 
 
@@ -56,7 +56,8 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:08:35
  00000000 00000000		cuotaBase dword 0d
  00000004 00000000		edad dword 0d
  00000008 00000000		cuotaEdad dword 0d
- 0000000C 0000000A		cuotaAlcohol dword 10d
+ 0000000C 0000000A		cuotaAlcohol dword 10d ; Para cambiarlo mas adelante 
+ 00000010 00000000		cuotaLentes dword 0d
 
  00000000			.code
  00000000				mainej7 PROC
@@ -65,8 +66,8 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:08:35
 
 						;***********EVALUANDO EDAD DEL CONDUCTOR***************
 						println "Ingresa la edad del conductor: "
- 00000010		     1	.data
- 00000010 49 6E 67 72 65     1		??0000 db "Ingresa la edad del conductor: " , 0
+ 00000014		     1	.data
+ 00000014 49 6E 67 72 65     1		??0000 db "Ingresa la edad del conductor: " , 0
 	   73 61 20 6C 61
 	   20 65 64 61 64
 	   20 64 65 6C 20
@@ -75,7 +76,7 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:08:35
 	   20 00
  00000000		     1		.code
  00000000  52		     1			push edx 
- 00000001  BA 00000010 R     1			mov edx , offset ??0000
+ 00000001  BA 00000014 R     1			mov edx , offset ??0000
  00000006  E8 00000000 E     1			call writestring
  0000000B  5A		     1			pop edx
  0000000C  E8 00000000 E			call readint 
@@ -100,8 +101,8 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:08:35
 
  0000003D					etqPoliza:
 						println "Ingresa el tipo de Poliza (A o B): "	
- 00000030		     1	.data
- 00000030 49 6E 67 72 65     1		??0001 db "Ingresa el tipo de Poliza (A o B): " , 0
+ 00000034		     1	.data
+ 00000034 49 6E 67 72 65     1		??0001 db "Ingresa el tipo de Poliza (A o B): " , 0
 	   73 61 20 65 6C
 	   20 74 69 70 6F
 	   20 64 65 20 50
@@ -111,7 +112,7 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:08:35
 	   00
  0000003D		     1		.code
  0000003D  52		     1			push edx 
- 0000003E  BA 00000030 R     1			mov edx , offset ??0001
+ 0000003E  BA 00000034 R     1			mov edx , offset ??0001
  00000043  E8 00000000 E     1			call writestring
  00000048  5A		     1			pop edx
  00000049  E8 00000000 E			call readchar
@@ -125,13 +126,13 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:08:35
 
  0000005E					tipoA:
 							println "ERES TIPO A"
- 00000054		     1	.data
- 00000054 45 52 45 53 20     1		??0002 db "ERES TIPO A" , 0
+ 00000058		     1	.data
+ 00000058 45 52 45 53 20     1		??0002 db "ERES TIPO A" , 0
 	   54 49 50 4F 20
 	   41 00
  0000005E		     1		.code
  0000005E  52		     1			push edx 
- 0000005F  BA 00000054 R     1			mov edx , offset ??0002
+ 0000005F  BA 00000058 R     1			mov edx , offset ??0002
  00000064  E8 00000000 E     1			call writestring
  00000069  5A		     1			pop edx
  0000006A  C7 05 00000000 R				mov cuotaBase , 1200
@@ -143,8 +144,8 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:08:35
  00000076					etqAlcohol:
  00000076  E8 00000000 E			call crlf
 						println "Habito por beber alcohol?(S o N)"
- 00000060		     1	.data
- 00000060 48 61 62 69 74     1		??0003 db "Habito por beber alcohol?(S o N)" , 0
+ 00000064		     1	.data
+ 00000064 48 61 62 69 74     1		??0003 db "Habito por beber alcohol?(S o N)" , 0
 	   6F 20 70 6F 72
 	   20 62 65 62 65
 	   72 20 61 6C 63
@@ -153,7 +154,7 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:08:35
 	   4E 29 00
  0000007B		     1		.code
  0000007B  52		     1			push edx 
- 0000007C  BA 00000060 R     1			mov edx , offset ??0003
+ 0000007C  BA 00000064 R     1			mov edx , offset ??0003
  00000081  E8 00000000 E     1			call writestring
  00000086  5A		     1			pop edx
  00000087  E8 00000000 E			call readchar
@@ -163,89 +164,138 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:08:35
 						;Si llegamos aqui , significa que cobertura no es igual a S
  00000090  C7 05 0000000C R			mov cuotaAlcohol , 0
 	   00000000
- 0000009A  EB 18				jmp salir 
+ 0000009A  EB 18				jmp etqLentes 
 
  0000009C					tiposI:
- 0000009C						alcoholSI:
 							println "SI INGIERE ALCOHOL"
- 00000081		     1	.data
- 00000081 53 49 20 49 4E     1		??0004 db "SI INGIERE ALCOHOL" , 0
+ 00000085		     1	.data
+ 00000085 53 49 20 49 4E     1		??0004 db "SI INGIERE ALCOHOL" , 0
 	   47 49 45 52 45
 	   20 41 4C 43 4F
 	   48 4F 4C 00
  0000009C		     1		.code
  0000009C  52		     1			push edx 
- 0000009D  BA 00000081 R     1			mov edx , offset ??0004
+ 0000009D  BA 00000085 R     1			mov edx , offset ??0004
  000000A2  E8 00000000 E     1			call writestring
  000000A7  5A		     1			pop edx
  000000A8  C7 05 0000000C R				mov cuotaAlcohol , 20
 	   00000014
- 000000B2  EB 00					jmp salir
+ 000000B2  EB 00					jmp etqLentes
 
+						;***********EVALUANDO SI USA LENTES***************
 
-
-
-						
-
-
-
- 000000B4					salir:
+ 000000B4					etqLentes:
  000000B4  E8 00000000 E			call crlf
- 000000B9  87 05 00000000 R			xchg eax , cuotaBase
+						println "Usas lentes?(S o N)"
+ 00000098		     1	.data
+ 00000098 55 73 61 73 20     1		??0005 db "Usas lentes?(S o N)" , 0
+	   6C 65 6E 74 65
+	   73 3F 28 53 20
+	   6F 20 4E 29 00
+ 000000B9		     1		.code
+ 000000B9  52		     1			push edx 
+ 000000BA  BA 00000098 R     1			mov edx , offset ??0005
+ 000000BF  E8 00000000 E     1			call writestring
+ 000000C4  5A		     1			pop edx
+ 000000C5  E8 00000000 E			call readchar
+ 000000CA  3C 53				cmp al , 'S'
+ 000000CC  74 0C				je tipolenSi
+
+						;Si llegamos aqui , significa que cobertura no es igual a S
+ 000000CE  C7 05 00000010 R			mov cuotaLentes , 0
+	   00000000
+ 000000D8  EB 18				jmp salir 
+
+ 000000DA					tipolenSi:
+							println "SI USA LENTES"
+ 000000AC		     1	.data
+ 000000AC 53 49 20 55 53     1		??0006 db "SI USA LENTES" , 0
+	   41 20 4C 45 4E
+	   54 45 53 00
+ 000000DA		     1		.code
+ 000000DA  52		     1			push edx 
+ 000000DB  BA 000000AC R     1			mov edx , offset ??0006
+ 000000E0  E8 00000000 E     1			call writestring
+ 000000E5  5A		     1			pop edx
+ 000000E6  C7 05 00000010 R				mov cuotaLentes , 10
+	   0000000A
+ 000000F0  EB 00					jmp salir
+							
+
+						;***********S A L I D A***************
+ 000000F2					salir:
+ 000000F2  E8 00000000 E			call crlf
+ 000000F7  87 05 00000000 R			xchg eax , cuotaBase
 						println "El valor de costo Base es: "
- 00000094		     1	.data
- 00000094 45 6C 20 76 61     1		??0005 db "El valor de costo Base es: " , 0
+ 000000BA		     1	.data
+ 000000BA 45 6C 20 76 61     1		??0007 db "El valor de costo Base es: " , 0
 	   6C 6F 72 20 64
 	   65 20 63 6F 73
 	   74 6F 20 42 61
 	   73 65 20 65 73
 	   3A 20 00
- 000000BF		     1		.code
- 000000BF  52		     1			push edx 
- 000000C0  BA 00000094 R     1			mov edx , offset ??0005
- 000000C5  E8 00000000 E     1			call writestring
- 000000CA  5A		     1			pop edx
- 000000CB  E8 00000000 E			call writedec
- 000000D0  E8 00000000 E			call crlf
- 000000D5  87 05 00000008 R			xchg eax , cuotaEdad
+ 000000FD		     1		.code
+ 000000FD  52		     1			push edx 
+ 000000FE  BA 000000BA R     1			mov edx , offset ??0007
+ 00000103  E8 00000000 E     1			call writestring
+ 00000108  5A		     1			pop edx
+ 00000109  E8 00000000 E			call writedec
+ 0000010E  87 05 00000008 R			xchg eax , cuotaEdad
+ 00000114  E8 00000000 E			call crlf
 						println "La valor de la cuota Edad es: "
- 000000B0		     1	.data
- 000000B0 4C 61 20 76 61     1		??0006 db "La valor de la cuota Edad es: " , 0
+ 000000D6		     1	.data
+ 000000D6 4C 61 20 76 61     1		??0008 db "La valor de la cuota Edad es: " , 0
 	   6C 6F 72 20 64
 	   65 20 6C 61 20
 	   63 75 6F 74 61
 	   20 45 64 61 64
 	   20 65 73 3A 20
 	   00
- 000000DB		     1		.code
- 000000DB  52		     1			push edx 
- 000000DC  BA 000000B0 R     1			mov edx , offset ??0006
- 000000E1  E8 00000000 E     1			call writestring
- 000000E6  5A		     1			pop edx
- 000000E7  E8 00000000 E			call writedec
- 000000EC  87 05 0000000C R			xchg eax , cuotaAlcohol
-						println "VALOR DE ALCOHOL"
- 000000CF		     1	.data
- 000000CF 56 41 4C 4F 52     1		??0007 db "VALOR DE ALCOHOL" , 0
+ 00000119		     1		.code
+ 00000119  52		     1			push edx 
+ 0000011A  BA 000000D6 R     1			mov edx , offset ??0008
+ 0000011F  E8 00000000 E     1			call writestring
+ 00000124  5A		     1			pop edx
+ 00000125  E8 00000000 E			call writedec
+ 0000012A  87 05 0000000C R			xchg eax , cuotaAlcohol
+ 00000130  E8 00000000 E			call crlf
+						println "VALOR DE ALCOHOL: "
+ 000000F5		     1	.data
+ 000000F5 56 41 4C 4F 52     1		??0009 db "VALOR DE ALCOHOL: " , 0
 	   20 44 45 20 41
 	   4C 43 4F 48 4F
-	   4C 00
- 000000F2		     1		.code
- 000000F2  52		     1			push edx 
- 000000F3  BA 000000CF R     1			mov edx , offset ??0007
- 000000F8  E8 00000000 E     1			call writestring
- 000000FD  5A		     1			pop edx
- 000000FE  E8 00000000 E			call writedec
+	   4C 3A 20 00
+ 00000135		     1		.code
+ 00000135  52		     1			push edx 
+ 00000136  BA 000000F5 R     1			mov edx , offset ??0009
+ 0000013B  E8 00000000 E     1			call writestring
+ 00000140  5A		     1			pop edx
+ 00000141  E8 00000000 E			call writedec
+ 00000146  87 05 00000010 R			xchg eax , cuotaLentes
+ 0000014C  E8 00000000 E			call crlf
+						println "VALOR AL USAR LENTES:"
+ 00000108		     1	.data
+ 00000108 56 41 4C 4F 52     1		??000A db "VALOR AL USAR LENTES:" , 0
+	   20 41 4C 20 55
+	   53 41 52 20 4C
+	   45 4E 54 45 53
+	   3A 00
+ 00000151		     1		.code
+ 00000151  52		     1			push edx 
+ 00000152  BA 00000108 R     1			mov edx , offset ??000A
+ 00000157  E8 00000000 E     1			call writestring
+ 0000015C  5A		     1			pop edx
+ 0000015D  E8 00000000 E			call writedec
 
 
 					
 						exit
 
- 0000010A				mainej7 ENDP
+ 00000169				mainej7 ENDP
 					
 					END mainej7
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:08:35
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:20:07
 NombreProgram						     Symbols 2 - 1
 
 
@@ -346,8 +396,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 000000E0 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000010A Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 0000011E Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000169 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -454,14 +504,15 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-mainej7  . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000010A Public STDCALL
+mainej7  . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000169 Public STDCALL
   MasDe40  . . . . . . . . . . .	L Near	 0000002C _TEXT	
   etqPoliza  . . . . . . . . . .	L Near	 0000003D _TEXT	
   tipoA  . . . . . . . . . . . .	L Near	 0000005E _TEXT	
   etqAlcohol . . . . . . . . . .	L Near	 00000076 _TEXT	
   tiposI . . . . . . . . . . . .	L Near	 0000009C _TEXT	
-  alcoholSI  . . . . . . . . . .	L Near	 0000009C _TEXT	
-  salir  . . . . . . . . . . . .	L Near	 000000B4 _TEXT	
+  etqLentes  . . . . . . . . . .	L Near	 000000B4 _TEXT	
+  tipolenSi  . . . . . . . . . .	L Near	 000000DA _TEXT	
+  salir  . . . . . . . . . . . .	L Near	 000000F2 _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -471,14 +522,17 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
-??0000 . . . . . . . . . . . . .	Byte	 00000010 _DATA	
-??0001 . . . . . . . . . . . . .	Byte	 00000030 _DATA	
-??0002 . . . . . . . . . . . . .	Byte	 00000054 _DATA	
-??0003 . . . . . . . . . . . . .	Byte	 00000060 _DATA	
-??0004 . . . . . . . . . . . . .	Byte	 00000081 _DATA	
-??0005 . . . . . . . . . . . . .	Byte	 00000094 _DATA	
-??0006 . . . . . . . . . . . . .	Byte	 000000B0 _DATA	
-??0007 . . . . . . . . . . . . .	Byte	 000000CF _DATA	
+??0000 . . . . . . . . . . . . .	Byte	 00000014 _DATA	
+??0001 . . . . . . . . . . . . .	Byte	 00000034 _DATA	
+??0002 . . . . . . . . . . . . .	Byte	 00000058 _DATA	
+??0003 . . . . . . . . . . . . .	Byte	 00000064 _DATA	
+??0004 . . . . . . . . . . . . .	Byte	 00000085 _DATA	
+??0005 . . . . . . . . . . . . .	Byte	 00000098 _DATA	
+??0006 . . . . . . . . . . . . .	Byte	 000000AC _DATA	
+??0007 . . . . . . . . . . . . .	Byte	 000000BA _DATA	
+??0008 . . . . . . . . . . . . .	Byte	 000000D6 _DATA	
+??0009 . . . . . . . . . . . . .	Byte	 000000F5 _DATA	
+??000A . . . . . . . . . . . . .	Byte	 00000108 _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -694,6 +748,7 @@ brown  . . . . . . . . . . . . .	Number	 00000006h
 cuotaAlcohol . . . . . . . . . .	DWord	 0000000C _DATA	
 cuotaBase  . . . . . . . . . . .	DWord	 00000000 _DATA	
 cuotaEdad  . . . . . . . . . . .	DWord	 00000008 _DATA	
+cuotaLentes  . . . . . . . . . .	DWord	 00000010 _DATA	
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
 edad . . . . . . . . . . . . . .	DWord	 00000004 _DATA	
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
