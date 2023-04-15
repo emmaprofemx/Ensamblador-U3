@@ -32,7 +32,7 @@ respaldo dword 0d
 		;Lógica del Programa	 
 
 		;***********EVALUANDO EDAD DEL CONDUCTOR***************
-
+		mov ebx , 0
 		println "Ingresa la edad del conductor: "
 		call readint 
 		xchg edad , eax
@@ -40,10 +40,11 @@ respaldo dword 0d
 		jg Masde40
 
 		;*SI LA EDAD ES MENOR QUE 40
+
 		mov cuotaEdad, 10
-		xchg eax,cuotaEdad
-		add eax , acumulador
-		xchg ebx , eax ; RESPALDANDO EL RESULTADO DE eax(10) + acumulador(0) , y el resultado lo pasamos a ebx
+		mov eax , cuotaEdad
+		add eax , ebx
+		mov acumulador , eax
 		jmp etqPoliza 
 
 		MasDe40:
@@ -120,7 +121,7 @@ respaldo dword 0d
 			
 		;***********EVALUANDO SI PADECE UNA ENFERMEDAD***************
 		etqEnfermedad:
-
+		mov ebx , acumulador ; RESPALDANDO EL RESULTADO (60)
 		call crlf
 		println "Padeces una enfermedad?(S o N)"
 		call readchar
@@ -132,8 +133,11 @@ respaldo dword 0d
 		jmp salir 
 
 		tipoenferSi:
-			println "SI USA LENTES"
+			println "SI TIENE ENFERMEDAD"
 			mov cuotaEnfermedad , 10
+			mov eax , cuotaEnfermedad
+			add eax , ebx
+			mov acumulador , eax
 			jmp salir
 
 
