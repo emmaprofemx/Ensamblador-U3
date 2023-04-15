@@ -24,6 +24,8 @@ cuotaLentes dword 0d
 cuotaEnfermedad dword 0d
 acumulador dword 0d
 
+variablex dword 100d
+resultadofinal dword 0d
 
 respaldo dword 0d
 .code
@@ -130,7 +132,7 @@ respaldo dword 0d
 
 		;Si llegamos aqui , significa que cobertura no es igual a S
 		mov cuotaEnfermedad , 0
-		jmp salir 
+		jmp calculo 
 
 		tipoenferSi:
 			println "SI TIENE ENFERMEDAD"
@@ -138,7 +140,31 @@ respaldo dword 0d
 			mov eax , cuotaEnfermedad
 			add eax , ebx
 			mov acumulador , eax
-			jmp salir
+			jmp calculo
+
+		;***********REALIZACION DEL COSTO***************
+
+		calculo:
+		mov eax , acumulador 
+		mul cuotaBase ;MULTIPLICAMOS (PORCENTAJE(70) * CUOTABASE(1200))
+		mov edx , 0
+		div variablex
+		call writedec ; OBTENEMOS EL VALOR DEL DESCUENTO
+
+		;EAX TIENE 600
+
+		add cuotaBase , eax
+		call crlf
+		mov eax , cuotaBase
+		mov resultadofinal , eax
+		jmp salir
+
+
+
+
+
+
+
 
 
 
@@ -171,7 +197,10 @@ respaldo dword 0d
 		mov eax , acumulador
 		println "VALOR DEL ACUMULADOR:"
 		call writedec
-
+		mov eax , resultadofinal
+		call crlf
+		println "PRECIO FINAL:"
+		call writedec
 	
 		exit
 
