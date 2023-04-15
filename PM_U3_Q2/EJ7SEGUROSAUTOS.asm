@@ -23,6 +23,9 @@ cuotaAlcohol dword 10d ; Para cambiarlo mas adelante
 cuotaLentes dword 0d
 cuotaEnfermedad dword 0d
 acumulador dword 0d
+
+
+respaldo dword 0d
 .code
 	mainej7 PROC
 	
@@ -40,18 +43,19 @@ acumulador dword 0d
 		mov cuotaEdad, 10
 		xchg eax,cuotaEdad
 		add eax , acumulador
-		mov ebx , eax ; RESPALDANDO EL RESULTADO DE eax(10) + acumulador(0) , y el resultado lo pasamos a ebx
+		xchg ebx , eax ; RESPALDANDO EL RESULTADO DE eax(10) + acumulador(0) , y el resultado lo pasamos a ebx
 		jmp etqPoliza 
 
 		MasDe40:
 			mov cuotaEdad , 30
 			xchg eax,cuotaEdad
 			add eax , acumulador
-			mov ebx , eax ; RESPALDANDO EL RESULTADO DE eax(30) + acumulador(0) , y el resultado lo pasamos a ebx
+			xchg ebx , eax ; RESPALDANDO EL RESULTADO DE eax(30) + acumulador(0) , y el resultado lo pasamos a ebx
 			jmp etqPoliza
 
 		call crlf
 		
+		xchg respaldo , ebx ; RESPALDANDO EL RESULTADO
 		;***********EVALUANDO TIPO DE POLIZA***************
 
 		etqPoliza:
@@ -82,9 +86,15 @@ acumulador dword 0d
 		mov cuotaAlcohol , 0
 		jmp etqLentes 
 
+
 		tiposI:
 			println "SI INGIERE ALCOHOL"
 			mov cuotaAlcohol , 20
+			mov eax , cuotaAlcohol ;(20)
+			add eax , ebx
+
+			mov acumulador , eax
+			
 			jmp etqLentes
 
 		;***********EVALUANDO SI USA LENTES***************
@@ -149,7 +159,9 @@ acumulador dword 0d
 		call writedec
 		;xchg eax , acumulador
 		call crlf
-		mov eax , ebx
+		;add eax , ebx
+		;mov eax , ebx
+		mov eax , acumulador
 		println "VALOR DEL ACUMULADOR:"
 		call writedec
 
