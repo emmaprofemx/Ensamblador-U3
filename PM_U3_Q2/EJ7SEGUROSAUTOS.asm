@@ -21,6 +21,7 @@ edad dword 0d
 cuotaEdad dword 0d
 cuotaAlcohol dword 10d ; Para cambiarlo mas adelante 
 cuotaLentes dword 0d
+cuotaEnfermedad dword 0d
 
 .code
 	mainej7 PROC
@@ -90,13 +91,32 @@ cuotaLentes dword 0d
 
 		;Si llegamos aqui , significa que cobertura no es igual a S
 		mov cuotaLentes , 0
-		jmp salir 
+		jmp etqEnfermedad 
 
 		tipolenSi:
 			println "SI USA LENTES"
 			mov cuotaLentes , 10
-			jmp salir
+			jmp etqEnfermedad
 			
+		;***********EVALUANDO SI PADECE UNA ENFERMEDAD***************
+		etqEnfermedad:
+
+		call crlf
+		println "Padeces una enfermedad?(S o N)"
+		call readchar
+		cmp al , 'S'
+		je tipoenferSi
+
+		;Si llegamos aqui , significa que cobertura no es igual a S
+		mov cuotaEnfermedad , 0
+		jmp salir 
+
+		tipoenferSi:
+			println "SI USA LENTES"
+			mov cuotaEnfermedad , 10
+			jmp salir
+
+
 
 		;***********S A L I D A***************
 		salir:
@@ -116,7 +136,10 @@ cuotaLentes dword 0d
 		call crlf
 		println "VALOR AL USAR LENTES:"
 		call writedec
-
+		xchg eax , cuotaEnfermedad
+		call crlf
+		println "VALOR AL TENER ENFERMEDAD:"
+		call writedec
 
 	
 		exit
