@@ -19,16 +19,17 @@ INCLUDE macros.inc
 cuotaBase dword 0d
 edad dword 0d
 cuotaEdad dword 0d
+cuotaAlcohol dword 10d ; Para cambiarlo mas adelante 
 
 .code
 	mainej7 PROC
 	
 		;Lógica del Programa	 
 
+		;***********EVALUANDO EDAD DEL CONDUCTOR***************
 		println "Ingresa la edad del conductor: "
 		call readint 
 		xchg edad , eax
-
 		cmp edad , 40
 		jg Masde40
 
@@ -37,14 +38,14 @@ cuotaEdad dword 0d
 		jmp etqPoliza 
 
 		MasDe40:
-			mov cuotaEdad , 40
+			mov cuotaEdad , 30
 			jmp etqPoliza
 
 		call crlf
 		
-		etqPoliza:
 		;***********EVALUANDO TIPO DE POLIZA***************
 
+		etqPoliza:
 		println "Ingresa el tipo de Poliza (A o B): "	
 		call readchar
 		cmp al , 'A'
@@ -52,12 +53,37 @@ cuotaEdad dword 0d
 		
 		;Si llegamos aqui , significa que cobertura no es igual a A
 		mov cuotaBase , 950
-		jmp salir
+		jmp etqAlcohol 
 
 		tipoA:
 			println "ERES TIPO A"
 			mov cuotaBase , 1200
+			jmp etqAlcohol
+		
+		;***********EVALUANDO HABITO DE BEBER ALCOHOL***************
+
+		etqAlcohol:
+		call crlf
+		println "Habito por beber alcohol?(S o N)"
+		call readchar
+		cmp al , 'S'
+		je tiposI
+		
+		;Si llegamos aqui , significa que cobertura no es igual a S
+		mov cuotaAlcohol , 0
+		jmp salir 
+
+		tiposI:
+			alcoholSI:
+			println "SI INGIERE ALCOHOL"
+			mov cuotaAlcohol , 20
 			jmp salir
+
+
+
+
+		
+
 
 
 		salir:
@@ -69,6 +95,10 @@ cuotaEdad dword 0d
 		xchg eax , cuotaEdad
 		println "La valor de la cuota Edad es: "
 		call writedec
+		xchg eax , cuotaAlcohol
+		println "VALOR DE ALCOHOL"
+		call writedec
+
 
 	
 		exit
