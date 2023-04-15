@@ -92,14 +92,14 @@ respaldo dword 0d
 			mov cuotaAlcohol , 20
 			mov eax , cuotaAlcohol ;(20)
 			add eax , ebx
-
 			mov acumulador , eax
-			
 			jmp etqLentes
 
 		;***********EVALUANDO SI USA LENTES***************
+		
 
 		etqLentes:
+		mov ebx , acumulador ; RESPALDANDO EL RESULTADO (50)
 		call crlf
 		println "Usas lentes?(S o N)"
 		call readchar
@@ -113,6 +113,9 @@ respaldo dword 0d
 		tipolenSi:
 			println "SI USA LENTES"
 			mov cuotaLentes , 10
+			mov eax , cuotaLentes
+			add eax , ebx
+			mov acumulador , eax
 			jmp etqEnfermedad
 			
 		;***********EVALUANDO SI PADECE UNA ENFERMEDAD***************

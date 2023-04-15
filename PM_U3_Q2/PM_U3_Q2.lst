@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 21:30:10
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 21:40:39
 NombreProgram						     Page 1 - 1
 
 
@@ -195,54 +195,57 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 21:30:10
 	   00000014
  000000D2  A1 0000000C R				mov eax , cuotaAlcohol ;(20)
  000000D7  03 C3					add eax , ebx
-
  000000D9  A3 00000018 R				mov acumulador , eax
-							
  000000DE  EB 00					jmp etqLentes
 
 						;***********EVALUANDO SI USA LENTES***************
+						
 
  000000E0					etqLentes:
- 000000E0  E8 00000000 E			call crlf
+ 000000E0  8B 1D 00000018 R			mov ebx , acumulador ; RESPALDANDO EL RESULTADO (50)
+ 000000E6  E8 00000000 E			call crlf
 						println "Usas lentes?(S o N)"
  000000A4		     1	.data
  000000A4 55 73 61 73 20     1		??0005 db "Usas lentes?(S o N)" , 0
 	   6C 65 6E 74 65
 	   73 3F 28 53 20
 	   6F 20 4E 29 00
- 000000E5		     1		.code
- 000000E5  52		     1			push edx 
- 000000E6  BA 000000A4 R     1			mov edx , offset ??0005
- 000000EB  E8 00000000 E     1			call writestring
- 000000F0  5A		     1			pop edx
- 000000F1  E8 00000000 E			call readchar
- 000000F6  3C 53				cmp al , 'S'
- 000000F8  74 0C				je tipolenSi
+ 000000EB		     1		.code
+ 000000EB  52		     1			push edx 
+ 000000EC  BA 000000A4 R     1			mov edx , offset ??0005
+ 000000F1  E8 00000000 E     1			call writestring
+ 000000F6  5A		     1			pop edx
+ 000000F7  E8 00000000 E			call readchar
+ 000000FC  3C 53				cmp al , 'S'
+ 000000FE  74 0C				je tipolenSi
 
 						;Si llegamos aqui , significa que cobertura no es igual a S
- 000000FA  C7 05 00000010 R			mov cuotaLentes , 0
+ 00000100  C7 05 00000010 R			mov cuotaLentes , 0
 	   00000000
- 00000104  EB 18				jmp etqEnfermedad 
+ 0000010A  EB 24				jmp etqEnfermedad 
 
- 00000106					tipolenSi:
+ 0000010C					tipolenSi:
 							println "SI USA LENTES"
  000000B8		     1	.data
  000000B8 53 49 20 55 53     1		??0006 db "SI USA LENTES" , 0
 	   41 20 4C 45 4E
 	   54 45 53 00
- 00000106		     1		.code
- 00000106  52		     1			push edx 
- 00000107  BA 000000B8 R     1			mov edx , offset ??0006
- 0000010C  E8 00000000 E     1			call writestring
- 00000111  5A		     1			pop edx
- 00000112  C7 05 00000010 R				mov cuotaLentes , 10
+ 0000010C		     1		.code
+ 0000010C  52		     1			push edx 
+ 0000010D  BA 000000B8 R     1			mov edx , offset ??0006
+ 00000112  E8 00000000 E     1			call writestring
+ 00000117  5A		     1			pop edx
+ 00000118  C7 05 00000010 R				mov cuotaLentes , 10
 	   0000000A
- 0000011C  EB 00					jmp etqEnfermedad
+ 00000122  A1 00000010 R				mov eax , cuotaLentes
+ 00000127  03 C3					add eax , ebx
+ 00000129  A3 00000018 R				mov acumulador , eax
+ 0000012E  EB 00					jmp etqEnfermedad
 							
 						;***********EVALUANDO SI PADECE UNA ENFERMEDAD***************
- 0000011E					etqEnfermedad:
+ 00000130					etqEnfermedad:
 
- 0000011E  E8 00000000 E			call crlf
+ 00000130  E8 00000000 E			call crlf
 						println "Padeces una enfermedad?(S o N)"
  000000C6		     1	.data
  000000C6 50 61 64 65 63     1		??0007 db "Padeces una enfermedad?(S o N)" , 0
@@ -252,41 +255,41 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 21:30:10
 	   61 64 3F 28 53
 	   20 6F 20 4E 29
 	   00
- 00000123		     1		.code
- 00000123  52		     1			push edx 
- 00000124  BA 000000C6 R     1			mov edx , offset ??0007
- 00000129  E8 00000000 E     1			call writestring
- 0000012E  5A		     1			pop edx
- 0000012F  E8 00000000 E			call readchar
- 00000134  3C 53				cmp al , 'S'
- 00000136  74 0C				je tipoenferSi
+ 00000135		     1		.code
+ 00000135  52		     1			push edx 
+ 00000136  BA 000000C6 R     1			mov edx , offset ??0007
+ 0000013B  E8 00000000 E     1			call writestring
+ 00000140  5A		     1			pop edx
+ 00000141  E8 00000000 E			call readchar
+ 00000146  3C 53				cmp al , 'S'
+ 00000148  74 0C				je tipoenferSi
 
 						;Si llegamos aqui , significa que cobertura no es igual a S
- 00000138  C7 05 00000014 R			mov cuotaEnfermedad , 0
+ 0000014A  C7 05 00000014 R			mov cuotaEnfermedad , 0
 	   00000000
- 00000142  EB 18				jmp salir 
+ 00000154  EB 18				jmp salir 
 
- 00000144					tipoenferSi:
+ 00000156					tipoenferSi:
 							println "SI USA LENTES"
  000000E5		     1	.data
  000000E5 53 49 20 55 53     1		??0008 db "SI USA LENTES" , 0
 	   41 20 4C 45 4E
 	   54 45 53 00
- 00000144		     1		.code
- 00000144  52		     1			push edx 
- 00000145  BA 000000E5 R     1			mov edx , offset ??0008
- 0000014A  E8 00000000 E     1			call writestring
- 0000014F  5A		     1			pop edx
- 00000150  C7 05 00000014 R				mov cuotaEnfermedad , 10
+ 00000156		     1		.code
+ 00000156  52		     1			push edx 
+ 00000157  BA 000000E5 R     1			mov edx , offset ??0008
+ 0000015C  E8 00000000 E     1			call writestring
+ 00000161  5A		     1			pop edx
+ 00000162  C7 05 00000014 R				mov cuotaEnfermedad , 10
 	   0000000A
- 0000015A  EB 00					jmp salir
+ 0000016C  EB 00					jmp salir
 
 
 
 						;***********S A L I D A***************
- 0000015C					salir:
- 0000015C  E8 00000000 E			call crlf
- 00000161  87 05 00000000 R			xchg eax , cuotaBase
+ 0000016E					salir:
+ 0000016E  E8 00000000 E			call crlf
+ 00000173  87 05 00000000 R			xchg eax , cuotaBase
 						println "El valor de costo Base es: "
  000000F3		     1	.data
  000000F3 45 6C 20 76 61     1		??0009 db "El valor de costo Base es: " , 0
@@ -295,14 +298,14 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 21:30:10
 	   74 6F 20 42 61
 	   73 65 20 65 73
 	   3A 20 00
- 00000167		     1		.code
- 00000167  52		     1			push edx 
- 00000168  BA 000000F3 R     1			mov edx , offset ??0009
- 0000016D  E8 00000000 E     1			call writestring
- 00000172  5A		     1			pop edx
- 00000173  E8 00000000 E			call writedec
- 00000178  87 05 00000008 R			xchg eax , cuotaEdad
- 0000017E  E8 00000000 E			call crlf
+ 00000179		     1		.code
+ 00000179  52		     1			push edx 
+ 0000017A  BA 000000F3 R     1			mov edx , offset ??0009
+ 0000017F  E8 00000000 E     1			call writestring
+ 00000184  5A		     1			pop edx
+ 00000185  E8 00000000 E			call writedec
+ 0000018A  87 05 00000008 R			xchg eax , cuotaEdad
+ 00000190  E8 00000000 E			call crlf
 						println "La valor de la cuota Edad es: "
  0000010F		     1	.data
  0000010F 4C 61 20 76 61     1		??000A db "La valor de la cuota Edad es: " , 0
@@ -312,28 +315,28 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 21:30:10
 	   20 45 64 61 64
 	   20 65 73 3A 20
 	   00
- 00000183		     1		.code
- 00000183  52		     1			push edx 
- 00000184  BA 0000010F R     1			mov edx , offset ??000A
- 00000189  E8 00000000 E     1			call writestring
- 0000018E  5A		     1			pop edx
- 0000018F  E8 00000000 E			call writedec
- 00000194  87 05 0000000C R			xchg eax , cuotaAlcohol
- 0000019A  E8 00000000 E			call crlf
+ 00000195		     1		.code
+ 00000195  52		     1			push edx 
+ 00000196  BA 0000010F R     1			mov edx , offset ??000A
+ 0000019B  E8 00000000 E     1			call writestring
+ 000001A0  5A		     1			pop edx
+ 000001A1  E8 00000000 E			call writedec
+ 000001A6  87 05 0000000C R			xchg eax , cuotaAlcohol
+ 000001AC  E8 00000000 E			call crlf
 						println "VALOR DE ALCOHOL: "
  0000012E		     1	.data
  0000012E 56 41 4C 4F 52     1		??000B db "VALOR DE ALCOHOL: " , 0
 	   20 44 45 20 41
 	   4C 43 4F 48 4F
 	   4C 3A 20 00
- 0000019F		     1		.code
- 0000019F  52		     1			push edx 
- 000001A0  BA 0000012E R     1			mov edx , offset ??000B
- 000001A5  E8 00000000 E     1			call writestring
- 000001AA  5A		     1			pop edx
- 000001AB  E8 00000000 E			call writedec
- 000001B0  87 05 00000010 R			xchg eax , cuotaLentes
- 000001B6  E8 00000000 E			call crlf
+ 000001B1		     1		.code
+ 000001B1  52		     1			push edx 
+ 000001B2  BA 0000012E R     1			mov edx , offset ??000B
+ 000001B7  E8 00000000 E     1			call writestring
+ 000001BC  5A		     1			pop edx
+ 000001BD  E8 00000000 E			call writedec
+ 000001C2  87 05 00000010 R			xchg eax , cuotaLentes
+ 000001C8  E8 00000000 E			call crlf
 						println "VALOR AL USAR LENTES:"
  00000141		     1	.data
  00000141 56 41 4C 4F 52     1		??000C db "VALOR AL USAR LENTES:" , 0
@@ -341,14 +344,14 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 21:30:10
 	   53 41 52 20 4C
 	   45 4E 54 45 53
 	   3A 00
- 000001BB		     1		.code
- 000001BB  52		     1			push edx 
- 000001BC  BA 00000141 R     1			mov edx , offset ??000C
- 000001C1  E8 00000000 E     1			call writestring
- 000001C6  5A		     1			pop edx
- 000001C7  E8 00000000 E			call writedec
- 000001CC  87 05 00000014 R			xchg eax , cuotaEnfermedad
- 000001D2  E8 00000000 E			call crlf
+ 000001CD		     1		.code
+ 000001CD  52		     1			push edx 
+ 000001CE  BA 00000141 R     1			mov edx , offset ??000C
+ 000001D3  E8 00000000 E     1			call writestring
+ 000001D8  5A		     1			pop edx
+ 000001D9  E8 00000000 E			call writedec
+ 000001DE  87 05 00000014 R			xchg eax , cuotaEnfermedad
+ 000001E4  E8 00000000 E			call crlf
 						println "VALOR AL TENER ENFERMEDAD:"
  00000157		     1	.data
  00000157 56 41 4C 4F 52     1		??000D db "VALOR AL TENER ENFERMEDAD:" , 0
@@ -357,17 +360,17 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 21:30:10
 	   45 4E 46 45 52
 	   4D 45 44 41 44
 	   3A 00
- 000001D7		     1		.code
- 000001D7  52		     1			push edx 
- 000001D8  BA 00000157 R     1			mov edx , offset ??000D
- 000001DD  E8 00000000 E     1			call writestring
- 000001E2  5A		     1			pop edx
- 000001E3  E8 00000000 E			call writedec
+ 000001E9		     1		.code
+ 000001E9  52		     1			push edx 
+ 000001EA  BA 00000157 R     1			mov edx , offset ??000D
+ 000001EF  E8 00000000 E     1			call writestring
+ 000001F4  5A		     1			pop edx
+ 000001F5  E8 00000000 E			call writedec
 						;xchg eax , acumulador
- 000001E8  E8 00000000 E			call crlf
+ 000001FA  E8 00000000 E			call crlf
 						;add eax , ebx
 						;mov eax , ebx
- 000001ED  A1 00000018 R			mov eax , acumulador
+ 000001FF  A1 00000018 R			mov eax , acumulador
 						println "VALOR DEL ACUMULADOR:"
  00000172		     1	.data
  00000172 56 41 4C 4F 52     1		??000E db "VALOR DEL ACUMULADOR:" , 0
@@ -375,21 +378,21 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 21:30:10
 	   41 43 55 4D 55
 	   4C 41 44 4F 52
 	   3A 00
- 000001F2		     1		.code
- 000001F2  52		     1			push edx 
- 000001F3  BA 00000172 R     1			mov edx , offset ??000E
- 000001F8  E8 00000000 E     1			call writestring
- 000001FD  5A		     1			pop edx
- 000001FE  E8 00000000 E			call writedec
+ 00000204		     1		.code
+ 00000204  52		     1			push edx 
+ 00000205  BA 00000172 R     1			mov edx , offset ??000E
+ 0000020A  E8 00000000 E     1			call writestring
+ 0000020F  5A		     1			pop edx
+ 00000210  E8 00000000 E			call writedec
 
 					
 						exit
 
- 0000020A				mainej7 ENDP
+ 0000021C				mainej7 ENDP
 					
 					END mainej7
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 21:30:10
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 21:40:39
 NombreProgram						     Symbols 2 - 1
 
 
@@ -491,7 +494,7 @@ Segments and Groups:
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
 _DATA  . . . . . . . . . . . . .	32 Bit	 00000188 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000020A Para	  Public  'CODE'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000021C Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -598,17 +601,17 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-mainej7  . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000020A Public STDCALL
+mainej7  . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000021C Public STDCALL
   MasDe40  . . . . . . . . . . .	L Near	 00000039 _TEXT	
   etqPoliza  . . . . . . . . . .	L Near	 0000005D _TEXT	
   tipoA  . . . . . . . . . . . .	L Near	 0000007E _TEXT	
   etqAlcohol . . . . . . . . . .	L Near	 00000096 _TEXT	
   tiposI . . . . . . . . . . . .	L Near	 000000BC _TEXT	
   etqLentes  . . . . . . . . . .	L Near	 000000E0 _TEXT	
-  tipolenSi  . . . . . . . . . .	L Near	 00000106 _TEXT	
-  etqEnfermedad  . . . . . . . .	L Near	 0000011E _TEXT	
-  tipoenferSi  . . . . . . . . .	L Near	 00000144 _TEXT	
-  salir  . . . . . . . . . . . .	L Near	 0000015C _TEXT	
+  tipolenSi  . . . . . . . . . .	L Near	 0000010C _TEXT	
+  etqEnfermedad  . . . . . . . .	L Near	 00000130 _TEXT	
+  tipoenferSi  . . . . . . . . .	L Near	 00000156 _TEXT	
+  salir  . . . . . . . . . . . .	L Near	 0000016E _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
