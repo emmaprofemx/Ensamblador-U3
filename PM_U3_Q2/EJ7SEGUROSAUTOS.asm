@@ -18,6 +18,7 @@ INCLUDE macros.inc
 ;CONSTANTES
 cuotaBase dword 0d
 edad dword 0d
+cuotaEdad dword 0d
 
 .code
 	mainej7 PROC
@@ -27,30 +28,49 @@ edad dword 0d
 		println "Ingresa la edad del conductor: "
 		call readint 
 		xchg edad , eax
-		println "Ingresa el tipo de Poliza (A o B): "
-		call crlf	
+
+		cmp edad , 40
+		jg Masde40
+
+		;*SI LA EDAD ES MENOR QUE 40
+		mov cuotaEdad, 10
+		jmp etqPoliza 
+
+		MasDe40:
+			mov cuotaEdad , 40
+			jmp etqPoliza
+
+		call crlf
+		
+		etqPoliza:
+		;***********EVALUANDO TIPO DE POLIZA***************
+
+		println "Ingresa el tipo de Poliza (A o B): "	
 		call readchar
 		cmp al , 'A'
 		je tipoA
-		cmp al , 'B'
-		je tipoB
+		
+		;Si llegamos aqui , significa que cobertura no es igual a A
+		mov cuotaBase , 950
+		jmp salir
 
 		tipoA:
 			println "ERES TIPO A"
+			mov cuotaBase , 1200
 			jmp salir
 
-        tipoB:
-		println "ERES TIPO B"
-		jmp salir
-		;--------presione una tecla para continuar----------
-	  mov eax, 10
-	  push eax
-	  mov eax , 500 ; milisegundos
-	  call delay ; DELAY SIEMPRE DEPENDE DE EAX (siempre se maneja en mls)
-	  pop eax 
-	  ;call writeDec
-	  ;-----------------------------------------------------
+
 		salir:
+		call crlf
+		xchg eax , cuotaBase
+		println "El valor de costo Base es: "
+		call writedec
+		call crlf
+		xchg eax , cuotaEdad
+		println "La valor de la cuota Edad es: "
+		call writedec
+
+	
 		exit
 
 	mainej7 ENDP
