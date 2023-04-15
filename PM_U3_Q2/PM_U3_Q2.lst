@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:33:02
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:47:13
 NombreProgram						     Page 1 - 1
 
 
@@ -59,16 +59,17 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:33:02
  0000000C 0000000A		cuotaAlcohol dword 10d ; Para cambiarlo mas adelante 
  00000010 00000000		cuotaLentes dword 0d
  00000014 00000000		cuotaEnfermedad dword 0d
-
+ 00000018 00000000		acumulador dword 0d
  00000000			.code
  00000000				mainej7 PROC
 					
 						;Lógica del Programa	 
 
 						;***********EVALUANDO EDAD DEL CONDUCTOR***************
+
 						println "Ingresa la edad del conductor: "
- 00000018		     1	.data
- 00000018 49 6E 67 72 65     1		??0000 db "Ingresa la edad del conductor: " , 0
+ 0000001C		     1	.data
+ 0000001C 49 6E 67 72 65     1		??0000 db "Ingresa la edad del conductor: " , 0
 	   73 61 20 6C 61
 	   20 65 64 61 64
 	   20 64 65 6C 20
@@ -77,33 +78,39 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:33:02
 	   20 00
  00000000		     1		.code
  00000000  52		     1			push edx 
- 00000001  BA 00000018 R     1			mov edx , offset ??0000
+ 00000001  BA 0000001C R     1			mov edx , offset ??0000
  00000006  E8 00000000 E     1			call writestring
  0000000B  5A		     1			pop edx
  0000000C  E8 00000000 E			call readint 
  00000011  87 05 00000004 R			xchg edad , eax
  00000017  83 3D 00000004 R			cmp edad , 40
 	   28
- 0000001E  7F 0C				jg Masde40
+ 0000001E  7F 1A				jg Masde40
 
 						;*SI LA EDAD ES MENOR QUE 40
  00000020  C7 05 00000008 R			mov cuotaEdad, 10
 	   0000000A
- 0000002A  EB 11				jmp etqPoliza 
+ 0000002A  87 05 00000008 R			xchg eax,cuotaEdad
+ 00000030  03 05 00000018 R			add eax , acumulador
+ 00000036  8B D8				mov ebx , eax ; RESPALDANDO EL RESULTADO DE eax(10) + acumulador(0) , y el resultado lo pasamos a ebx
+ 00000038  EB 1F				jmp etqPoliza 
 
- 0000002C					MasDe40:
- 0000002C  C7 05 00000008 R				mov cuotaEdad , 30
+ 0000003A					MasDe40:
+ 0000003A  C7 05 00000008 R				mov cuotaEdad , 30
 	   0000001E
- 00000036  EB 05					jmp etqPoliza
+ 00000044  87 05 00000008 R				xchg eax,cuotaEdad
+ 0000004A  03 05 00000018 R				add eax , acumulador
+ 00000050  8B D8					mov ebx , eax ; RESPALDANDO EL RESULTADO DE eax(30) + acumulador(0) , y el resultado lo pasamos a ebx
+ 00000052  EB 05					jmp etqPoliza
 
- 00000038  E8 00000000 E			call crlf
+ 00000054  E8 00000000 E			call crlf
 						
 						;***********EVALUANDO TIPO DE POLIZA***************
 
- 0000003D					etqPoliza:
+ 00000059					etqPoliza:
 						println "Ingresa el tipo de Poliza (A o B): "	
- 00000038		     1	.data
- 00000038 49 6E 67 72 65     1		??0001 db "Ingresa el tipo de Poliza (A o B): " , 0
+ 0000003C		     1	.data
+ 0000003C 49 6E 67 72 65     1		??0001 db "Ingresa el tipo de Poliza (A o B): " , 0
 	   73 61 20 65 6C
 	   20 74 69 70 6F
 	   20 64 65 20 50
@@ -111,250 +118,266 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:33:02
 	   20 28 41 20 6F
 	   20 42 29 3A 20
 	   00
- 0000003D		     1		.code
- 0000003D  52		     1			push edx 
- 0000003E  BA 00000038 R     1			mov edx , offset ??0001
- 00000043  E8 00000000 E     1			call writestring
- 00000048  5A		     1			pop edx
- 00000049  E8 00000000 E			call readchar
- 0000004E  3C 41				cmp al , 'A'
- 00000050  74 0C				je tipoA
+ 00000059		     1		.code
+ 00000059  52		     1			push edx 
+ 0000005A  BA 0000003C R     1			mov edx , offset ??0001
+ 0000005F  E8 00000000 E     1			call writestring
+ 00000064  5A		     1			pop edx
+ 00000065  E8 00000000 E			call readchar
+ 0000006A  3C 41				cmp al , 'A'
+ 0000006C  74 0C				je tipoA
 						
 						;Si llegamos aqui , significa que cobertura no es igual a A
- 00000052  C7 05 00000000 R			mov cuotaBase , 950
+ 0000006E  C7 05 00000000 R			mov cuotaBase , 950
 	   000003B6
- 0000005C  EB 18				jmp etqAlcohol 
+ 00000078  EB 18				jmp etqAlcohol 
 
- 0000005E					tipoA:
+ 0000007A					tipoA:
 							println "ERES TIPO A"
- 0000005C		     1	.data
- 0000005C 45 52 45 53 20     1		??0002 db "ERES TIPO A" , 0
+ 00000060		     1	.data
+ 00000060 45 52 45 53 20     1		??0002 db "ERES TIPO A" , 0
 	   54 49 50 4F 20
 	   41 00
- 0000005E		     1		.code
- 0000005E  52		     1			push edx 
- 0000005F  BA 0000005C R     1			mov edx , offset ??0002
- 00000064  E8 00000000 E     1			call writestring
- 00000069  5A		     1			pop edx
- 0000006A  C7 05 00000000 R				mov cuotaBase , 1200
+ 0000007A		     1		.code
+ 0000007A  52		     1			push edx 
+ 0000007B  BA 00000060 R     1			mov edx , offset ??0002
+ 00000080  E8 00000000 E     1			call writestring
+ 00000085  5A		     1			pop edx
+ 00000086  C7 05 00000000 R				mov cuotaBase , 1200
 	   000004B0
- 00000074  EB 00					jmp etqAlcohol
+ 00000090  EB 00					jmp etqAlcohol
 						
 						;***********EVALUANDO HABITO DE BEBER ALCOHOL***************
 
- 00000076					etqAlcohol:
- 00000076  E8 00000000 E			call crlf
+ 00000092					etqAlcohol:
+ 00000092  E8 00000000 E			call crlf
 						println "Habito por beber alcohol?(S o N)"
- 00000068		     1	.data
- 00000068 48 61 62 69 74     1		??0003 db "Habito por beber alcohol?(S o N)" , 0
+ 0000006C		     1	.data
+ 0000006C 48 61 62 69 74     1		??0003 db "Habito por beber alcohol?(S o N)" , 0
 	   6F 20 70 6F 72
 	   20 62 65 62 65
 	   72 20 61 6C 63
 	   6F 68 6F 6C 3F
 	   28 53 20 6F 20
 	   4E 29 00
- 0000007B		     1		.code
- 0000007B  52		     1			push edx 
- 0000007C  BA 00000068 R     1			mov edx , offset ??0003
- 00000081  E8 00000000 E     1			call writestring
- 00000086  5A		     1			pop edx
- 00000087  E8 00000000 E			call readchar
- 0000008C  3C 53				cmp al , 'S'
- 0000008E  74 0C				je tiposI
+ 00000097		     1		.code
+ 00000097  52		     1			push edx 
+ 00000098  BA 0000006C R     1			mov edx , offset ??0003
+ 0000009D  E8 00000000 E     1			call writestring
+ 000000A2  5A		     1			pop edx
+ 000000A3  E8 00000000 E			call readchar
+ 000000A8  3C 53				cmp al , 'S'
+ 000000AA  74 0C				je tiposI
 						
 						;Si llegamos aqui , significa que cobertura no es igual a S
- 00000090  C7 05 0000000C R			mov cuotaAlcohol , 0
+ 000000AC  C7 05 0000000C R			mov cuotaAlcohol , 0
 	   00000000
- 0000009A  EB 18				jmp etqLentes 
+ 000000B6  EB 18				jmp etqLentes 
 
- 0000009C					tiposI:
+ 000000B8					tiposI:
 							println "SI INGIERE ALCOHOL"
- 00000089		     1	.data
- 00000089 53 49 20 49 4E     1		??0004 db "SI INGIERE ALCOHOL" , 0
+ 0000008D		     1	.data
+ 0000008D 53 49 20 49 4E     1		??0004 db "SI INGIERE ALCOHOL" , 0
 	   47 49 45 52 45
 	   20 41 4C 43 4F
 	   48 4F 4C 00
- 0000009C		     1		.code
- 0000009C  52		     1			push edx 
- 0000009D  BA 00000089 R     1			mov edx , offset ??0004
- 000000A2  E8 00000000 E     1			call writestring
- 000000A7  5A		     1			pop edx
- 000000A8  C7 05 0000000C R				mov cuotaAlcohol , 20
+ 000000B8		     1		.code
+ 000000B8  52		     1			push edx 
+ 000000B9  BA 0000008D R     1			mov edx , offset ??0004
+ 000000BE  E8 00000000 E     1			call writestring
+ 000000C3  5A		     1			pop edx
+ 000000C4  C7 05 0000000C R				mov cuotaAlcohol , 20
 	   00000014
- 000000B2  EB 00					jmp etqLentes
+ 000000CE  EB 00					jmp etqLentes
 
 						;***********EVALUANDO SI USA LENTES***************
 
- 000000B4					etqLentes:
- 000000B4  E8 00000000 E			call crlf
+ 000000D0					etqLentes:
+ 000000D0  E8 00000000 E			call crlf
 						println "Usas lentes?(S o N)"
- 0000009C		     1	.data
- 0000009C 55 73 61 73 20     1		??0005 db "Usas lentes?(S o N)" , 0
+ 000000A0		     1	.data
+ 000000A0 55 73 61 73 20     1		??0005 db "Usas lentes?(S o N)" , 0
 	   6C 65 6E 74 65
 	   73 3F 28 53 20
 	   6F 20 4E 29 00
- 000000B9		     1		.code
- 000000B9  52		     1			push edx 
- 000000BA  BA 0000009C R     1			mov edx , offset ??0005
- 000000BF  E8 00000000 E     1			call writestring
- 000000C4  5A		     1			pop edx
- 000000C5  E8 00000000 E			call readchar
- 000000CA  3C 53				cmp al , 'S'
- 000000CC  74 0C				je tipolenSi
+ 000000D5		     1		.code
+ 000000D5  52		     1			push edx 
+ 000000D6  BA 000000A0 R     1			mov edx , offset ??0005
+ 000000DB  E8 00000000 E     1			call writestring
+ 000000E0  5A		     1			pop edx
+ 000000E1  E8 00000000 E			call readchar
+ 000000E6  3C 53				cmp al , 'S'
+ 000000E8  74 0C				je tipolenSi
 
 						;Si llegamos aqui , significa que cobertura no es igual a S
- 000000CE  C7 05 00000010 R			mov cuotaLentes , 0
+ 000000EA  C7 05 00000010 R			mov cuotaLentes , 0
 	   00000000
- 000000D8  EB 18				jmp etqEnfermedad 
+ 000000F4  EB 18				jmp etqEnfermedad 
 
- 000000DA					tipolenSi:
+ 000000F6					tipolenSi:
 							println "SI USA LENTES"
- 000000B0		     1	.data
- 000000B0 53 49 20 55 53     1		??0006 db "SI USA LENTES" , 0
+ 000000B4		     1	.data
+ 000000B4 53 49 20 55 53     1		??0006 db "SI USA LENTES" , 0
 	   41 20 4C 45 4E
 	   54 45 53 00
- 000000DA		     1		.code
- 000000DA  52		     1			push edx 
- 000000DB  BA 000000B0 R     1			mov edx , offset ??0006
- 000000E0  E8 00000000 E     1			call writestring
- 000000E5  5A		     1			pop edx
- 000000E6  C7 05 00000010 R				mov cuotaLentes , 10
+ 000000F6		     1		.code
+ 000000F6  52		     1			push edx 
+ 000000F7  BA 000000B4 R     1			mov edx , offset ??0006
+ 000000FC  E8 00000000 E     1			call writestring
+ 00000101  5A		     1			pop edx
+ 00000102  C7 05 00000010 R				mov cuotaLentes , 10
 	   0000000A
- 000000F0  EB 00					jmp etqEnfermedad
+ 0000010C  EB 00					jmp etqEnfermedad
 							
 						;***********EVALUANDO SI PADECE UNA ENFERMEDAD***************
- 000000F2					etqEnfermedad:
+ 0000010E					etqEnfermedad:
 
- 000000F2  E8 00000000 E			call crlf
+ 0000010E  E8 00000000 E			call crlf
 						println "Padeces una enfermedad?(S o N)"
- 000000BE		     1	.data
- 000000BE 50 61 64 65 63     1		??0007 db "Padeces una enfermedad?(S o N)" , 0
+ 000000C2		     1	.data
+ 000000C2 50 61 64 65 63     1		??0007 db "Padeces una enfermedad?(S o N)" , 0
 	   65 73 20 75 6E
 	   61 20 65 6E 66
 	   65 72 6D 65 64
 	   61 64 3F 28 53
 	   20 6F 20 4E 29
 	   00
- 000000F7		     1		.code
- 000000F7  52		     1			push edx 
- 000000F8  BA 000000BE R     1			mov edx , offset ??0007
- 000000FD  E8 00000000 E     1			call writestring
- 00000102  5A		     1			pop edx
- 00000103  E8 00000000 E			call readchar
- 00000108  3C 53				cmp al , 'S'
- 0000010A  74 0C				je tipoenferSi
+ 00000113		     1		.code
+ 00000113  52		     1			push edx 
+ 00000114  BA 000000C2 R     1			mov edx , offset ??0007
+ 00000119  E8 00000000 E     1			call writestring
+ 0000011E  5A		     1			pop edx
+ 0000011F  E8 00000000 E			call readchar
+ 00000124  3C 53				cmp al , 'S'
+ 00000126  74 0C				je tipoenferSi
 
 						;Si llegamos aqui , significa que cobertura no es igual a S
- 0000010C  C7 05 00000014 R			mov cuotaEnfermedad , 0
+ 00000128  C7 05 00000014 R			mov cuotaEnfermedad , 0
 	   00000000
- 00000116  EB 18				jmp salir 
+ 00000132  EB 18				jmp salir 
 
- 00000118					tipoenferSi:
+ 00000134					tipoenferSi:
 							println "SI USA LENTES"
- 000000DD		     1	.data
- 000000DD 53 49 20 55 53     1		??0008 db "SI USA LENTES" , 0
+ 000000E1		     1	.data
+ 000000E1 53 49 20 55 53     1		??0008 db "SI USA LENTES" , 0
 	   41 20 4C 45 4E
 	   54 45 53 00
- 00000118		     1		.code
- 00000118  52		     1			push edx 
- 00000119  BA 000000DD R     1			mov edx , offset ??0008
- 0000011E  E8 00000000 E     1			call writestring
- 00000123  5A		     1			pop edx
- 00000124  C7 05 00000014 R				mov cuotaEnfermedad , 10
+ 00000134		     1		.code
+ 00000134  52		     1			push edx 
+ 00000135  BA 000000E1 R     1			mov edx , offset ??0008
+ 0000013A  E8 00000000 E     1			call writestring
+ 0000013F  5A		     1			pop edx
+ 00000140  C7 05 00000014 R				mov cuotaEnfermedad , 10
 	   0000000A
- 0000012E  EB 00					jmp salir
+ 0000014A  EB 00					jmp salir
 
 
 
 						;***********S A L I D A***************
- 00000130					salir:
- 00000130  E8 00000000 E			call crlf
- 00000135  87 05 00000000 R			xchg eax , cuotaBase
+ 0000014C					salir:
+ 0000014C  E8 00000000 E			call crlf
+ 00000151  87 05 00000000 R			xchg eax , cuotaBase
 						println "El valor de costo Base es: "
- 000000EB		     1	.data
- 000000EB 45 6C 20 76 61     1		??0009 db "El valor de costo Base es: " , 0
+ 000000EF		     1	.data
+ 000000EF 45 6C 20 76 61     1		??0009 db "El valor de costo Base es: " , 0
 	   6C 6F 72 20 64
 	   65 20 63 6F 73
 	   74 6F 20 42 61
 	   73 65 20 65 73
 	   3A 20 00
- 0000013B		     1		.code
- 0000013B  52		     1			push edx 
- 0000013C  BA 000000EB R     1			mov edx , offset ??0009
- 00000141  E8 00000000 E     1			call writestring
- 00000146  5A		     1			pop edx
- 00000147  E8 00000000 E			call writedec
- 0000014C  87 05 00000008 R			xchg eax , cuotaEdad
- 00000152  E8 00000000 E			call crlf
+ 00000157		     1		.code
+ 00000157  52		     1			push edx 
+ 00000158  BA 000000EF R     1			mov edx , offset ??0009
+ 0000015D  E8 00000000 E     1			call writestring
+ 00000162  5A		     1			pop edx
+ 00000163  E8 00000000 E			call writedec
+ 00000168  87 05 00000008 R			xchg eax , cuotaEdad
+ 0000016E  E8 00000000 E			call crlf
 						println "La valor de la cuota Edad es: "
- 00000107		     1	.data
- 00000107 4C 61 20 76 61     1		??000A db "La valor de la cuota Edad es: " , 0
+ 0000010B		     1	.data
+ 0000010B 4C 61 20 76 61     1		??000A db "La valor de la cuota Edad es: " , 0
 	   6C 6F 72 20 64
 	   65 20 6C 61 20
 	   63 75 6F 74 61
 	   20 45 64 61 64
 	   20 65 73 3A 20
 	   00
- 00000157		     1		.code
- 00000157  52		     1			push edx 
- 00000158  BA 00000107 R     1			mov edx , offset ??000A
- 0000015D  E8 00000000 E     1			call writestring
- 00000162  5A		     1			pop edx
- 00000163  E8 00000000 E			call writedec
- 00000168  87 05 0000000C R			xchg eax , cuotaAlcohol
- 0000016E  E8 00000000 E			call crlf
-						println "VALOR DE ALCOHOL: "
- 00000126		     1	.data
- 00000126 56 41 4C 4F 52     1		??000B db "VALOR DE ALCOHOL: " , 0
-	   20 44 45 20 41
-	   4C 43 4F 48 4F
-	   4C 3A 20 00
  00000173		     1		.code
  00000173  52		     1			push edx 
- 00000174  BA 00000126 R     1			mov edx , offset ??000B
+ 00000174  BA 0000010B R     1			mov edx , offset ??000A
  00000179  E8 00000000 E     1			call writestring
  0000017E  5A		     1			pop edx
  0000017F  E8 00000000 E			call writedec
- 00000184  87 05 00000010 R			xchg eax , cuotaLentes
+ 00000184  87 05 0000000C R			xchg eax , cuotaAlcohol
  0000018A  E8 00000000 E			call crlf
+						println "VALOR DE ALCOHOL: "
+ 0000012A		     1	.data
+ 0000012A 56 41 4C 4F 52     1		??000B db "VALOR DE ALCOHOL: " , 0
+	   20 44 45 20 41
+	   4C 43 4F 48 4F
+	   4C 3A 20 00
+ 0000018F		     1		.code
+ 0000018F  52		     1			push edx 
+ 00000190  BA 0000012A R     1			mov edx , offset ??000B
+ 00000195  E8 00000000 E     1			call writestring
+ 0000019A  5A		     1			pop edx
+ 0000019B  E8 00000000 E			call writedec
+ 000001A0  87 05 00000010 R			xchg eax , cuotaLentes
+ 000001A6  E8 00000000 E			call crlf
 						println "VALOR AL USAR LENTES:"
- 00000139		     1	.data
- 00000139 56 41 4C 4F 52     1		??000C db "VALOR AL USAR LENTES:" , 0
+ 0000013D		     1	.data
+ 0000013D 56 41 4C 4F 52     1		??000C db "VALOR AL USAR LENTES:" , 0
 	   20 41 4C 20 55
 	   53 41 52 20 4C
 	   45 4E 54 45 53
 	   3A 00
- 0000018F		     1		.code
- 0000018F  52		     1			push edx 
- 00000190  BA 00000139 R     1			mov edx , offset ??000C
- 00000195  E8 00000000 E     1			call writestring
- 0000019A  5A		     1			pop edx
- 0000019B  E8 00000000 E			call writedec
- 000001A0  87 05 00000014 R			xchg eax , cuotaEnfermedad
- 000001A6  E8 00000000 E			call crlf
+ 000001AB		     1		.code
+ 000001AB  52		     1			push edx 
+ 000001AC  BA 0000013D R     1			mov edx , offset ??000C
+ 000001B1  E8 00000000 E     1			call writestring
+ 000001B6  5A		     1			pop edx
+ 000001B7  E8 00000000 E			call writedec
+ 000001BC  87 05 00000014 R			xchg eax , cuotaEnfermedad
+ 000001C2  E8 00000000 E			call crlf
 						println "VALOR AL TENER ENFERMEDAD:"
- 0000014F		     1	.data
- 0000014F 56 41 4C 4F 52     1		??000D db "VALOR AL TENER ENFERMEDAD:" , 0
+ 00000153		     1	.data
+ 00000153 56 41 4C 4F 52     1		??000D db "VALOR AL TENER ENFERMEDAD:" , 0
 	   20 41 4C 20 54
 	   45 4E 45 52 20
 	   45 4E 46 45 52
 	   4D 45 44 41 44
 	   3A 00
- 000001AB		     1		.code
- 000001AB  52		     1			push edx 
- 000001AC  BA 0000014F R     1			mov edx , offset ??000D
- 000001B1  E8 00000000 E     1			call writestring
- 000001B6  5A		     1			pop edx
- 000001B7  E8 00000000 E			call writedec
+ 000001C7		     1		.code
+ 000001C7  52		     1			push edx 
+ 000001C8  BA 00000153 R     1			mov edx , offset ??000D
+ 000001CD  E8 00000000 E     1			call writestring
+ 000001D2  5A		     1			pop edx
+ 000001D3  E8 00000000 E			call writedec
+						;xchg eax , acumulador
+ 000001D8  E8 00000000 E			call crlf
+ 000001DD  8B C3				mov eax , ebx
+						println "VALOR DEL ACUMULADOR:"
+ 0000016E		     1	.data
+ 0000016E 56 41 4C 4F 52     1		??000E db "VALOR DEL ACUMULADOR:" , 0
+	   20 44 45 4C 20
+	   41 43 55 4D 55
+	   4C 41 44 4F 52
+	   3A 00
+ 000001DF		     1		.code
+ 000001DF  52		     1			push edx 
+ 000001E0  BA 0000016E R     1			mov edx , offset ??000E
+ 000001E5  E8 00000000 E     1			call writestring
+ 000001EA  5A		     1			pop edx
+ 000001EB  E8 00000000 E			call writedec
 
 					
 						exit
 
- 000001C3				mainej7 ENDP
+ 000001F7				mainej7 ENDP
 					
 					END mainej7
 
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:33:02
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    04/14/23 20:47:13
 NombreProgram						     Symbols 2 - 1
 
 
@@ -455,8 +478,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 0000016A Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 000001C3 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000184 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 000001F7 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -563,17 +586,17 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-mainej7  . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 000001C3 Public STDCALL
-  MasDe40  . . . . . . . . . . .	L Near	 0000002C _TEXT	
-  etqPoliza  . . . . . . . . . .	L Near	 0000003D _TEXT	
-  tipoA  . . . . . . . . . . . .	L Near	 0000005E _TEXT	
-  etqAlcohol . . . . . . . . . .	L Near	 00000076 _TEXT	
-  tiposI . . . . . . . . . . . .	L Near	 0000009C _TEXT	
-  etqLentes  . . . . . . . . . .	L Near	 000000B4 _TEXT	
-  tipolenSi  . . . . . . . . . .	L Near	 000000DA _TEXT	
-  etqEnfermedad  . . . . . . . .	L Near	 000000F2 _TEXT	
-  tipoenferSi  . . . . . . . . .	L Near	 00000118 _TEXT	
-  salir  . . . . . . . . . . . .	L Near	 00000130 _TEXT	
+mainej7  . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 000001F7 Public STDCALL
+  MasDe40  . . . . . . . . . . .	L Near	 0000003A _TEXT	
+  etqPoliza  . . . . . . . . . .	L Near	 00000059 _TEXT	
+  tipoA  . . . . . . . . . . . .	L Near	 0000007A _TEXT	
+  etqAlcohol . . . . . . . . . .	L Near	 00000092 _TEXT	
+  tiposI . . . . . . . . . . . .	L Near	 000000B8 _TEXT	
+  etqLentes  . . . . . . . . . .	L Near	 000000D0 _TEXT	
+  tipolenSi  . . . . . . . . . .	L Near	 000000F6 _TEXT	
+  etqEnfermedad  . . . . . . . .	L Near	 0000010E _TEXT	
+  tipoenferSi  . . . . . . . . .	L Near	 00000134 _TEXT	
+  salir  . . . . . . . . . . . .	L Near	 0000014C _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -583,20 +606,21 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
-??0000 . . . . . . . . . . . . .	Byte	 00000018 _DATA	
-??0001 . . . . . . . . . . . . .	Byte	 00000038 _DATA	
-??0002 . . . . . . . . . . . . .	Byte	 0000005C _DATA	
-??0003 . . . . . . . . . . . . .	Byte	 00000068 _DATA	
-??0004 . . . . . . . . . . . . .	Byte	 00000089 _DATA	
-??0005 . . . . . . . . . . . . .	Byte	 0000009C _DATA	
-??0006 . . . . . . . . . . . . .	Byte	 000000B0 _DATA	
-??0007 . . . . . . . . . . . . .	Byte	 000000BE _DATA	
-??0008 . . . . . . . . . . . . .	Byte	 000000DD _DATA	
-??0009 . . . . . . . . . . . . .	Byte	 000000EB _DATA	
-??000A . . . . . . . . . . . . .	Byte	 00000107 _DATA	
-??000B . . . . . . . . . . . . .	Byte	 00000126 _DATA	
-??000C . . . . . . . . . . . . .	Byte	 00000139 _DATA	
-??000D . . . . . . . . . . . . .	Byte	 0000014F _DATA	
+??0000 . . . . . . . . . . . . .	Byte	 0000001C _DATA	
+??0001 . . . . . . . . . . . . .	Byte	 0000003C _DATA	
+??0002 . . . . . . . . . . . . .	Byte	 00000060 _DATA	
+??0003 . . . . . . . . . . . . .	Byte	 0000006C _DATA	
+??0004 . . . . . . . . . . . . .	Byte	 0000008D _DATA	
+??0005 . . . . . . . . . . . . .	Byte	 000000A0 _DATA	
+??0006 . . . . . . . . . . . . .	Byte	 000000B4 _DATA	
+??0007 . . . . . . . . . . . . .	Byte	 000000C2 _DATA	
+??0008 . . . . . . . . . . . . .	Byte	 000000E1 _DATA	
+??0009 . . . . . . . . . . . . .	Byte	 000000EF _DATA	
+??000A . . . . . . . . . . . . .	Byte	 0000010B _DATA	
+??000B . . . . . . . . . . . . .	Byte	 0000012A _DATA	
+??000C . . . . . . . . . . . . .	Byte	 0000013D _DATA	
+??000D . . . . . . . . . . . . .	Byte	 00000153 _DATA	
+??000E . . . . . . . . . . . . .	Byte	 0000016E _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -806,6 +830,7 @@ VK_UP  . . . . . . . . . . . . .	Number	 00000026h
 WINDOW_BUFFER_SIZE_EVENT . . . .	Number	 00000004h   
 WriteConsoleOutputCharacter  . .	Text   	 WriteConsoleOutputCharacterA
 WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
+acumulador . . . . . . . . . . .	DWord	 00000018 _DATA	
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   

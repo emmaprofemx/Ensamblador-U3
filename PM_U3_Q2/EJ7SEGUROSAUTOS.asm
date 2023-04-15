@@ -22,13 +22,14 @@ cuotaEdad dword 0d
 cuotaAlcohol dword 10d ; Para cambiarlo mas adelante 
 cuotaLentes dword 0d
 cuotaEnfermedad dword 0d
-
+acumulador dword 0d
 .code
 	mainej7 PROC
 	
 		;Lógica del Programa	 
 
 		;***********EVALUANDO EDAD DEL CONDUCTOR***************
+
 		println "Ingresa la edad del conductor: "
 		call readint 
 		xchg edad , eax
@@ -37,10 +38,16 @@ cuotaEnfermedad dword 0d
 
 		;*SI LA EDAD ES MENOR QUE 40
 		mov cuotaEdad, 10
+		xchg eax,cuotaEdad
+		add eax , acumulador
+		mov ebx , eax ; RESPALDANDO EL RESULTADO DE eax(10) + acumulador(0) , y el resultado lo pasamos a ebx
 		jmp etqPoliza 
 
 		MasDe40:
 			mov cuotaEdad , 30
+			xchg eax,cuotaEdad
+			add eax , acumulador
+			mov ebx , eax ; RESPALDANDO EL RESULTADO DE eax(30) + acumulador(0) , y el resultado lo pasamos a ebx
 			jmp etqPoliza
 
 		call crlf
@@ -139,6 +146,11 @@ cuotaEnfermedad dword 0d
 		xchg eax , cuotaEnfermedad
 		call crlf
 		println "VALOR AL TENER ENFERMEDAD:"
+		call writedec
+		;xchg eax , acumulador
+		call crlf
+		mov eax , ebx
+		println "VALOR DEL ACUMULADOR:"
 		call writedec
 
 	
