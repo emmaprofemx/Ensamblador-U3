@@ -16,7 +16,7 @@ INCLUDE macros.inc
 ; Área de Declaración de Variables
  mensajeEdad BYTE "Ingrese su edad: ",0
     mensajePromedio BYTE "Ingrese su promedio: ",0
-    mensajeBeca BYTE "Usted recibirá una beca de $",0
+    mensajeBeca BYTE "Usted recibira una beca de $",0
     mensajeInvitacion BYTE "Lo invitamos a estudiar más en el próximo ciclo escolar",0
     beca dword 0d
     edad dword 0d
