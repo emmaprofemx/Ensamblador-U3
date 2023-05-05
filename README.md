@@ -8,7 +8,7 @@
 * [P3 - Generando un numero aleatorio v1(sin cambiar)](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P3.asm)
 * [P4 - Muestra un numero aleatrorio n veces usando ciclo)](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P4.asm)
 * [P5 - Generando un numero aleatorio v2(muestra numeros aleatorios)](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P5.asm)
-* [P6 - Generador de numeros aleatorios - randomize](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P6.asm)
+* [P6 - Waitmsg](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P6.asm)
 * [P7 - Presiona una tecla para continuar](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P7.asm)
 * [P8 - Muestra un numero tantan veces](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P8.asm)
 
@@ -42,8 +42,8 @@ Ejercicios de Tarea del documento proporcionado por el Dr Alejandro.
 * [T14 - HORAS TRABAJADAS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ14HORASTRABAJADAS.asm)
 * [T15 - TIKITAKA](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ15TikiTaka.asm)
 * [T16 - SALARIOS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ16Salario.asm)
-* [T17 - NAUFRAGIO SATISFECHO](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ17NaufragioSatisfecho.asm)
+* [T17 - NAUFRAGO SATISFECHO](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ17NaufragioSatisfecho.asm)
 * [T18 - FOCOS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ18Focos_colores.asm)
 * [T19 - N ARTICULOS](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/EJ19Narticulos.asm)
-* [T20 - PROEMDIO SALON](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P17_PromedioM_Salones.asm)
+* [T20 - PROMEDIO SALON](https://github.com/emmaprofemx/Ensamblador-U3/blob/main/PM_U3_Q2/P17_PromedioM_Salones.asm)
 
