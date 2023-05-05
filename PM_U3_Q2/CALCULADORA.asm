@@ -19,7 +19,10 @@ opcion dword 0d
 resgeneral dword 0d ; RESULTADO GENERAL
 meses dword 12d
 acumulador dword 0d
-is dword 1d
+multiplicador dword 1d
+;-----INCREMENTADORES-------
+is dword 1d ; INCREMENTADOR SUMA
+im dword 1d ; INCREMENTADOR MULTIPLICACION
 .code
 
 	maincalcu01 PROC
@@ -27,10 +30,13 @@ is dword 1d
 		;Lógica del Programa
 
 		operacion:
+		;----LIMPIANDO REGISTROS-----
 		mov eax , 0;
 		mov ebx , 0;
 		mov ecx , 0;
 		mov edx , 0;
+
+		;----------------------------
 	;-----------MENU----------------	
 	println "PROYECTO CALCULADORA"
 	println "1.-Suma"
@@ -45,7 +51,7 @@ is dword 1d
 	mov opcion , eax
 	;-----------------------------------------
 	
-	;-----------OPCIONES----------------
+	;************OPCIONES*******************
 	cmp opcion , 1
 	je suma
 
@@ -57,9 +63,9 @@ is dword 1d
 
 	cmp opcion , 4
 	je division
-	;-----------------------------------
+	;***************************************
 
-	;-----------ETIQUETAS----------------
+	;****************E T I Q U E T A S******************
 	suma:
 	println "Estas en la parte de suma"
     mov is, 1 ; inicializamos el contador en 1
@@ -83,14 +89,29 @@ is dword 1d
 	jmp salir
 
 	multiplicacion:
-		println "Estas en la parte de multiplicacion"
-	jmp salir
+    println "Estas en la parte de multiplicacion"
+    mov acumulador, 1 ; inicializamos el acumulador en 1
+    ciclomulti:
+         println "Ingresa un numero: (ingresa 't' para terminar)"
+        call readchar ; leemos un caracter
+        cmp al, 't' ; comparamos si el caracter es 't'
+        je salir ; si es 't', saltamos a salir
+
+        call readint ; leemos el entero
+        imul eax, multiplicador ; multiplicamos el valor anterior con el valor actual
+        mov multiplicador, eax ; actualizamos el valor anterior con el resultado
+        mov eax, multiplicador ; guardamos el resultado en eax para imprimirlo
+        call writedec ; imprimimos el resultado
+        call crlf ; saltamos de línea
+        jmp ciclomulti ; volvemos a pedir otro número
+    jmp salir
 
 	division:
 		println "Estas en la parte de division"
 	jmp salir
-	;-----------------------------------
+	
 
+	;**************SALIDA******************
 	;-----------DESEA CONTINUAR?----------------
 	salir:
 	; Preguntar si el usuario desea continuar
