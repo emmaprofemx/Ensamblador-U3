@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    05/04/23 23:04:59
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    05/04/23 23:47:46
 NombreProgram						     Page 1 - 1
 
 
@@ -42,7 +42,7 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    05/04/23 23:04:59
 			      C 		push edx 
 			      C 		mov edx , offset cad
 			      C 		call writestring
-			      C 		;call crlf
+			      C 		call crlf
 			      C 		pop edx
 			      C 
 			      C 		ENDM
@@ -52,31 +52,204 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    05/04/23 23:04:59
  00000000			.data
 				; Área de Declaración de Variables
 
-
-				;CONSTANTES
-
+ 00000000 00000000		opcion dword 0d
  00000000			.code
 
  00000000				maincalcu01 PROC
 					
 						;Lógica del Programa
-						
+ 00000000					operacion:
+					;-----------MENU----------------	
 					println "PROYECTO CALCULADORA"
- 00000000		     1	.data
- 00000000 50 52 4F 59 45     1		??0000 db "PROYECTO CALCULADORA" , 0
+ 00000004		     1	.data
+ 00000004 50 52 4F 59 45     1		??0000 db "PROYECTO CALCULADORA" , 0
 	   43 54 4F 20 43
 	   41 4C 43 55 4C
 	   41 44 4F 52 41
 	   00
  00000000		     1		.code
  00000000  52		     1			push edx 
- 00000001  BA 00000000 R     1			mov edx , offset ??0000
+ 00000001  BA 00000004 R     1			mov edx , offset ??0000
  00000006  E8 00000000 E     1			call writestring
- 0000000B  5A		     1			pop edx
- 0000000C				maincalcu01 ENDP
+ 0000000B  E8 00000000 E     1			call crlf
+ 00000010  5A		     1			pop edx
+					println "1.-Suma"
+ 00000019		     1	.data
+ 00000019 31 2E 2D 53 75     1		??0001 db "1.-Suma" , 0
+	   6D 61 00
+ 00000011		     1		.code
+ 00000011  52		     1			push edx 
+ 00000012  BA 00000019 R     1			mov edx , offset ??0001
+ 00000017  E8 00000000 E     1			call writestring
+ 0000001C  E8 00000000 E     1			call crlf
+ 00000021  5A		     1			pop edx
+					println "2.-Resta"
+ 00000021		     1	.data
+ 00000021 32 2E 2D 52 65     1		??0002 db "2.-Resta" , 0
+	   73 74 61 00
+ 00000022		     1		.code
+ 00000022  52		     1			push edx 
+ 00000023  BA 00000021 R     1			mov edx , offset ??0002
+ 00000028  E8 00000000 E     1			call writestring
+ 0000002D  E8 00000000 E     1			call crlf
+ 00000032  5A		     1			pop edx
+					println "3.-Multipliacion"
+ 0000002A		     1	.data
+ 0000002A 33 2E 2D 4D 75     1		??0003 db "3.-Multipliacion" , 0
+	   6C 74 69 70 6C
+	   69 61 63 69 6F
+	   6E 00
+ 00000033		     1		.code
+ 00000033  52		     1			push edx 
+ 00000034  BA 0000002A R     1			mov edx , offset ??0003
+ 00000039  E8 00000000 E     1			call writestring
+ 0000003E  E8 00000000 E     1			call crlf
+ 00000043  5A		     1			pop edx
+					println "4.-Division"
+ 0000003B		     1	.data
+ 0000003B 34 2E 2D 44 69     1		??0004 db "4.-Division" , 0
+	   76 69 73 69 6F
+	   6E 00
+ 00000044		     1		.code
+ 00000044  52		     1			push edx 
+ 00000045  BA 0000003B R     1			mov edx , offset ??0004
+ 0000004A  E8 00000000 E     1			call writestring
+ 0000004F  E8 00000000 E     1			call crlf
+ 00000054  5A		     1			pop edx
+					println "SELECCIONA UNA DE LAS SIGUIENTES OPERACIONES"
+ 00000047		     1	.data
+ 00000047 53 45 4C 45 43     1		??0005 db "SELECCIONA UNA DE LAS SIGUIENTES OPERACIONES" , 0
+	   43 49 4F 4E 41
+	   20 55 4E 41 20
+	   44 45 20 4C 41
+	   53 20 53 49 47
+	   55 49 45 4E 54
+	   45 53 20 4F 50
+	   45 52 41 43 49
+	   4F 4E 45 53 00
+ 00000055		     1		.code
+ 00000055  52		     1			push edx 
+ 00000056  BA 00000047 R     1			mov edx , offset ??0005
+ 0000005B  E8 00000000 E     1			call writestring
+ 00000060  E8 00000000 E     1			call crlf
+ 00000065  5A		     1			pop edx
+					;-------------------------------
+
+					;-----------LEYENDO OPCION----------------
+ 00000066  E8 00000000 E		call readint ; leemos la opcion eax
+ 0000006B  A3 00000000 R		mov opcion , eax
+					;-----------------------------------------
+					
+ 00000070  83 3D 00000000 R		cmp opcion , 1
+	   01
+ 00000077  74 1B			je suma
+
+ 00000079  83 3D 00000000 R		cmp opcion , 2
+	   02
+ 00000080  74 25			je resta
+
+ 00000082  83 3D 00000000 R		cmp opcion , 3
+	   03
+ 00000089  74 2F			je multiplicacion
+
+ 0000008B  83 3D 00000000 R		cmp opcion , 4
+	   04
+ 00000092  74 39			je division
+
+ 00000094				suma:
+						println "Estas en la parte de suma"
+ 00000074		     1	.data
+ 00000074 45 73 74 61 73     1		??0006 db "Estas en la parte de suma" , 0
+	   20 65 6E 20 6C
+	   61 20 70 61 72
+	   74 65 20 64 65
+	   20 73 75 6D 61
+	   00
+ 00000094		     1		.code
+ 00000094  52		     1			push edx 
+ 00000095  BA 00000074 R     1			mov edx , offset ??0006
+ 0000009A  E8 00000000 E     1			call writestring
+ 0000009F  E8 00000000 E     1			call crlf
+ 000000A4  5A		     1			pop edx
+ 000000A5  EB 39			jmp salir
+
+ 000000A7				resta:
+						println "Estas en la parte de resta"
+ 0000008E		     1	.data
+ 0000008E 45 73 74 61 73     1		??0007 db "Estas en la parte de resta" , 0
+	   20 65 6E 20 6C
+	   61 20 70 61 72
+	   74 65 20 64 65
+	   20 72 65 73 74
+	   61 00
+ 000000A7		     1		.code
+ 000000A7  52		     1			push edx 
+ 000000A8  BA 0000008E R     1			mov edx , offset ??0007
+ 000000AD  E8 00000000 E     1			call writestring
+ 000000B2  E8 00000000 E     1			call crlf
+ 000000B7  5A		     1			pop edx
+ 000000B8  EB 26			jmp salir
+
+ 000000BA				multiplicacion:
+						println "Estas en la parte de multiplicacion"
+ 000000A9		     1	.data
+ 000000A9 45 73 74 61 73     1		??0008 db "Estas en la parte de multiplicacion" , 0
+	   20 65 6E 20 6C
+	   61 20 70 61 72
+	   74 65 20 64 65
+	   20 6D 75 6C 74
+	   69 70 6C 69 63
+	   61 63 69 6F 6E
+	   00
+ 000000BA		     1		.code
+ 000000BA  52		     1			push edx 
+ 000000BB  BA 000000A9 R     1			mov edx , offset ??0008
+ 000000C0  E8 00000000 E     1			call writestring
+ 000000C5  E8 00000000 E     1			call crlf
+ 000000CA  5A		     1			pop edx
+ 000000CB  EB 13			jmp salir
+
+ 000000CD				division:
+						println "Estas en la parte de division"
+ 000000CD		     1	.data
+ 000000CD 45 73 74 61 73     1		??0009 db "Estas en la parte de division" , 0
+	   20 65 6E 20 6C
+	   61 20 70 61 72
+	   74 65 20 64 65
+	   20 64 69 76 69
+	   73 69 6F 6E 00
+ 000000CD		     1		.code
+ 000000CD  52		     1			push edx 
+ 000000CE  BA 000000CD R     1			mov edx , offset ??0009
+ 000000D3  E8 00000000 E     1			call writestring
+ 000000D8  E8 00000000 E     1			call crlf
+ 000000DD  5A		     1			pop edx
+ 000000DE  EB 00			jmp salir
+
+
+ 000000E0				salir:
+					; Preguntar si el usuario desea continuar
+						println "Desea continuar? (S/N)"
+ 000000EB		     1	.data
+ 000000EB 44 65 73 65 61     1		??000A db "Desea continuar? (S/N)" , 0
+	   20 63 6F 6E 74
+	   69 6E 75 61 72
+	   3F 20 28 53 2F
+	   4E 29 00
+ 000000E0		     1		.code
+ 000000E0  52		     1			push edx 
+ 000000E1  BA 000000EB R     1			mov edx , offset ??000A
+ 000000E6  E8 00000000 E     1			call writestring
+ 000000EB  E8 00000000 E     1			call crlf
+ 000000F0  5A		     1			pop edx
+ 000000F1  E8 00000000 E			call readchar ; leemos la respuesta del usuario
+ 000000F6  3C 53				cmp al , 'S' ; SI INGRESO LA S , VOLVEMOS AL MENU PRINCIPAL
+ 000000F8  0F 84 FFFFFF02			je operacion ; Si el usuario desea continuar, saltamos a la etiqueta "operacion"
+
 					exit
+ 00000105				maincalcu01 ENDP
 					END maincalcu01
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    05/04/23 23:04:59
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    05/04/23 23:47:46
 NombreProgram						     Symbols 2 - 1
 
 
@@ -177,8 +350,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000015 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000013 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000102 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000105 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -285,7 +458,13 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-maincalcu01  . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000000C Public STDCALL
+maincalcu01  . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000105 Public STDCALL
+  operacion  . . . . . . . . . .	L Near	 00000000 _TEXT	
+  suma . . . . . . . . . . . . .	L Near	 00000094 _TEXT	
+  resta  . . . . . . . . . . . .	L Near	 000000A7 _TEXT	
+  multiplicacion . . . . . . . .	L Near	 000000BA _TEXT	
+  division . . . . . . . . . . .	L Near	 000000CD _TEXT	
+  salir  . . . . . . . . . . . .	L Near	 000000E0 _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -295,7 +474,17 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
-??0000 . . . . . . . . . . . . .	Byte	 00000000 _DATA	
+??0000 . . . . . . . . . . . . .	Byte	 00000004 _DATA	
+??0001 . . . . . . . . . . . . .	Byte	 00000019 _DATA	
+??0002 . . . . . . . . . . . . .	Byte	 00000021 _DATA	
+??0003 . . . . . . . . . . . . .	Byte	 0000002A _DATA	
+??0004 . . . . . . . . . . . . .	Byte	 0000003B _DATA	
+??0005 . . . . . . . . . . . . .	Byte	 00000047 _DATA	
+??0006 . . . . . . . . . . . . .	Byte	 00000074 _DATA	
+??0007 . . . . . . . . . . . . .	Byte	 0000008E _DATA	
+??0008 . . . . . . . . . . . . .	Byte	 000000A9 _DATA	
+??0009 . . . . . . . . . . . . .	Byte	 000000CD _DATA	
+??000A . . . . . . . . . . . . .	Byte	 000000EB _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -519,6 +708,7 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
+opcion . . . . . . . . . . . . .	DWord	 00000000 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
