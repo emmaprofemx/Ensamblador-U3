@@ -69,6 +69,9 @@
     <MASM Include="EJ06U3_Bono_mensual.asm" />
     <MASM Include="pruebarelgade3.asm" />
     <MASM Include="EJ7SEGUROSAUTOS.asm" />
+    <MASM Include="CALCULADORA.asm">
+      <Filter>PROYECTO DE UNIDAD 3</Filter>
+    </MASM>
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
@@ -76,6 +79,9 @@
   <ItemGroup>
     <Filter Include="PROGRAMAS">
       <UniqueIdentifier>{bfe370ed-56ea-4483-a91b-85289852da0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PROYECTO DE UNIDAD 3">
+      <UniqueIdentifier>{fa783f05-88b2-4e2f-9ade-1bff551518fb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

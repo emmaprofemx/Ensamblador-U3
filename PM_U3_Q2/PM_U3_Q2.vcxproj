@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <MASM Include="CALCULADORA.asm" />
     <MASM Include="EJ04_Tarjetasdecredito.asm" />
     <MASM Include="EJ06U3_Bono_mensual.asm" />
     <MASM Include="EJ09_CostoPasaje_alumno.asm" />
@@ -151,7 +152,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>c:/Irvine</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainej7</EntryPointSymbol>
+      <EntryPointSymbol>maincalcu01</EntryPointSymbol>
       <ImportLibrary>c:/Irvine</ImportLibrary>
     </Link>
     <MASM>

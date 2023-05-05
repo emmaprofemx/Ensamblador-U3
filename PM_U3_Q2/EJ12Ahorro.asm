@@ -14,9 +14,6 @@ INCLUDE Irvine32.inc
 INCLUDE macros.inc
 .data
 ; Área de Declaración de Variables
-	 titulo db "Advertencia",0
-	 contenido db  "Desea pagar con tarjeta?", 0
-
 ;CONSTANTES
 acumulador dword 0d
 meses dword 12d

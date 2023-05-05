@@ -49,13 +49,7 @@ sumatotal dword 0d
 		mov eax , res
 		call writedec
 		loop ciclo
-	
-
-
 		exit
-
-
-
 	mainej16 ENDP
 	
 	END mainej16
