@@ -85,8 +85,28 @@ im dword 1d ; INCREMENTADOR MULTIPLICACION
 	jmp salir
 
 	resta:
-		println "Estas en la parte de resta"
+	println "Estas en la parte de resta"
+    mov is, 1 ; inicializamos el contador en 1
+    cicloresta:
+        println "Ingresa un numero: (ingresa 't' para terminar)"
+        call readchar ; leemos un caracter
+        cmp al, 't' ; comparamos si el caracter es 't'
+        je salir ; si es 't', saltamos a salir
+        call readint ; leemos el entero
+        cmp is, 1 ; comparamos si es el primer número
+        je primeronumero ; si es el primer número, saltamos a la etiqueta "primeronumero"
+        sub acumulador, eax ; restamos el número ingresado al acumulador
+        mov eax, acumulador
+		println "Resultado hasta el momento:"
+        call writedec ; imprimimos el acumulador
+        call crlf ; saltamos de línea
+        jmp cicloresta ; volvemos a pedir otro número
+    primeronumero:
+        mov acumulador, eax ; asignamos el primer número al acumulador
+        add is, 1 ; incrementamos el contador
+        jmp cicloresta ; volvemos a pedir otro número
 	jmp salir
+
 
 	multiplicacion:
     println "Estas en la parte de multiplicacion"
@@ -98,7 +118,7 @@ im dword 1d ; INCREMENTADOR MULTIPLICACION
         je salir ; si es 't', saltamos a salir
 
         call readint ; leemos el entero
-        imul eax, multiplicador ; multiplicamos el valor anterior con el valor actual
+        mul multiplicador ; multiplicamos el valor anterior con el valor actual
         mov multiplicador, eax ; actualizamos el valor anterior con el resultado
         mov eax, multiplicador ; guardamos el resultado en eax para imprimirlo
         call writedec ; imprimimos el resultado
@@ -107,8 +127,28 @@ im dword 1d ; INCREMENTADOR MULTIPLICACION
     jmp salir
 
 	division:
-		println "Estas en la parte de division"
-	jmp salir
+    println "Estas en la parte de division"
+    println "Ingresa el dividendo:"
+    call readint ; leemos el dividendo
+    mov ebx, eax ; guardamos el dividendo en ebx
+    mov eax, 0 ; limpiamos eax
+    println "Ingresa el divisor:"
+    call readint ; leemos el divisor
+    cmp eax, 0 ; comprobamos si el divisor es cero
+    je division_error ; si es cero, saltamos a la etiqueta "division_error"
+    mov ecx, eax ; guardamos el divisor en ecx
+    mov eax, ebx ; movemos el dividendo a eax
+    mov edx, 0 ; limpiamos edx
+    div ecx ; dividimos eax entre ecx
+    println "El resultado de la division es:"
+    call writedec ; imprimimos el resultado
+    call crlf ; saltamos de línea
+    jmp salir ; saltamos a la etiqueta "salir"
+
+division_error:
+    println "Error: division entre cero"
+    jmp salir ; saltamos a la etiqueta "salir"
+
 	
 
 	;**************SALIDA******************

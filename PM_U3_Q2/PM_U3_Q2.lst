@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    05/05/23 11:52:43
+Microsoft (R) Macro Assembler Version 14.29.30147.0	    05/07/23 19:34:02
 NombreProgram						     Page 1 - 1
 
 
@@ -166,11 +166,11 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    05/05/23 11:52:43
 
  0000009A  83 3D 00000004 R		cmp opcion , 3
 	   03
- 000000A1  0F 84 00000092		je multiplicacion
+ 000000A1  0F 84 00000101		je multiplicacion
 
  000000A7  83 3D 00000004 R		cmp opcion , 4
 	   04
- 000000AE  0F 84 000000E0		je division
+ 000000AE  0F 84 00000153		je division
 					;***************************************
 
 					;****************E T I Q U E T A S******************
@@ -212,7 +212,7 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    05/05/23 11:52:43
  000000DF  5A		     1			pop edx
  000000E0  E8 00000000 E	        call readchar ; leemos un caracter
  000000E5  3C 74		        cmp al, 't' ; comparamos si el caracter es 't'
- 000000E7  0F 84 000000BA	        je salir ; si es 't', saltamos a salir
+ 000000E7  0F 84 0000019E	        je salir ; si es 't', saltamos a salir
  000000ED  E8 00000000 E	        call readint ; leemos el entero
  000000F2  01 05 00000010 R	        add acumulador, eax ; lo sumamos al acumulador
  000000F8  83 05 00000018 R	        add is, 1 ; incrementamos el contador
@@ -235,10 +235,10 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    05/05/23 11:52:43
  00000115  E8 00000000 E	        call writedec ; imprimimos el acumulador
  0000011A  E8 00000000 E	        call crlf ; saltamos de línea
  0000011F  EB AE		        jmp ciclo ; volvemos a pedir otro número
- 00000121  E9 00000081			jmp salir
+ 00000121  E9 00000165			jmp salir
 
  00000126				resta:
-						println "Estas en la parte de resta"
+					println "Estas en la parte de resta"
  000000F5		     1	.data
  000000F5 45 73 74 61 73     1		??0009 db "Estas en la parte de resta" , 0
 	   20 65 6E 20 6C
@@ -252,31 +252,12 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    05/05/23 11:52:43
  0000012C  E8 00000000 E     1			call writestring
  00000131  E8 00000000 E     1			call crlf
  00000136  5A		     1			pop edx
- 00000137  EB 6E			jmp salir
-
- 00000139				multiplicacion:
-				    println "Estas en la parte de multiplicacion"
- 00000110		     1	.data
- 00000110 45 73 74 61 73     1		??000A db "Estas en la parte de multiplicacion" , 0
-	   20 65 6E 20 6C
-	   61 20 70 61 72
-	   74 65 20 64 65
-	   20 6D 75 6C 74
-	   69 70 6C 69 63
-	   61 63 69 6F 6E
-	   00
- 00000139		     1		.code
- 00000139  52		     1			push edx 
- 0000013A  BA 00000110 R     1			mov edx , offset ??000A
- 0000013F  E8 00000000 E     1			call writestring
- 00000144  E8 00000000 E     1			call crlf
- 00000149  5A		     1			pop edx
- 0000014A  C7 05 00000010 R	    mov acumulador, 1 ; inicializamos el acumulador en 1
+ 00000137  C7 05 00000018 R	    mov is, 1 ; inicializamos el contador en 1
 	   00000001
- 00000154			    ciclomulti:
-				         println "Ingresa un numero: (ingresa 't' para terminar)"
- 00000134		     1	.data
- 00000134 49 6E 67 72 65     1		??000B db "Ingresa un numero: (ingresa 't' para terminar)" , 0
+ 00000141			    cicloresta:
+				        println "Ingresa un numero: (ingresa 't' para terminar)"
+ 00000110		     1	.data
+ 00000110 49 6E 67 72 65     1		??000A db "Ingresa un numero: (ingresa 't' para terminar)" , 0
 	   73 61 20 75 6E
 	   20 6E 75 6D 65
 	   72 6F 3A 20 28
@@ -286,83 +267,211 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    05/05/23 11:52:43
 	   61 20 74 65 72
 	   6D 69 6E 61 72
 	   29 00
- 00000154		     1		.code
- 00000154  52		     1			push edx 
- 00000155  BA 00000134 R     1			mov edx , offset ??000B
- 0000015A  E8 00000000 E     1			call writestring
- 0000015F  E8 00000000 E     1			call crlf
- 00000164  5A		     1			pop edx
- 00000165  E8 00000000 E	        call readchar ; leemos un caracter
- 0000016A  3C 74		        cmp al, 't' ; comparamos si el caracter es 't'
- 0000016C  74 39		        je salir ; si es 't', saltamos a salir
+ 00000141		     1		.code
+ 00000141  52		     1			push edx 
+ 00000142  BA 00000110 R     1			mov edx , offset ??000A
+ 00000147  E8 00000000 E     1			call writestring
+ 0000014C  E8 00000000 E     1			call crlf
+ 00000151  5A		     1			pop edx
+ 00000152  E8 00000000 E	        call readchar ; leemos un caracter
+ 00000157  3C 74		        cmp al, 't' ; comparamos si el caracter es 't'
+ 00000159  0F 84 0000012C	        je salir ; si es 't', saltamos a salir
+ 0000015F  E8 00000000 E	        call readint ; leemos el entero
+ 00000164  83 3D 00000018 R	        cmp is, 1 ; comparamos si es el primer número
+	   01
+ 0000016B  74 28		        je primeronumero ; si es el primer número, saltamos a la etiqueta "primeronumero"
+ 0000016D  29 05 00000010 R	        sub acumulador, eax ; restamos el número ingresado al acumulador
+ 00000173  A1 00000010 R	        mov eax, acumulador
+						println "Resultado hasta el momento:"
+ 0000013F		     1	.data
+ 0000013F 52 65 73 75 6C     1		??000B db "Resultado hasta el momento:" , 0
+	   74 61 64 6F 20
+	   68 61 73 74 61
+	   20 65 6C 20 6D
+	   6F 6D 65 6E 74
+	   6F 3A 00
+ 00000178		     1		.code
+ 00000178  52		     1			push edx 
+ 00000179  BA 0000013F R     1			mov edx , offset ??000B
+ 0000017E  E8 00000000 E     1			call writestring
+ 00000183  E8 00000000 E     1			call crlf
+ 00000188  5A		     1			pop edx
+ 00000189  E8 00000000 E	        call writedec ; imprimimos el acumulador
+ 0000018E  E8 00000000 E	        call crlf ; saltamos de línea
+ 00000193  EB AC		        jmp cicloresta ; volvemos a pedir otro número
+ 00000195			    primeronumero:
+ 00000195  A3 00000010 R	        mov acumulador, eax ; asignamos el primer número al acumulador
+ 0000019A  83 05 00000018 R	        add is, 1 ; incrementamos el contador
+	   01
+ 000001A1  EB 9E		        jmp cicloresta ; volvemos a pedir otro número
+ 000001A3  E9 000000E3			jmp salir
 
- 0000016E  E8 00000000 E	        call readint ; leemos el entero
- 00000173  0F AF 05		        imul eax, multiplicador ; multiplicamos el valor anterior con el valor actual
-	   00000014 R
- 0000017A  A3 00000014 R	        mov multiplicador, eax ; actualizamos el valor anterior con el resultado
- 0000017F  A1 00000014 R	        mov eax, multiplicador ; guardamos el resultado en eax para imprimirlo
- 00000184  E8 00000000 E	        call writedec ; imprimimos el resultado
- 00000189  E8 00000000 E	        call crlf ; saltamos de línea
- 0000018E  EB C4		        jmp ciclomulti ; volvemos a pedir otro número
- 00000190  EB 15		    jmp salir
 
+ 000001A8				multiplicacion:
+				    println "Estas en la parte de multiplicacion"
+ 0000015B		     1	.data
+ 0000015B 45 73 74 61 73     1		??000C db "Estas en la parte de multiplicacion" , 0
+	   20 65 6E 20 6C
+	   61 20 70 61 72
+	   74 65 20 64 65
+	   20 6D 75 6C 74
+	   69 70 6C 69 63
+	   61 63 69 6F 6E
+	   00
+ 000001A8		     1		.code
+ 000001A8  52		     1			push edx 
+ 000001A9  BA 0000015B R     1			mov edx , offset ??000C
+ 000001AE  E8 00000000 E     1			call writestring
+ 000001B3  E8 00000000 E     1			call crlf
+ 000001B8  5A		     1			pop edx
+ 000001B9  C7 05 00000010 R	    mov acumulador, 1 ; inicializamos el acumulador en 1
+	   00000001
+ 000001C3			    ciclomulti:
+				         println "Ingresa un numero: (ingresa 't' para terminar)"
+ 0000017F		     1	.data
+ 0000017F 49 6E 67 72 65     1		??000D db "Ingresa un numero: (ingresa 't' para terminar)" , 0
+	   73 61 20 75 6E
+	   20 6E 75 6D 65
+	   72 6F 3A 20 28
+	   69 6E 67 72 65
+	   73 61 20 27 74
+	   27 20 70 61 72
+	   61 20 74 65 72
+	   6D 69 6E 61 72
+	   29 00
+ 000001C3		     1		.code
+ 000001C3  52		     1			push edx 
+ 000001C4  BA 0000017F R     1			mov edx , offset ??000D
+ 000001C9  E8 00000000 E     1			call writestring
+ 000001CE  E8 00000000 E     1			call crlf
+ 000001D3  5A		     1			pop edx
+ 000001D4  E8 00000000 E	        call readchar ; leemos un caracter
+ 000001D9  3C 74		        cmp al, 't' ; comparamos si el caracter es 't'
+ 000001DB  0F 84 000000AA	        je salir ; si es 't', saltamos a salir
 
+ 000001E1  E8 00000000 E	        call readint ; leemos el entero
+ 000001E6  F7 25 00000014 R	        mul multiplicador ; multiplicamos el valor anterior con el valor actual
+ 000001EC  A3 00000014 R	        mov multiplicador, eax ; actualizamos el valor anterior con el resultado
+ 000001F1  A1 00000014 R	        mov eax, multiplicador ; guardamos el resultado en eax para imprimirlo
+ 000001F6  E8 00000000 E	        call writedec ; imprimimos el resultado
+ 000001FB  E8 00000000 E	        call crlf ; saltamos de línea
+ 00000200  EB C1		        jmp ciclomulti ; volvemos a pedir otro número
+ 00000202  E9 00000084		    jmp salir
 
-
-
-
-
-
-
-
-
-
-
- 00000192  EB 13			jmp salir
-
- 00000194				division:
-						println "Estas en la parte de division"
- 00000163		     1	.data
- 00000163 45 73 74 61 73     1		??000C db "Estas en la parte de division" , 0
+ 00000207				division:
+				    println "Estas en la parte de division"
+ 000001AE		     1	.data
+ 000001AE 45 73 74 61 73     1		??000E db "Estas en la parte de division" , 0
 	   20 65 6E 20 6C
 	   61 20 70 61 72
 	   74 65 20 64 65
 	   20 64 69 76 69
 	   73 69 6F 6E 00
- 00000194		     1		.code
- 00000194  52		     1			push edx 
- 00000195  BA 00000163 R     1			mov edx , offset ??000C
- 0000019A  E8 00000000 E     1			call writestring
- 0000019F  E8 00000000 E     1			call crlf
- 000001A4  5A		     1			pop edx
- 000001A5  EB 00			jmp salir
-					;-----------------------------------
+ 00000207		     1		.code
+ 00000207  52		     1			push edx 
+ 00000208  BA 000001AE R     1			mov edx , offset ??000E
+ 0000020D  E8 00000000 E     1			call writestring
+ 00000212  E8 00000000 E     1			call crlf
+ 00000217  5A		     1			pop edx
+				    println "Ingresa el dividendo:"
+ 000001CC		     1	.data
+ 000001CC 49 6E 67 72 65     1		??000F db "Ingresa el dividendo:" , 0
+	   73 61 20 65 6C
+	   20 64 69 76 69
+	   64 65 6E 64 6F
+	   3A 00
+ 00000218		     1		.code
+ 00000218  52		     1			push edx 
+ 00000219  BA 000001CC R     1			mov edx , offset ??000F
+ 0000021E  E8 00000000 E     1			call writestring
+ 00000223  E8 00000000 E     1			call crlf
+ 00000228  5A		     1			pop edx
+ 00000229  E8 00000000 E	    call readint ; leemos el dividendo
+ 0000022E  8B D8		    mov ebx, eax ; guardamos el dividendo en ebx
+ 00000230  B8 00000000		    mov eax, 0 ; limpiamos eax
+				    println "Ingresa el divisor:"
+ 000001E2		     1	.data
+ 000001E2 49 6E 67 72 65     1		??0010 db "Ingresa el divisor:" , 0
+	   73 61 20 65 6C
+	   20 64 69 76 69
+	   73 6F 72 3A 00
+ 00000235		     1		.code
+ 00000235  52		     1			push edx 
+ 00000236  BA 000001E2 R     1			mov edx , offset ??0010
+ 0000023B  E8 00000000 E     1			call writestring
+ 00000240  E8 00000000 E     1			call crlf
+ 00000245  5A		     1			pop edx
+ 00000246  E8 00000000 E	    call readint ; leemos el divisor
+ 0000024B  83 F8 00		    cmp eax, 0 ; comprobamos si el divisor es cero
+ 0000024E  74 28		    je division_error ; si es cero, saltamos a la etiqueta "division_error"
+ 00000250  8B C8		    mov ecx, eax ; guardamos el divisor en ecx
+ 00000252  8B C3		    mov eax, ebx ; movemos el dividendo a eax
+ 00000254  BA 00000000		    mov edx, 0 ; limpiamos edx
+ 00000259  F7 F1		    div ecx ; dividimos eax entre ecx
+				    println "El resultado de la division es:"
+ 000001F6		     1	.data
+ 000001F6 45 6C 20 72 65     1		??0011 db "El resultado de la division es:" , 0
+	   73 75 6C 74 61
+	   64 6F 20 64 65
+	   20 6C 61 20 64
+	   69 76 69 73 69
+	   6F 6E 20 65 73
+	   3A 00
+ 0000025B		     1		.code
+ 0000025B  52		     1			push edx 
+ 0000025C  BA 000001F6 R     1			mov edx , offset ??0011
+ 00000261  E8 00000000 E     1			call writestring
+ 00000266  E8 00000000 E     1			call crlf
+ 0000026B  5A		     1			pop edx
+ 0000026C  E8 00000000 E	    call writedec ; imprimimos el resultado
+ 00000271  E8 00000000 E	    call crlf ; saltamos de línea
+ 00000276  EB 13		    jmp salir ; saltamos a la etiqueta "salir"
 
+ 00000278			division_error:
+				    println "Error: division entre cero"
+ 00000216		     1	.data
+ 00000216 45 72 72 6F 72     1		??0012 db "Error: division entre cero" , 0
+	   3A 20 64 69 76
+	   69 73 69 6F 6E
+	   20 65 6E 74 72
+	   65 20 63 65 72
+	   6F 00
+ 00000278		     1		.code
+ 00000278  52		     1			push edx 
+ 00000279  BA 00000216 R     1			mov edx , offset ??0012
+ 0000027E  E8 00000000 E     1			call writestring
+ 00000283  E8 00000000 E     1			call crlf
+ 00000288  5A		     1			pop edx
+ 00000289  EB 00		    jmp salir ; saltamos a la etiqueta "salir"
+
+					
+
+					;**************SALIDA******************
 					;-----------DESEA CONTINUAR?----------------
- 000001A7				salir:
+ 0000028B				salir:
 					; Preguntar si el usuario desea continuar
 						println "Desea continuar? (S/N)"
- 00000181		     1	.data
- 00000181 44 65 73 65 61     1		??000D db "Desea continuar? (S/N)" , 0
+ 00000231		     1	.data
+ 00000231 44 65 73 65 61     1		??0013 db "Desea continuar? (S/N)" , 0
 	   20 63 6F 6E 74
 	   69 6E 75 61 72
 	   3F 20 28 53 2F
 	   4E 29 00
- 000001A7		     1		.code
- 000001A7  52		     1			push edx 
- 000001A8  BA 00000181 R     1			mov edx , offset ??000D
- 000001AD  E8 00000000 E     1			call writestring
- 000001B2  E8 00000000 E     1			call crlf
- 000001B7  5A		     1			pop edx
- 000001B8  E8 00000000 E			call readchar ; leemos la respuesta del usuario
- 000001BD  3C 53				cmp al , 'S' ; SI INGRESO LA S , VOLVEMOS AL MENU PRINCIPAL
- 000001BF  0F 84 FFFFFE3B			je operacion ; Si el usuario desea continuar, saltamos a la etiqueta "operacion"
- 000001C5  3C 73				cmp al , 's' ; SI INGRESO LA S , VOLVEMOS AL MENU PRINCIPAL
- 000001C7  0F 84 FFFFFE33			je operacion ; Si el usuario desea continuar, saltamos a la etiqueta "operacion"
+ 0000028B		     1		.code
+ 0000028B  52		     1			push edx 
+ 0000028C  BA 00000231 R     1			mov edx , offset ??0013
+ 00000291  E8 00000000 E     1			call writestring
+ 00000296  E8 00000000 E     1			call crlf
+ 0000029B  5A		     1			pop edx
+ 0000029C  E8 00000000 E			call readchar ; leemos la respuesta del usuario
+ 000002A1  3C 53				cmp al , 'S' ; SI INGRESO LA S , VOLVEMOS AL MENU PRINCIPAL
+ 000002A3  0F 84 FFFFFD57			je operacion ; Si el usuario desea continuar, saltamos a la etiqueta "operacion"
+ 000002A9  3C 73				cmp al , 's' ; SI INGRESO LA S , VOLVEMOS AL MENU PRINCIPAL
+ 000002AB  0F 84 FFFFFD4F			je operacion ; Si el usuario desea continuar, saltamos a la etiqueta "operacion"
 					exit
- 000001D4				maincalcu01 ENDP
+ 000002B8				maincalcu01 ENDP
 					END maincalcu01
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    05/05/23 11:52:43
+Microsoft (R) Macro Assembler Version 14.29.30147.0	    05/07/23 19:34:02
 NombreProgram						     Symbols 2 - 1
 
 
@@ -463,8 +572,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000198 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 000001D4 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000248 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 000002B8 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -571,15 +680,18 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-maincalcu01  . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 000001D4 Public STDCALL
+maincalcu01  . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 000002B8 Public STDCALL
   operacion  . . . . . . . . . .	L Near	 00000000 _TEXT	
   suma . . . . . . . . . . . . .	L Near	 000000B4 _TEXT	
   ciclo  . . . . . . . . . . . .	L Near	 000000CF _TEXT	
   resta  . . . . . . . . . . . .	L Near	 00000126 _TEXT	
-  multiplicacion . . . . . . . .	L Near	 00000139 _TEXT	
-  ciclomulti . . . . . . . . . .	L Near	 00000154 _TEXT	
-  division . . . . . . . . . . .	L Near	 00000194 _TEXT	
-  salir  . . . . . . . . . . . .	L Near	 000001A7 _TEXT	
+  cicloresta . . . . . . . . . .	L Near	 00000141 _TEXT	
+  primeronumero  . . . . . . . .	L Near	 00000195 _TEXT	
+  multiplicacion . . . . . . . .	L Near	 000001A8 _TEXT	
+  ciclomulti . . . . . . . . . .	L Near	 000001C3 _TEXT	
+  division . . . . . . . . . . .	L Near	 00000207 _TEXT	
+  division_error . . . . . . . .	L Near	 00000278 _TEXT	
+  salir  . . . . . . . . . . . .	L Near	 0000028B _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -600,9 +712,15 @@ Symbols:
 ??0008 . . . . . . . . . . . . .	Byte	 000000D9 _DATA	
 ??0009 . . . . . . . . . . . . .	Byte	 000000F5 _DATA	
 ??000A . . . . . . . . . . . . .	Byte	 00000110 _DATA	
-??000B . . . . . . . . . . . . .	Byte	 00000134 _DATA	
-??000C . . . . . . . . . . . . .	Byte	 00000163 _DATA	
-??000D . . . . . . . . . . . . .	Byte	 00000181 _DATA	
+??000B . . . . . . . . . . . . .	Byte	 0000013F _DATA	
+??000C . . . . . . . . . . . . .	Byte	 0000015B _DATA	
+??000D . . . . . . . . . . . . .	Byte	 0000017F _DATA	
+??000E . . . . . . . . . . . . .	Byte	 000001AE _DATA	
+??000F . . . . . . . . . . . . .	Byte	 000001CC _DATA	
+??0010 . . . . . . . . . . . . .	Byte	 000001E2 _DATA	
+??0011 . . . . . . . . . . . . .	Byte	 000001F6 _DATA	
+??0012 . . . . . . . . . . . . .	Byte	 00000216 _DATA	
+??0013 . . . . . . . . . . . . .	Byte	 00000231 _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
